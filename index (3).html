@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruthi Senthilarasu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-mid: #111827;
+    --bg-light: #1a2540;
+    --cream: #f0ede8;
+    --cream-muted: #8a92a6;
+    --terracotta: #3fb88a;
+    --terracotta-light: #6dd4b0;
+    --gold: #a99fe8;
+    --gold-light: #c4baf0;
+    --border: rgba(255,255,255,0.07);
+    --border-soft: rgba(255,255,255,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* AMBIENT */
+  .glow-1 {
+    position: fixed; top: -10%; right: -5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,111,212,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+    animation: ambientDrift 16s ease-in-out infinite alternate;
+  }
+  .glow-2 {
+    position: fixed; bottom: -20%; left: -5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,58,46,0.2) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+    animation: ambientDrift 20s ease-in-out infinite alternate-reverse;
+  }
+
+  /* GRAIN */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(10,15,30,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--cream);
+    text-decoration: none; opacity: 0.85;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+  .nav-links a {
+    color: var(--cream-muted); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta-light); }
+
+  .nav-resume {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold) !important;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.4rem 0.9rem;
+    transition: background 0.2s !important;
+  }
+  .nav-resume:hover { background: rgba(201,168,76,0.08) !important; }
+
+  /* SECTIONS */
+  section {
+    min-height: 100vh; padding: 8rem 3rem;
+    max-width: 1080px; margin: 0 auto;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+
+  #hero { max-width: 100%; padding-left: 3rem; padding-right: 3rem; }
+  .hero-inner { max-width: 1080px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+
+  .section-divider { width: 100%; height: 1px; background: var(--border); max-width: 1080px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--terracotta); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 3rem; opacity: 0.7;
+  }
+  .section-label::after { content: '|'; animation: blink 1.2s step-end infinite; margin-left: 2px; opacity: 0.7; }
+
+  /* HERO */
+  .hero-practitioner {
+    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+    color: var(--terracotta); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 2rem; opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.1s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.8rem, 9vw, 7.5rem);
+    line-height: 1.02; font-weight: 400; margin-bottom: 2.5rem;
+  }
+
+  .hero-title .word { display: block; opacity: 0; transform: translateY(18px); }
+  .hero-title .word:nth-child(1) { animation: fadeUp 0.7s ease forwards 0.3s; }
+  .hero-title .word:nth-child(2) { animation: fadeUp 0.7s ease forwards 0.45s; }
+  .hero-title .word:nth-child(3) { animation: fadeUp 0.7s ease forwards 0.6s; }
+  .hero-title em { font-style: italic; color: var(--terracotta-light); }
+
+  .hero-worldview {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--cream-muted); max-width: 500px;
+    line-height: 1.6; margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 1.5rem;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 1s;
+  }
+
+  .hero-cta {
+    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+    color: var(--bg); text-decoration: none;
+    padding: 0.7rem 1.4rem; background: #7c6fd4;
+    letter-spacing: 0.06em; transition: background 0.2s;
+  }
+  .hero-cta:hover { background: #a99fe8; color: #0a0f1e; }
+
+  .hero-resume-link {
+    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+    color: var(--cream-muted); text-decoration: none;
+    letter-spacing: 0.06em; border-bottom: 1px solid var(--border);
+    padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .hero-resume-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--cream-muted); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0; animation: fadeInSlow 1s ease forwards 1.5s; z-index: 2;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--terracotta), transparent);
+    animation: scrollPulse 2.5s ease infinite;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+  .about-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400; line-height: 1.25; margin-bottom: 2rem;
+  }
+  .about-heading em { font-style: italic; color: var(--terracotta-light); }
+
+  .about-lede {
+    font-size: 0.97rem; color: var(--cream);
+    line-height: 1.9; margin-bottom: 1.2rem; font-style: italic;
+  }
+
+  .about-body { color: var(--cream-muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.2rem; }
+
+  .central-line {
+    margin: 2rem 0; padding: 1.4rem 1.8rem;
+    border-left: 2px solid #7c6fd4;
+    background: rgba(124,111,212,0.05);
+  }
+  .central-line p {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--cream); line-height: 1.6;
+  }
+
+  .about-stack { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--border); }
+  .about-stack-label {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--terracotta); letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.8rem; opacity: 0.7;
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .stack-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.73rem;
+    color: var(--cream-muted); padding: 0.25rem 0.7rem;
+    border: 1px solid var(--border); border-radius: 2px;
+  }
+
+  .about-right { display: flex; flex-direction: column; gap: 0; }
+
+  .value-item { padding: 1.6rem 0; border-bottom: 1px solid var(--border-soft); }
+  .value-item:first-child { padding-top: 0; }
+  .value-title { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.4rem; font-weight: 400; }
+  .value-desc { color: var(--cream-muted); font-size: 0.86rem; line-height: 1.75; }
+
+  .currently-block {
+    margin-top: 2rem; padding: 1.4rem 1.6rem;
+    border: 1px solid var(--border); background: rgba(17,24,39,0.6);
+  }
+  .currently-label { font-family: 'Caveat', cursive; font-size: 0.95rem; color: var(--terracotta); margin-bottom: 0.8rem; }
+  .currently-label::after { content: '|'; animation: blink 1.2s step-end infinite; margin-left: 1px; opacity: 0.7; }
+  .currently-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .currently-list li { font-size: 0.86rem; color: var(--cream-muted); padding-left: 1.2rem; position: relative; }
+  .currently-list li::before { content: '→'; position: absolute; left: 0; color: var(--terracotta); font-size: 0.8rem; opacity: 0.7; }
+  .currently-list li.open-to { color: var(--cream); margin-top: 0.3rem; padding-top: 0.5rem; border-top: 1px solid var(--border-soft); }
+
+  /* WORK */
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+
+  .project-card {
+    padding: 2rem; border: 1px solid var(--border);
+    background: var(--bg-mid); position: relative; overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 2px; height: 0; background: var(--terracotta);
+    transition: height 0.4s ease;
+  }
+  .project-card:hover { border-color: rgba(196,113,74,0.25); transform: translateY(-2px); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-constraint {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--terracotta); margin-bottom: 0.8rem; line-height: 1.5; opacity: 0.85;
+  }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.3; }
+  .project-desc { color: var(--cream-muted); font-size: 0.86rem; line-height: 1.75; margin-bottom: 1.4rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .project-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.66rem;
+    color: var(--gold); padding: 0.18rem 0.5rem;
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 2px;
+  }
+  .project-arrow {
+    position: absolute; bottom: 1.4rem; right: 1.4rem;
+    color: var(--cream-muted); font-size: 0.95rem;
+    transition: color 0.2s, transform 0.2s; opacity: 0.4;
+  }
+  .project-card:hover .project-arrow { color: var(--terracotta-light); transform: translate(2px,-2px); opacity: 1; }
+
+  /* WRITING */
+  .writing-intro { max-width: 560px; color: var(--cream-muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2.5rem; }
+
+  .writing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+
+  .writing-col-label {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--terracotta); letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem; opacity: 0.7;
+  }
+
+  /* Technical essays */
+  .essay-list { display: flex; flex-direction: column; gap: 0; }
+
+  .essay-item {
+    padding: 1.2rem 0; border-bottom: 1px solid var(--border-soft);
+    text-decoration: none; color: inherit; display: block;
+    transition: opacity 0.2s;
+  }
+  .essay-item:first-child { padding-top: 0; }
+  .essay-item:hover { opacity: 0.75; }
+  .essay-item:last-child { border-bottom: none; }
+
+  .essay-meta {
+    display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.3rem;
+  }
+  .essay-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--terracotta); border: 1px solid rgba(196,113,74,0.3);
+    padding: 0.1rem 0.4rem; border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .essay-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--cream-muted); opacity: 0.45; }
+
+  .essay-title {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1rem; color: var(--cream); line-height: 1.4; margin-bottom: 0.3rem;
+  }
+  .essay-excerpt { font-size: 0.83rem; color: var(--cream-muted); line-height: 1.7; }
+
+  /* Personal writing — warmer */
+  .personal-writing { background: rgba(17,24,39,0.5); padding: 2rem; border: 1px solid var(--border); }
+
+  .substack-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .substack-desc { color: var(--cream-muted); font-size: 0.84rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .personal-essays { display: flex; flex-direction: column; gap: 0; }
+
+  .personal-essay {
+    padding: 1rem 0; border-bottom: 1px solid var(--border-soft);
+    text-decoration: none; color: inherit; display: block; transition: opacity 0.2s;
+  }
+  .personal-essay:hover { opacity: 0.7; }
+  .personal-essay:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .personal-essay-title {
+    font-size: 0.9rem; color: var(--cream); margin-bottom: 0.2rem; line-height: 1.5;
+  }
+  .personal-essay-sub { font-size: 0.8rem; color: var(--cream-muted); font-style: italic; }
+
+  .substack-link {
+    display: inline-block; margin-top: 1.2rem;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--gold); letter-spacing: 0.06em;
+    text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 1px; transition: color 0.2s;
+  }
+  .substack-link:hover { color: var(--gold-light); }
+
+  /* CONTACT */
+  .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400;
+    line-height: 1.15; margin-bottom: 1.5rem; max-width: 560px;
+  }
+  .contact-heading em { font-style: italic; color: var(--terracotta-light); }
+  .contact-sub { color: var(--cream-muted); font-size: 0.95rem; max-width: 480px; line-height: 1.85; margin-bottom: 0.8rem; }
+  .contact-avail {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--gold); letter-spacing: 0.1em; margin-bottom: 2.5rem; opacity: 0.75;
+  }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--cream); text-decoration: none;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.06em; padding: 0.72rem 1.3rem;
+    border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--terracotta); color: var(--terracotta-light); }
+  .contact-link.primary { background: #7c6fd4; border-color: #7c6fd4; color: var(--bg); }
+  .contact-link.primary:hover { background: transparent; color: #a99fe8; border-color: #a99fe8; }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 3rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1080px; margin: 0 auto;
+  }
+  .footer-manifesto {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 0.85rem; color: var(--cream-muted); opacity: 0.4;
+  }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--cream-muted); letter-spacing: 0.08em; opacity: 0.3; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInSlow { from { opacity: 0; } to { opacity: 0.5; } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes ambientDrift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,-20px) scale(1.08); } }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  #writing .reveal { transition: opacity 0.85s ease, transform 0.85s ease; }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .nav-logo { font-size: 0.9rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 0.06em; }
+    .nav-resume { padding: 0.3rem 0.6rem; font-size: 0.65rem; }
+
+    section { padding: 5rem 1.2rem; }
+    #hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+
+    .hero-practitioner { font-size: 0.65rem; letter-spacing: 0.08em; }
+    .hero-title { font-size: clamp(2.8rem, 14vw, 4.5rem); margin-bottom: 1.5rem; }
+    .hero-worldview { font-size: 0.95rem; margin-bottom: 1.8rem; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .hero-cta { padding: 0.65rem 1.2rem; font-size: 0.75rem; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-heading { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+    .central-line { padding: 1.1rem 1.4rem; }
+    .central-line p { font-size: 1rem; }
+
+    .work-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .project-card { padding: 1.5rem; }
+    .project-title { font-size: 1.2rem; }
+
+    .writing-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .personal-writing { padding: 1.5rem; }
+
+    .contact-heading { font-size: clamp(2rem, 9vw, 3rem); }
+    .contact-links { flex-direction: column; gap: 0.7rem; }
+    .contact-link { justify-content: center; padding: 0.85rem 1.2rem; }
+
+    footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.2rem; }
+    .footer-manifesto { font-size: 0.78rem; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links .nav-resume { display: none; }
+    .hero-title { font-size: clamp(2.4rem, 16vw, 3.5rem); }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">Shruthi Senthilarasu</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-resume">↓ Resume</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-practitioner">Software & Data Systems · Building tools that make complex systems easier to navigate</p>
+    <h1 class="hero-title">
+      <span class="word">systems.</span>
+      <span class="word">data.</span>
+      <span class="word"><em>equity.</em></span>
+    </h1>
+    <p class="hero-worldview">Technology should reduce friction, not create more of it.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="hero-cta">Let's talk →</a>
+      <a href="#" class="hero-resume-link">↓ Download resume</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="about">
+  <p class="section-label reveal">About</p>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-heading reveal">I learn best<br>by <em>building.</em></h2>
+      <p class="about-lede reveal">I'm especially drawn to problems where the people who most need good software are often the last to get it.</p>
+      <p class="about-body reveal">I've been prototyping ways for startups and nonprofits to use AI and automation to simplify workflows and reduce operational friction. The technical setup can get complicated — but done well, it changes how a team operates entirely.</p>
+      <p class="about-body reveal">I work best in small teams where everyone wears multiple hats and the user is someone most software ignores.</p>
+      <div class="central-line reveal"><p>"Good software quietly makes someone's work easier."</p></div>
+      <div class="about-stack reveal">
+        <p class="about-stack-label">Stack</p>
+        <div class="stack-tags">
+          <span class="stack-tag">Python</span><span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">JavaScript</span><span class="stack-tag">SQL</span>
+          <span class="stack-tag">Claude API</span><span class="stack-tag">React Native</span>
+          <span class="stack-tag">C</span><span class="stack-tag">Git</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="value-item reveal"><p class="value-title">Implementation-focused</p><p class="value-desc">Not just prototyping ideas — building things that actually get adopted and used by the people they're built for.</p></div>
+      <div class="value-item reveal"><p class="value-title">Systems thinker</p><p class="value-desc">Interested in the whole picture — how data flows, where friction lives, and what it takes to make complex processes feel simple.</p></div>
+      <div class="value-item reveal"><p class="value-title">Mission-driven</p><p class="value-desc">Drawn to organizations that care not just about what they're building, but who it serves.</p></div>
+      <div class="value-item reveal"><p class="value-title">Builder who writes</p><p class="value-desc">Writing is how I process what I build — the ideas, the failures, and the things that surprised me.</p></div>
+      <div class="currently-block reveal">
+        <p class="currently-label">currently</p>
+        <ul class="currently-list">
+          <li>Building a website for an Indigenous maternal health nonprofit in Montana</li>
+          <li>Thinking about how AI tools actually get adopted inside organizations</li>
+          <li>Writing about operational friction and why it matters more than features</li>
+          <li class="open-to">→ Open to internships & contract work now · Full-time from December 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="work">
+  <p class="section-label reveal">Work</p>
+  <div class="work-grid">
+    <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Built for users with no reliable internet and no margin for error</p>
+      <h3 class="project-title">Saheli</h3>
+      <p class="project-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
+      <div class="project-tags"><span class="project-tag">React Native</span><span class="project-tag">TypeScript</span><span class="project-tag">Supabase</span><span class="project-tag">Mapbox</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Replaced a manual 3-hour weekly process for a real client</p>
+      <h3 class="project-title">SEO City Suite</h3>
+      <p class="project-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
+      <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">Claude API</span><span class="project-tag">Vercel</span><span class="project-tag">React</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/shruthisenthilarasu/Student-Funnel-Analysis-Equity-Audit" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Identified where stopped-out students actually disappear — not where institutions assume</p>
+      <h3 class="project-title">Student Funnel & Equity Audit</h3>
+      <p class="project-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Pandas</span><span class="project-tag">scikit-learn</span><span class="project-tag">Jupyter</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Built to understand how operating systems actually work at the process level</p>
+      <h3 class="project-title">TinyShell</h3>
+      <p class="project-desc">A Unix shell implemented in C. Covers process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
+      <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Unix</span><span class="project-tag">POSIX</span><span class="project-tag">Systems</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/shruthisenthilarasu/Trust-Aware-SEO" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Most SEO tools miss the dimension of who a site actually serves</p>
+      <h3 class="project-title">Trust-Aware SEO</h3>
+      <p class="project-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — combining SEO, UX, and trust exposure into one prioritized report.</p>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">FastAPI</span><span class="project-tag">BeautifulSoup</span><span class="project-tag">Jinja2</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/shruthisenthilarasu/LogLLM" target="_blank" class="project-card reveal">
+      <p class="project-constraint">Because manually classifying thousands of log lines is a systems problem, not a human one</p>
+      <h3 class="project-title">LogLLM</h3>
+      <p class="project-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">PyTorch</span><span class="project-tag">HuggingFace</span><span class="project-tag">DistilBERT</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="writing">
+  <p class="section-label reveal">Writing</p>
+  <p class="writing-intro reveal">I write in two registers — technical essays about systems and implementation, and personal essays about everything else. Both are how I make sense of the world.</p>
+
+  <div class="writing-grid">
+    <div class="reveal">
+      <p class="writing-col-label">Technical — Medium</p>
+      <div class="essay-list">
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
+          <p class="essay-title">Why operational friction matters more than flashy features</p>
+          <p class="essay-excerpt">The tools that actually change how organizations work are rarely the impressive ones.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
+          <p class="essay-title">What nonprofits actually need from AI tools</p>
+          <p class="essay-excerpt">Most AI tooling is built for teams with engineers, budget, and time. Nonprofits have none of those.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">Apr 2026</span></div>
+          <p class="essay-title">The hidden systems behind public safety infrastructure</p>
+          <p class="essay-excerpt">Building Saheli made me realize how much critical infrastructure is either undocumented, outdated, or inaccessible.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="personal-writing reveal">
+      <p class="writing-col-label">Personal — The Unsent Letter Project</p>
+      <p class="substack-desc">"Unsent letters from the in-between — of endings, beginnings, and everything that lingers."</p>
+      <div class="personal-essays">
+        <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="personal-essay">
+          <p class="personal-essay-title">Boxes, Ballots, and the Power of Cinema</p>
+          <p class="personal-essay-sub">On storytelling, Vijay, and the politics of imagination</p>
+        </a>
+        <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="personal-essay">
+          <p class="personal-essay-title">I process better with an AI than with people. That's the problem.</p>
+          <p class="personal-essay-sub">On ghosting my therapist</p>
+        </a>
+        <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="personal-essay">
+          <p class="personal-essay-title">The Art of Saying Goodbye</p>
+          <p class="personal-essay-sub">"If a goodbye hurts, it means you've spent your time well."</p>
+        </a>
+        <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="personal-essay">
+          <p class="personal-essay-title">Ordinary</p>
+          <p class="personal-essay-sub">I made a cup of coffee for your headache</p>
+        </a>
+      </div>
+      <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="substack-link">Read all essays ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="contact">
+  <p class="section-label reveal">Contact</p>
+  <h2 class="contact-heading reveal">Let's build something <em>useful.</em></h2>
+  <p class="contact-sub reveal">I'm currently available for internships and contract work — and open to full-time roles from December 2026. I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams. If that sounds like you, let's talk.</p>
+  <p class="contact-avail reveal">Available for internships & contract work now · Open to full-time roles from December 2026</p>
+  <div class="contact-links reveal">
+    <a href="mailto:hello@shruthisenthil.com" class="contact-link primary">Email me ↗</a>
+    <a href="#" class="contact-link">↓ Resume</a>
+    <a href="https://linkedin.com/in/shruthi-senthilarasu" target="_blank" class="contact-link">LinkedIn ↗</a>
+    <a href="https://github.com/shruthisenthilarasu" target="_blank" class="contact-link">GitHub ↗</a>
+    <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="contact-link">Substack ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-manifesto">"Technology should reduce friction, not create more of it."</span>
+  <span class="footer-copy">© 2026 Shruthi Senthilarasu · shruthisenthil.com</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
