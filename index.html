@@ -1,0 +1,464 @@
+Index · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruthi Senthilarasu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-mid: #0e1628;
+    --cream: #f0ede8;
+    --cream-muted: #7a8299;
+    --teal: #3fb88a;
+    --teal-dim: #2d7a5c;
+    --purple: #7c6fd4;
+    --purple-light: #a99fe8;
+    --border: rgba(240,237,232,0.07);
+    --border-soft: rgba(240,237,232,0.04);
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+ 
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.022; pointer-events: none; z-index: 999;
+  }
+ 
+  .glow-1 { position: fixed; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,111,212,0.055) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: drift 18s ease-in-out infinite alternate; }
+  .glow-2 { position: fixed; bottom: -15%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,58,46,0.18) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: drift 22s ease-in-out infinite alternate-reverse; }
+ 
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.4rem 4rem; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(20px); background: rgba(10,15,30,0.75); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--cream); text-decoration: none; opacity: 0.8; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--cream-muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--cream); }
+  .nav-resume { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--teal) !important; border: 1px solid rgba(63,184,138,0.25); padding: 0.35rem 0.85rem; transition: background 0.2s !important; }
+  .nav-resume:hover { background: rgba(63,184,138,0.06) !important; }
+ 
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 4rem; position: relative; z-index: 2; }
+  section { padding: 9rem 0; position: relative; z-index: 2; }
+ 
+  /* PAGE NUMBER */
+  .page-num { position: fixed; bottom: 2.5rem; right: 4rem; z-index: 50; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--cream-muted); letter-spacing: 0.15em; opacity: 0.35; transition: opacity 0.3s; }
+ 
+  /* SECTION LABEL */
+  .label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4rem; display: flex; align-items: center; gap: 0.8rem; }
+  .label::after { content: '|'; animation: blink 1.2s step-end infinite; opacity: 0.7; }
+  .label .star { color: var(--teal); opacity: 0.25; font-size: 0.6rem; }
+ 
+  /* PAGE DIVIDER */
+  .page-divider { max-width: 1080px; margin: 0 auto; padding: 0 4rem; display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 2; }
+  .page-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .page-divider-sym { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; color: var(--cream-muted); opacity: 0.2; white-space: nowrap; letter-spacing: 0.06em; }
+ 
+  /* MARQUEE */
+  .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; position: relative; z-index: 2; }
+  .marquee-track { display: flex; width: max-content; animation: marquee 24s linear infinite; }
+  .marquee-track:hover { animation-play-state: paused; }
+  .marquee-item { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--cream-muted); opacity: 0.35; white-space: nowrap; padding-right: 2.5rem; }
+  .marquee-item em { font-style: normal; color: var(--purple-light); opacity: 1; }
+  .marquee-item .sym { color: var(--teal); margin: 0 1rem; opacity: 0.4; font-style: normal; font-size: 0.6rem; vertical-align: middle; }
+ 
+  /* HERO */
+  #hero { padding: 0; min-height: 100vh; display: flex; align-items: center; }
+  .hero-inner { padding: 0 4rem; max-width: 1080px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--teal); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: up 0.7s ease forwards 0.2s; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(4rem, 9.5vw, 8rem); line-height: 0.98; font-weight: 400; margin-bottom: 3.5rem; }
+  .hero-title .w { display: block; opacity: 0; transform: translateY(20px); }
+  .hero-title .w:nth-child(1) { animation: up 0.7s ease forwards 0.35s; }
+  .hero-title .w:nth-child(2) { animation: up 0.7s ease forwards 0.5s; }
+  .hero-title .w:nth-child(3) { animation: up 0.7s ease forwards 0.65s; }
+  .hero-title em { font-style: italic; color: var(--purple-light); }
+  .hero-line { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--cream-muted); max-width: 480px; line-height: 1.65; margin-bottom: 3.5rem; opacity: 0; animation: up 0.7s ease forwards 0.85s; }
+  .hero-btns { display: flex; align-items: center; gap: 2.5rem; opacity: 0; animation: up 0.7s ease forwards 1.05s; }
+  .btn-editorial { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.9rem; color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; position: relative; padding-bottom: 3px; letter-spacing: 0.02em; }
+  .btn-editorial::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--cream); transform: scaleX(0.3); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+  .btn-editorial:hover::after { transform: scaleX(1); }
+  .btn-editorial .arr { transition: transform 0.3s ease; display: inline-block; }
+  .btn-editorial:hover .arr { transform: translate(3px,-3px); }
+  .btn-ghost { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--cream-muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+  .btn-ghost:hover { color: var(--teal); }
+  .hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--cream-muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s ease forwards 1.6s; }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--teal), transparent); animation: pulse 2.5s ease infinite; }
+ 
+  /* ABOUT */
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+  .about-photo-wrap { margin-bottom: 3rem; }
+  .about-greeting { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--teal); display: block; margin-bottom: 1rem; opacity: 0.85; }
+  .about-photo { width: 100%; max-width: 300px; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border: 1px solid var(--border); filter: grayscale(10%) contrast(1.02); }
+  .about-h { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 3rem; }
+  .about-h em { font-style: italic; color: var(--purple-light); }
+  .about-lede { font-size: 1rem; color: var(--cream); font-style: italic; line-height: 1.9; margin-bottom: 1.8rem; }
+  .about-body { color: var(--cream-muted); font-size: 0.94rem; line-height: 1.95; margin-bottom: 1.4rem; }
+  .pullquote { margin: 3rem 0; padding: 1.6rem 2rem; border-left: 2px solid var(--purple); background: rgba(124,111,212,0.04); }
+  .pullquote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: var(--cream); line-height: 1.65; }
+  .stack-prose { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stack-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.7rem; display: block; }
+  .stack-list { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cream-muted); letter-spacing: 0.04em; line-height: 2; }
+  .stack-list span { opacity: 0.35; margin: 0 0.3em; }
+  .trait { padding: 2rem 0; border-bottom: 1px solid var(--border-soft); }
+  .trait:first-child { padding-top: 0; }
+  .trait-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .trait-desc { color: var(--cream-muted); font-size: 0.85rem; line-height: 1.8; }
+  .now-block { margin-top: 2.5rem; padding: 1.6rem 1.8rem; border: 1px solid var(--border); background: rgba(14,22,40,0.5); }
+  .now-label { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--teal); margin-bottom: 1rem; }
+  .now-label::after { content: '|'; animation: blink 1.2s step-end infinite; margin-left: 1px; opacity: 0.6; }
+  .now-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .now-list li { font-size: 0.85rem; color: var(--cream-muted); padding-left: 1.2rem; position: relative; }
+  .now-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal-dim); font-size: 0.78rem; }
+  .now-list li.open { color: var(--cream); margin-top: 0.4rem; padding-top: 0.7rem; border-top: 1px solid var(--border-soft); }
+ 
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+  .project-card { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.2rem 2rem; text-decoration: none; color: inherit; display: block; position: relative; transition: background 0.3s ease; overflow: hidden; }
+  .project-card:hover { background: rgba(255,255,255,0.02); }
+  .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .project-card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.25; }
+  .project-card-arr { font-size: 0.9rem; color: var(--cream-muted); opacity: 0.3; transition: opacity 0.2s, transform 0.25s; flex-shrink: 0; margin-left: 1rem; margin-top: 0.15rem; }
+  .project-card:hover .project-card-arr { opacity: 0.7; transform: translate(3px,-3px); }
+  .project-card-constraint { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--teal); opacity: 0.75; margin-bottom: 1rem; line-height: 1.5; display: block; }
+  .project-card-desc { color: var(--cream-muted); font-size: 0.84rem; line-height: 1.8; margin-bottom: 1.5rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.35s ease; }
+  .project-card:hover .project-card-desc { max-height: 200px; opacity: 1; }
+  .project-card-stack { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--cream-muted); opacity: 0.38; letter-spacing: 0.03em; }
+  .project-card-stack span { opacity: 0.35; margin: 0 0.3em; }
+ 
+  /* WRITING */
+  .writing-intro { max-width: 560px; color: var(--cream-muted); font-size: 0.95rem; line-height: 1.95; margin-bottom: 4rem; }
+  .writing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .writing-col-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2rem; display: block; }
+  .essay-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border-soft); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+  .essay-item:first-child { padding-top: 0; }
+  .essay-item:last-child { border-bottom: none; }
+  .essay-item:hover { opacity: 0.7; }
+  .essay-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem; }
+  .essay-tag-published { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--purple-light); border: 1px solid rgba(169,159,232,0.3); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .essay-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--teal); border: 1px solid rgba(63,184,138,0.25); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .essay-date { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--cream-muted); opacity: 0.38; }
+  .essay-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--cream); line-height: 1.45; margin-bottom: 0.35rem; }
+  .essay-excerpt { font-size: 0.82rem; color: var(--cream-muted); line-height: 1.75; }
+  .unsent-block { border-left: 2px solid rgba(169,159,232,0.3); padding: 2rem 2rem 2.5rem; background: rgba(124,111,212,0.03); }
+  .unsent-epigraph { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--cream-muted); line-height: 1.8; margin-bottom: 2.5rem; opacity: 0.8; }
+  .personal-essay { padding: 1.1rem 0; border-bottom: 1px solid rgba(169,159,232,0.08); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+  .personal-essay:first-of-type { padding-top: 0; }
+  .personal-essay:last-of-type { border-bottom: none; padding-bottom: 0; }
+  .personal-essay:hover { opacity: 0.7; }
+  .personal-title { font-size: 0.92rem; color: var(--cream); margin-bottom: 0.2rem; line-height: 1.5; }
+  .personal-sub { font-size: 0.78rem; color: var(--cream-muted); font-style: italic; opacity: 0.7; }
+  .unsent-link { display: inline-block; margin-top: 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--purple-light); letter-spacing: 0.06em; text-decoration: none; opacity: 0.7; position: relative; padding-bottom: 2px; }
+  .unsent-link::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--purple-light); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+  .unsent-link:hover::after { transform: scaleX(1); }
+ 
+  /* CONTACT */
+  .contact-h { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; max-width: 600px; }
+  .contact-h em { font-style: italic; color: var(--purple-light); }
+  .contact-body { color: var(--cream-muted); font-size: 0.95rem; max-width: 460px; line-height: 1.9; margin-bottom: 0.8rem; }
+  .contact-avail { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 3.5rem; opacity: 0.65; }
+  .contact-links { display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center; }
+  .contact-btn { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.95rem; color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; position: relative; padding-bottom: 3px; letter-spacing: 0.01em; }
+  .contact-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--cream); transform: scaleX(0.2); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+  .contact-btn:hover::after { transform: scaleX(1); }
+  .contact-btn .arr { transition: transform 0.3s ease; display: inline-block; }
+  .contact-btn:hover .arr { transform: translate(3px,-3px); }
+  .contact-link-sm { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--cream-muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+  .contact-link-sm:hover { color: var(--teal); }
+ 
+  /* FOOTER */
+  footer { padding: 2.5rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; position: relative; z-index: 2; }
+  .footer-manifesto { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.82rem; color: var(--cream-muted); opacity: 0.35; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--cream-muted); letter-spacing: 0.08em; opacity: 0.28; }
+ 
+  /* PAGE FLIP REVEAL */
+  .page {
+    opacity: 0;
+    transform: translateY(40px) rotateX(3deg);
+    transform-origin: top center;
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  }
+  .page.in-view { opacity: 1; transform: translateY(0) rotateX(0deg); }
+ 
+  /* ANIMATIONS */
+  @keyframes up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:0.45; } }
+  @keyframes pulse { 0%,100% { opacity:0.2; } 50% { opacity:0.8; } }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+  @keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(28px,-18px) scale(1.07); } }
+  @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.1rem 1.5rem; }
+    .wrap { padding: 0 1.5rem; }
+    .hero-inner { padding: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .writing-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-links { gap: 1.5rem; }
+    .page-divider { padding: 0 1.5rem; }
+    .page-num { right: 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.66rem; }
+    .nav-resume { display: none; }
+    section { padding: 6rem 0; }
+    .hero-title { font-size: clamp(3rem, 15vw, 4.5rem); }
+    .contact-h { font-size: clamp(2.2rem, 10vw, 3rem); }
+    .hero-btns { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+ 
+<nav>
+  <a href="#hero" class="nav-logo">Shruthi Senthilarasu</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-resume">↓ Resume</a></li>
+  </ul>
+</nav>
+ 
+<div class="page-num" id="pageNum">01 / 05</div>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Software Development and Data Automation · Building tools that make complex systems easier to navigate</p>
+    <h1 class="hero-title">
+      <span class="w">systems.</span>
+      <span class="w">data.</span>
+      <span class="w"><em>equity.</em></span>
+    </h1>
+    <p class="hero-line">Technology should reduce friction, not create more of it.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-editorial">Let's talk <span class="arr">↗</span></a>
+      <a href="#" class="btn-ghost">↓ Download resume</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+ 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
+    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
+    <span class="marquee-item">builder who writes<span class="sym">✦</span>writer who builds<span class="sym">✦</span></span>
+    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
+    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
+    <span class="marquee-item">builder who writes<span class="sym">✦</span>writer who builds<span class="sym">✦</span></span>
+    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
+    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
+  </div>
+</div>
+ 
+<!-- ABOUT -->
+<section id="about" class="page" data-page="02 / 05">
+  <div class="wrap">
+    <div class="label"><span>About</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <div class="about-layout">
+      <div>
+        <div class="about-photo-wrap">
+          <span class="about-greeting">hi, I'm Shruthi :)</span>
+          <img src="IMG_3449.JPG" alt="Shruthi Senthilarasu" class="about-photo" />
+        </div>
+        <h2 class="about-h">I learn best<br>by <em>building.</em></h2>
+        <p class="about-lede">I'm especially drawn to problems where the people who most need good software are often the last to get it.</p>
+        <p class="about-body">I've been prototyping ways for startups and nonprofits to use AI and automation to simplify workflows and reduce operational friction. The technical setup can get complicated — but done well, it changes how a team operates entirely.</p>
+        <p class="about-body">I work best in small teams where everyone wears multiple hats and the user is someone most software ignores.</p>
+        <div class="pullquote"><p>"Good software quietly makes someone's work easier."</p></div>
+        <div class="stack-prose">
+          <span class="stack-label">Stack</span>
+          <p class="stack-list">Python <span>·</span> TypeScript <span>·</span> JavaScript <span>·</span> SQL <span>·</span> Claude API <span>·</span> React Native <span>·</span> C <span>·</span> Git</p>
+        </div>
+      </div>
+      <div>
+        <div class="trait"><p class="trait-title">Implementation-focused</p><p class="trait-desc">Not just prototyping ideas — building things that actually get adopted and used by the people they're built for.</p></div>
+        <div class="trait"><p class="trait-title">Systems thinker</p><p class="trait-desc">Interested in the whole picture — how data flows, where friction lives, and what it takes to make complex processes feel simple.</p></div>
+        <div class="trait"><p class="trait-title">Mission-driven</p><p class="trait-desc">Drawn to organizations that care not just about what they're building, but who it serves.</p></div>
+        <div class="trait"><p class="trait-title">Builder who writes</p><p class="trait-desc">Writing is how I process what I build — the ideas, the failures, and the things that surprised me.</p></div>
+        <div class="now-block">
+          <p class="now-label">currently</p>
+          <ul class="now-list">
+            <li>Building a website for an Indigenous maternal health nonprofit in Montana</li>
+            <li>Thinking about how AI tools actually get adopted inside organizations</li>
+            <li>Writing about operational friction and why it matters more than features</li>
+            <li class="open">→ Open to internships & contract work now · Full-time from December 2026</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+ 
+<!-- PROJECTS -->
+<section id="projects" class="page" data-page="03 / 05">
+  <div class="wrap">
+    <div class="label"><span>Projects</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <div class="projects-grid">
+      <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">Saheli</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
+        <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
+        <p class="project-card-stack">React Native <span>·</span> TypeScript <span>·</span> Supabase <span>·</span> Mapbox</p>
+      </a>
+      <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">SEO City Suite</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Replaced a manual 3-hour weekly process for a real client</span>
+        <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
+        <p class="project-card-stack">JavaScript <span>·</span> Claude API <span>·</span> Vercel <span>·</span> React</p>
+      </a>
+      <a href="https://github.com/shruthisenthilarasu/Student-Funnel-Analysis-Equity-Audit" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">Student Funnel & Equity Audit</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Identified where stopped-out students actually disappear</span>
+        <p class="project-card-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
+        <p class="project-card-stack">Python <span>·</span> Pandas <span>·</span> scikit-learn <span>·</span> Jupyter</p>
+      </a>
+      <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">TinyShell</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Built to understand how operating systems actually work at the process level</span>
+        <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
+        <p class="project-card-stack">C <span>·</span> Unix <span>·</span> POSIX <span>·</span> Systems</p>
+      </a>
+      <a href="https://github.com/shruthisenthilarasu/Trust-Aware-SEO" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">Trust-Aware SEO</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Most SEO tools miss the dimension of who a site actually serves</span>
+        <p class="project-card-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — SEO, UX, and trust exposure in one report.</p>
+        <p class="project-card-stack">Python <span>·</span> FastAPI <span>·</span> BeautifulSoup <span>·</span> Jinja2</p>
+      </a>
+      <a href="https://github.com/shruthisenthilarasu/LogLLM" target="_blank" class="project-card">
+        <div class="project-card-top"><p class="project-card-title">LogLLM</p><span class="project-card-arr">↗</span></div>
+        <span class="project-card-constraint">Manually classifying log lines is a systems problem, not a human one</span>
+        <p class="project-card-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
+        <p class="project-card-stack">Python <span>·</span> PyTorch <span>·</span> HuggingFace <span>·</span> DistilBERT</p>
+      </a>
+    </div>
+  </div>
+</section>
+ 
+<div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+ 
+<!-- WRITING -->
+<section id="writing" class="page" data-page="04 / 05">
+  <div class="wrap">
+    <div class="label"><span>Writing</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <p class="writing-intro">I write in two registers — technical essays about systems and implementation, and personal essays about everything else. Both are how I make sense of the world.</p>
+    <div class="writing-layout">
+      <div>
+        <span class="writing-col-label">Technical — Medium</span>
+        <a href="https://medium.com/@shruthi.senth/i-thought-i-was-building-a-map-app-i-was-actually-building-for-someone-with-2-battery-and-no-data-cf5a048bbbc6" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag-published">published</span><span class="essay-date">May 2026</span></div>
+          <p class="essay-title">I thought I was building a map app. I was actually building for someone with 2% battery and no data.</p>
+          <p class="essay-excerpt">On offline-first design, real constraints, and what Saheli taught me about building software that holds up under pressure.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
+          <p class="essay-title">Why operational friction matters more than flashy features</p>
+          <p class="essay-excerpt">The tools that actually change how organizations work are rarely the impressive ones.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
+          <p class="essay-title">What nonprofits actually need from AI tools</p>
+          <p class="essay-excerpt">Most AI tooling is built for teams with engineers, budget, and time. Nonprofits have none of those.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">Apr 2026</span></div>
+          <p class="essay-title">The hidden systems behind public safety infrastructure</p>
+          <p class="essay-excerpt">Building Saheli made me realize how much critical infrastructure is either undocumented, outdated, or inaccessible.</p>
+        </a>
+      </div>
+      <div>
+        <span class="writing-col-label">Personal — The Unsent Letter Project</span>
+        <div class="unsent-block">
+          <p class="unsent-epigraph">"Unsent letters from the in-between — of endings, beginnings, and everything that lingers."</p>
+          <a href="https://shruthisenthilarasu.substack.com/p/boxes-ballots-and-the-power-of-cinema" target="_blank" class="personal-essay">
+            <div class="essay-meta"><span class="essay-date">May 2026</span></div>
+            <p class="personal-title">Boxes, Ballots, and the Power of Cinema</p>
+            <p class="personal-sub">On Tamil cinema, Vijay's political debut, and how film has always been a site of imagination and resistance.</p>
+          </a>
+          <a href="https://shruthisenthilarasu.substack.com/p/happy-birthday-mr-president" target="_blank" class="personal-essay">
+            <div class="essay-meta"><span class="essay-date">Oct 2025</span></div>
+            <p class="personal-title">Happy Birthday, Mr. President</p>
+            <p class="personal-sub">On power, performance, and what it means to celebrate someone who was never really yours to celebrate.</p>
+          </a>
+          <a href="https://shruthisenthilarasu.substack.com/p/ordinary" target="_blank" class="personal-essay">
+            <div class="essay-meta"><span class="essay-date">Feb 2026</span></div>
+            <p class="personal-title">Ordinary</p>
+            <p class="personal-sub">On the small, unremarkable acts of care that turn out to be everything.</p>
+          </a>
+          <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="unsent-link">Read all essays ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+ 
+<!-- CONTACT -->
+<section id="contact" class="page" data-page="05 / 05">
+  <div class="wrap">
+    <div class="label"><span>Contact</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <h2 class="contact-h">Let's build something <em>useful.</em></h2>
+    <p class="contact-body">I'm currently available for internships and contract work — and open to full-time roles from December 2026. I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams. If that sounds like you, let's talk.</p>
+    <p class="contact-avail">Available for internships & contract work now · Full-time from December 2026</p>
+    <div class="contact-links">
+      <a href="mailto:hello@shruthisenthil.com" class="contact-btn">Email me <span class="arr">↗</span></a>
+      <a href="#" class="contact-btn">Resume <span class="arr">↓</span></a>
+      <a href="https://linkedin.com/in/shruthi-senthilarasu" target="_blank" class="contact-link-sm">LinkedIn ↗</a>
+      <a href="https://github.com/shruthisenthilarasu" target="_blank" class="contact-link-sm">GitHub ↗</a>
+      <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="contact-link-sm">Substack ↗</a>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <span class="footer-manifesto">"Technology should reduce friction, not create more of it."</span>
+  <span class="footer-copy">© 2026 Shruthi Senthilarasu · shruthisenthil.com</span>
+</footer>
+ 
+<script>
+  const pages = document.querySelectorAll('.page');
+  const pageNum = document.getElementById('pageNum');
+ 
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        if (entry.target.dataset.page) pageNum.textContent = entry.target.dataset.page;
+      }
+    });
+  }, { threshold: 0.08 });
+ 
+  pages.forEach(p => obs.observe(p));
+ 
+  const heroObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) pageNum.textContent = '01 / 05'; });
+  }, { threshold: 0.3 });
+  heroObs.observe(document.getElementById('hero'));
+</script>
+</body>
+</html>
