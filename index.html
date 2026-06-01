@@ -1,4 +1,3 @@
-Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,210 +5,207 @@ Index · HTML
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shruthi Senthilarasu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0f1e;
-    --bg-mid: #0e1628;
-    --cream: #f0ede8;
-    --cream-muted: #7a8299;
-    --teal: #3fb88a;
-    --teal-dim: #2d7a5c;
-    --purple: #7c6fd4;
-    --purple-light: #a99fe8;
-    --border: rgba(240,237,232,0.07);
-    --border-soft: rgba(240,237,232,0.04);
+    --bg: #F8FAFC;
+    --bg-mid: #F1F5F9;
+    --white: #FFFFFF;
+    --text: #1A202C;
+    --text-muted: #4A5568;
+    --text-light: #718096;
+    --blue: #2B6CB0;
+    --blue-light: #4A90E2;
+    --teal: #2C7A7B;
+    --green: #38A169;
+    --border: #E2E8F0;
+    --border-strong: #CBD5E0;
   }
- 
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
- 
+
   body {
     background: var(--bg);
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
     line-height: 1.7;
     overflow-x: hidden;
   }
- 
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.022; pointer-events: none; z-index: 999;
-  }
- 
-  .glow-1 { position: fixed; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,111,212,0.055) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: drift 18s ease-in-out infinite alternate; }
-  .glow-2 { position: fixed; bottom: -15%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,58,46,0.18) 0%, transparent 70%); pointer-events: none; z-index: 0; animation: drift 22s ease-in-out infinite alternate-reverse; }
- 
+
   /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.4rem 4rem; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(20px); background: rgba(10,15,30,0.75); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--cream); text-decoration: none; opacity: 0.8; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(248,250,252,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Newsreader', serif; font-size: 1.05rem; font-style: italic; color: var(--blue); text-decoration: none; font-weight: 400; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-  .nav-links a { color: var(--cream-muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--cream); }
-  .nav-resume { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--teal) !important; border: 1px solid rgba(63,184,138,0.25); padding: 0.35rem 0.85rem; transition: background 0.2s !important; }
-  .nav-resume:hover { background: rgba(63,184,138,0.06) !important; }
- 
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 4rem; position: relative; z-index: 2; }
-  section { padding: 9rem 0; position: relative; z-index: 2; }
- 
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-resume { font-size: 0.72rem !important; color: var(--blue) !important; border: 1px solid rgba(43,108,176,0.35) !important; padding: 0.35rem 0.85rem; transition: background 0.2s !important; }
+  .nav-resume:hover { background: rgba(43,108,176,0.06) !important; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 4rem; }
+  section { padding: 8rem 0; }
+  #about { background: var(--bg-mid); }
+  #writing { background: var(--bg-mid); }
+
   /* PAGE NUMBER */
-  .page-num { position: fixed; bottom: 2.5rem; right: 4rem; z-index: 50; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--cream-muted); letter-spacing: 0.15em; opacity: 0.35; transition: opacity 0.3s; }
- 
+  .page-num { position: fixed; bottom: 2.5rem; right: 4rem; z-index: 50; font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--text-light); letter-spacing: 0.15em; opacity: 0.45; transition: opacity 0.3s; }
+
   /* SECTION LABEL */
-  .label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4rem; display: flex; align-items: center; gap: 0.8rem; }
-  .label::after { content: '|'; animation: blink 1.2s step-end infinite; opacity: 0.7; }
-  .label .star { color: var(--teal); opacity: 0.25; font-size: 0.6rem; }
- 
+  .label { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 3rem; display: block; }
+
   /* PAGE DIVIDER */
-  .page-divider { max-width: 1080px; margin: 0 auto; padding: 0 4rem; display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 2; }
+  .page-divider { max-width: 1080px; margin: 0 auto; padding: 0 4rem; display: flex; align-items: center; gap: 1.5rem; }
   .page-divider-line { flex: 1; height: 1px; background: var(--border); }
-  .page-divider-sym { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; color: var(--cream-muted); opacity: 0.2; white-space: nowrap; letter-spacing: 0.06em; }
- 
-  /* MARQUEE */
-  .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; position: relative; z-index: 2; }
-  .marquee-track { display: flex; width: max-content; animation: marquee 24s linear infinite; }
-  .marquee-track:hover { animation-play-state: paused; }
-  .marquee-item { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--cream-muted); opacity: 0.35; white-space: nowrap; padding-right: 2.5rem; }
-  .marquee-item em { font-style: normal; color: var(--purple-light); opacity: 1; }
-  .marquee-item .sym { color: var(--teal); margin: 0 1rem; opacity: 0.4; font-style: normal; font-size: 0.6rem; vertical-align: middle; }
- 
-  /* HERO */
-  #hero { padding: 0; min-height: 100vh; display: flex; align-items: center; }
-  .hero-inner { padding: 0 4rem; max-width: 1080px; margin: 0 auto; width: 100%; }
-  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--teal); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: up 0.7s ease forwards 0.2s; }
-  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(4rem, 9.5vw, 8rem); line-height: 0.98; font-weight: 400; margin-bottom: 3.5rem; }
+  .page-divider-sym { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.78rem; color: var(--text-light); opacity: 0.45; white-space: nowrap; }
+
+  /* ── HERO ── */
+  #hero { padding: 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; position: relative; background-image: linear-gradient(rgba(44,122,123,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(44,122,123,0.045) 1px, transparent 1px); background-size: 48px 48px; }
+  .hero-inner { padding: 0 4rem; max-width: 1080px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+  .hero-text { max-width: 500px; }
+  .hero-eyebrow { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--teal); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 2rem; opacity: 0; animation: up 0.7s ease forwards 0.2s; }
+  .hero-title { font-family: 'Newsreader', serif; font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.15; font-weight: 600; color: var(--text); margin-bottom: 1.8rem; }
   .hero-title .w { display: block; opacity: 0; transform: translateY(20px); }
   .hero-title .w:nth-child(1) { animation: up 0.7s ease forwards 0.35s; }
   .hero-title .w:nth-child(2) { animation: up 0.7s ease forwards 0.5s; }
   .hero-title .w:nth-child(3) { animation: up 0.7s ease forwards 0.65s; }
-  .hero-title em { font-style: italic; color: var(--purple-light); }
-  .hero-line { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--cream-muted); max-width: 480px; line-height: 1.65; margin-bottom: 3.5rem; opacity: 0; animation: up 0.7s ease forwards 0.85s; }
-  .hero-btns { display: flex; align-items: center; gap: 2.5rem; opacity: 0; animation: up 0.7s ease forwards 1.05s; }
-  .btn-editorial { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.9rem; color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; position: relative; padding-bottom: 3px; letter-spacing: 0.02em; }
-  .btn-editorial::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--cream); transform: scaleX(0.3); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-  .btn-editorial:hover::after { transform: scaleX(1); }
-  .btn-editorial .arr { transition: transform 0.3s ease; display: inline-block; }
-  .btn-editorial:hover .arr { transform: translate(3px,-3px); }
-  .btn-ghost { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--cream-muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
-  .btn-ghost:hover { color: var(--teal); }
-  .hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--cream-muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s ease forwards 1.6s; }
-  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--teal), transparent); animation: pulse 2.5s ease infinite; }
- 
-  /* ABOUT */
+.hero-sub { font-size: 1rem; color: #374151; max-width: 400px; line-height: 1.75; margin-bottom: 2.5rem; opacity: 0; animation: up 0.7s ease forwards 0.85s; }
+  .hero-link { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; opacity: 0; animation: up 0.7s ease forwards 1.05s; border-bottom: 1px solid rgba(43,108,176,0.3); padding-bottom: 2px; transition: border-color 0.2s; }
+  .hero-link:hover { border-color: var(--blue); }
+  .hero-link .arr { transition: transform 0.3s ease; display: inline-block; }
+  .hero-link:hover .arr { transform: translateX(4px); }
+  .hero-illustration { position: absolute; right: 1vw; top: 50%; transform: translateY(-50%); width: 62vw; z-index: 1; pointer-events: none; opacity: 0; animation: heroFadeIn 1.4s ease forwards 0.5s; -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 7%, rgba(0,0,0,0.45) 18%, black 30%, black 80%, transparent 98%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 7%, rgba(0,0,0,0.45) 18%, black 30%, black 80%, transparent 98%); }
+  .hero-illustration svg { width: 100%; display: block; }
+  .hero-illustration img { width: 100%; display: block; mix-blend-mode: multiply; }
+  .hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--text-light); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s ease forwards 1.6s; z-index: 2; }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--blue), transparent); animation: pulse 2.5s ease infinite; }
+
+  /* ── ABOUT ── */
   .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
   .about-photo-wrap { margin-bottom: 3rem; }
-  .about-greeting { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--teal); display: block; margin-bottom: 1rem; opacity: 0.85; }
-  .about-photo { width: 100%; max-width: 300px; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border: 1px solid var(--border); filter: grayscale(10%) contrast(1.02); }
-  .about-h { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 3rem; }
-  .about-h em { font-style: italic; color: var(--purple-light); }
-  .about-lede { font-size: 1rem; color: var(--cream); font-style: italic; line-height: 1.9; margin-bottom: 1.8rem; }
-  .about-body { color: var(--cream-muted); font-size: 0.94rem; line-height: 1.95; margin-bottom: 1.4rem; }
-  .pullquote { margin: 3rem 0; padding: 1.6rem 2rem; border-left: 2px solid var(--purple); background: rgba(124,111,212,0.04); }
-  .pullquote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: var(--cream); line-height: 1.65; }
+  .about-greeting { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.4rem; color: var(--teal); display: block; margin-bottom: 1rem; }
+  .about-photo { width: 100%; max-width: 300px; aspect-ratio: 4/5; object-fit: cover; object-position: center 15%; border: 1px solid var(--border); filter: grayscale(8%) contrast(1.01); }
+  .about-h { font-family: 'Newsreader', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 2.5rem; color: var(--text); }
+  .about-h em { font-style: italic; color: var(--blue); font-weight: 400; }
+  .about-lede { font-size: 1rem; color: var(--text); line-height: 1.9; margin-bottom: 1.6rem; }
+  .about-body { color: #374151; font-size: 0.94rem; line-height: 1.95; margin-bottom: 1.4rem; }
+  .about-questions { list-style: none; margin: 1.4rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .about-questions li { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.97rem; color: var(--blue); padding-left: 1rem; position: relative; line-height: 1.5; }
+  .about-questions li::before { content: '—'; position: absolute; left: 0; color: var(--teal); opacity: 0.6; }
+  .pullquote { margin: 2.5rem 0; padding: 1.4rem 1.8rem; border-left: 3px solid var(--blue); background: rgba(43,108,176,0.05); }
+  .pullquote p { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.1rem; color: var(--text); line-height: 1.65; font-weight: 400; }
   .stack-prose { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-  .stack-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.7rem; display: block; }
-  .stack-list { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cream-muted); letter-spacing: 0.04em; line-height: 2; }
-  .stack-list span { opacity: 0.35; margin: 0 0.3em; }
-  .trait { padding: 2rem 0; border-bottom: 1px solid var(--border-soft); }
+  .stack-label { font-family: 'Inter', sans-serif; font-size: 0.63rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; opacity: 0.7; margin-bottom: 1rem; display: block; }
+  .stack-exploring { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .stack-exploring li { font-size: 0.85rem; color: #374151; padding-left: 1rem; position: relative; line-height: 1.6; }
+  .stack-exploring li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 0.75rem; opacity: 0.65; }
+  .stack-tools { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.4rem; }
+  .stack-note { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.85rem; color: var(--text-muted); }
+  .trait-section-label { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 2rem; display: block; }
+  .trait { padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
   .trait:first-child { padding-top: 0; }
-  .trait-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.5rem; }
-  .trait-desc { color: var(--cream-muted); font-size: 0.85rem; line-height: 1.8; }
-  .now-block { margin-top: 2.5rem; padding: 1.6rem 1.8rem; border: 1px solid var(--border); background: rgba(14,22,40,0.5); }
-  .now-label { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--teal); margin-bottom: 1rem; }
-  .now-label::after { content: '|'; animation: blink 1.2s step-end infinite; margin-left: 1px; opacity: 0.6; }
+  .trait-title { font-family: 'Newsreader', serif; font-size: 1.05rem; font-weight: 400; font-style: italic; margin-bottom: 0.4rem; color: var(--text); }
+  .trait-desc { color: #374151; font-size: 0.85rem; line-height: 1.8; }
+  .now-block { margin-top: 2.5rem; padding: 1.6rem 1.8rem; border: 1px solid var(--border-strong); background: var(--white); }
+  .now-label { font-family: 'Newsreader', serif; font-style: italic; font-size: 1rem; color: var(--teal); margin-bottom: 1rem; display: block; }
   .now-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .now-list li { font-size: 0.85rem; color: var(--cream-muted); padding-left: 1.2rem; position: relative; }
-  .now-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal-dim); font-size: 0.78rem; }
-  .now-list li.open { color: var(--cream); margin-top: 0.4rem; padding-top: 0.7rem; border-top: 1px solid var(--border-soft); }
- 
-  /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
-  .project-card { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2.2rem 2rem; text-decoration: none; color: inherit; display: block; position: relative; transition: background 0.3s ease; overflow: hidden; }
-  .project-card:hover { background: rgba(255,255,255,0.02); }
-  .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-  .project-card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.25; }
-  .project-card-arr { font-size: 0.9rem; color: var(--cream-muted); opacity: 0.3; transition: opacity 0.2s, transform 0.25s; flex-shrink: 0; margin-left: 1rem; margin-top: 0.15rem; }
-  .project-card:hover .project-card-arr { opacity: 0.7; transform: translate(3px,-3px); }
-  .project-card-constraint { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--teal); opacity: 0.75; margin-bottom: 1rem; line-height: 1.5; display: block; }
-  .project-card-desc { color: var(--cream-muted); font-size: 0.84rem; line-height: 1.8; margin-bottom: 1.5rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.35s ease; }
-  .project-card:hover .project-card-desc { max-height: 200px; opacity: 1; }
-  .project-card-stack { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--cream-muted); opacity: 0.38; letter-spacing: 0.03em; }
-  .project-card-stack span { opacity: 0.35; margin: 0 0.3em; }
- 
-  /* WRITING */
-  .writing-intro { max-width: 560px; color: var(--cream-muted); font-size: 0.95rem; line-height: 1.95; margin-bottom: 4rem; }
+  .now-list li { font-size: 0.85rem; color: var(--text-muted); padding-left: 1.2rem; position: relative; }
+  .now-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 0.78rem; opacity: 0.6; }
+  .now-list li.open { color: var(--text); margin-top: 0.4rem; padding-top: 0.7rem; border-top: 1px solid var(--border); }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .project-card { background: var(--white); border: 1px solid var(--border-strong); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color 0.2s, box-shadow 0.2s; }
+  .project-card:hover { border-color: var(--blue); box-shadow: 0 2px 16px rgba(43,108,176,0.1); }
+  .project-card-img { width: 100%; aspect-ratio: 16/10; background: var(--bg-mid); border-bottom: 1px solid var(--border-strong); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .project-card-img svg { width: 100%; height: 100%; }
+  .project-card-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
+  .project-card-constraint { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--teal); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .project-card-title { font-family: 'Newsreader', serif; font-size: 1.35rem; font-weight: 600; line-height: 1.2; color: var(--blue); margin-bottom: 0.65rem; }
+  .project-card-desc { color: #374151; font-size: 0.84rem; line-height: 1.75; margin-bottom: 1.2rem; flex: 1; }
+  .project-card-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .project-card-stack span { font-size: 0.67rem; font-weight: 500; padding: 0.2rem 0.65rem; border-radius: 50px; background: var(--bg); border: 1px solid var(--border-strong); color: var(--text-muted); }
+  .project-card-link { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--blue); display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: none; transition: gap 0.2s; margin-top: auto; }
+  .project-card:hover .project-card-link { gap: 0.5rem; }
+
+  /* ── WRITING ── */
+  .writing-intro { max-width: 560px; color: #374151; font-size: 0.95rem; line-height: 1.95; margin-bottom: 4rem; }
   .writing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-  .writing-col-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.6; margin-bottom: 2rem; display: block; }
-  .essay-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border-soft); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+  .writing-col-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; opacity: 0.7; margin-bottom: 2rem; display: block; }
+  .essay-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
   .essay-item:first-child { padding-top: 0; }
   .essay-item:last-child { border-bottom: none; }
-  .essay-item:hover { opacity: 0.7; }
+  .essay-item:hover { opacity: 0.75; }
   .essay-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem; }
-  .essay-tag-published { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--purple-light); border: 1px solid rgba(169,159,232,0.3); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .essay-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--teal); border: 1px solid rgba(63,184,138,0.25); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .essay-date { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--cream-muted); opacity: 0.38; }
-  .essay-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--cream); line-height: 1.45; margin-bottom: 0.35rem; }
-  .essay-excerpt { font-size: 0.82rem; color: var(--cream-muted); line-height: 1.75; }
-  .unsent-block { border-left: 2px solid rgba(169,159,232,0.3); padding: 2rem 2rem 2.5rem; background: rgba(124,111,212,0.03); }
-  .unsent-epigraph { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--cream-muted); line-height: 1.8; margin-bottom: 2.5rem; opacity: 0.8; }
-  .personal-essay { padding: 1.1rem 0; border-bottom: 1px solid rgba(169,159,232,0.08); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+  .essay-tag-published { font-family: 'Inter', sans-serif; font-size: 0.58rem; color: var(--green); border: 1px solid rgba(56,161,105,0.3); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+  .essay-tag { font-family: 'Inter', sans-serif; font-size: 0.58rem; color: var(--text-light); border: 1px solid var(--border-strong); padding: 0.08rem 0.4rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  .essay-date { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--text-light); }
+  .essay-title { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.08rem; font-weight: 600; color: var(--text); line-height: 1.45; margin-bottom: 0.35rem; }
+  .essay-excerpt { font-size: 0.82rem; color: #374151; line-height: 1.75; }
+  .unsent-block { border-left: 3px solid rgba(44,122,123,0.25); padding: 1.8rem 2rem 2.5rem; background: rgba(44,122,123,0.03); }
+  .unsent-epigraph { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.98rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+  .personal-essay { padding: 1.1rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
   .personal-essay:first-of-type { padding-top: 0; }
   .personal-essay:last-of-type { border-bottom: none; padding-bottom: 0; }
   .personal-essay:hover { opacity: 0.7; }
-  .personal-title { font-size: 0.92rem; color: var(--cream); margin-bottom: 0.2rem; line-height: 1.5; }
-  .personal-sub { font-size: 0.78rem; color: var(--cream-muted); font-style: italic; opacity: 0.7; }
-  .unsent-link { display: inline-block; margin-top: 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--purple-light); letter-spacing: 0.06em; text-decoration: none; opacity: 0.7; position: relative; padding-bottom: 2px; }
-  .unsent-link::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--purple-light); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-  .unsent-link:hover::after { transform: scaleX(1); }
- 
-  /* CONTACT */
-  .contact-h { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; max-width: 600px; }
-  .contact-h em { font-style: italic; color: var(--purple-light); }
-  .contact-body { color: var(--cream-muted); font-size: 0.95rem; max-width: 460px; line-height: 1.9; margin-bottom: 0.8rem; }
-  .contact-avail { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 3.5rem; opacity: 0.65; }
-  .contact-links { display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center; }
-  .contact-btn { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.95rem; color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; position: relative; padding-bottom: 3px; letter-spacing: 0.01em; }
-  .contact-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--cream); transform: scaleX(0.2); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
-  .contact-btn:hover::after { transform: scaleX(1); }
-  .contact-btn .arr { transition: transform 0.3s ease; display: inline-block; }
-  .contact-btn:hover .arr { transform: translate(3px,-3px); }
-  .contact-link-sm { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--cream-muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-  .contact-link-sm:hover { color: var(--teal); }
- 
-  /* FOOTER */
-  footer { padding: 2.5rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; position: relative; z-index: 2; }
-  .footer-manifesto { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.82rem; color: var(--cream-muted); opacity: 0.35; }
-  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--cream-muted); letter-spacing: 0.08em; opacity: 0.28; }
- 
-  /* PAGE FLIP REVEAL */
-  .page {
-    opacity: 0;
-    transform: translateY(40px) rotateX(3deg);
-    transform-origin: top center;
-    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
-  }
-  .page.in-view { opacity: 1; transform: translateY(0) rotateX(0deg); }
- 
+  .personal-title { font-size: 0.92rem; color: var(--text); margin-bottom: 0.2rem; line-height: 1.5; font-weight: 500; }
+  .personal-sub { font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
+  .unsent-link { display: inline-block; margin-top: 1.8rem; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--teal); font-weight: 500; letter-spacing: 0.06em; text-decoration: none; border-bottom: 1px solid rgba(44,122,123,0.3); padding-bottom: 2px; transition: border-color 0.2s; }
+  .unsent-link:hover { border-color: var(--teal); }
+
+  /* ── AVAILABILITY ── */
+  .avail-block { margin-top: 2rem; padding: 1.4rem 1.6rem; border: 1px solid var(--border); background: var(--white); }
+  .avail-block-label { font-family: 'Inter', sans-serif; font-size: 0.63rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; opacity: 0.7; margin-bottom: 1rem; }
+  .avail-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem; }
+  .avail-row:last-child { margin-bottom: 0; }
+  .avail-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .avail-dot.green { background: var(--green); box-shadow: 0 0 0 3px rgba(56,161,105,0.15); animation: availPulse 2s infinite; }
+  .avail-dot.dim { background: var(--text-light); opacity: 0.3; }
+  .avail-text { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+  .avail-sub { font-size: 0.73rem; color: var(--text-muted); margin-top: 0.1rem; }
+  @keyframes availPulse { 0%,100%{box-shadow:0 0 0 3px rgba(56,161,105,0.15)}50%{box-shadow:0 0 0 7px rgba(56,161,105,0.05)} }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .contact-h { font-family: 'Newsreader', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; color: var(--text); }
+  .contact-h em { font-style: italic; color: var(--blue); }
+  .contact-body { color: #374151; font-size: 0.95rem; line-height: 1.9; margin-bottom: 0.8rem; }
+  .contact-cards { display: flex; flex-direction: column; gap: 0.6rem; }
+  .contact-card { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border); padding: 1rem 1.2rem; text-decoration: none; background: var(--white); transition: border-color 0.2s, background 0.2s; }
+  .contact-card:hover { border-color: rgba(43,108,176,0.4); background: rgba(43,108,176,0.03); }
+  .contact-card-left { display: flex; flex-direction: column; gap: 0.15rem; }
+  .contact-card-name { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+  .contact-card-detail { font-size: 0.67rem; color: var(--text-muted); }
+  .contact-card-arr { font-size: 0.8rem; color: var(--text-light); opacity: 0.3; transition: opacity 0.2s, transform 0.2s; }
+  .contact-card:hover .contact-card-arr { opacity: 0.8; color: var(--blue); transform: translate(2px,-2px); }
+
+  /* ── FOOTER ── */
+  footer { padding: 2.5rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; max-width: 1080px; margin: 0 auto; }
+  .footer-manifesto { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.85rem; color: var(--text-muted); opacity: 0.7; }
+  .footer-copy { font-family: 'Inter', sans-serif; font-size: 0.65rem; color: var(--text-light); letter-spacing: 0.08em; opacity: 0.6; }
+
+  /* REVEAL */
+  .page { opacity: 0; transform: translateY(24px); transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+  .page.in-view { opacity: 1; transform: translateY(0); }
+
   /* ANIMATIONS */
   @keyframes up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeIn { from { opacity:0; } to { opacity:0.45; } }
-  @keyframes pulse { 0%,100% { opacity:0.2; } 50% { opacity:0.8; } }
-  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-  @keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(28px,-18px) scale(1.07); } }
-  @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
- 
+  @keyframes heroFadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:0.5; } }
+  @keyframes pulse { 0%,100% { opacity:0.3; } 50% { opacity:0.9; } }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 1.1rem 1.5rem; }
     .wrap { padding: 0 1.5rem; }
     .hero-inner { padding: 0 1.5rem; }
+    .hero-illustration { display: none; }
     footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
     .about-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
     .writing-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .contact-links { gap: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .page-divider { padding: 0 1.5rem; }
     .page-num { right: 1.5rem; }
   }
@@ -217,17 +213,14 @@ Index · HTML
     .nav-links { gap: 1rem; }
     .nav-links a { font-size: 0.66rem; }
     .nav-resume { display: none; }
-    section { padding: 6rem 0; }
-    .hero-title { font-size: clamp(3rem, 15vw, 4.5rem); }
+    section { padding: 5rem 0; }
+    .projects-grid { grid-template-columns: 1fr; }
     .contact-h { font-size: clamp(2.2rem, 10vw, 3rem); }
-    .hero-btns { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
   }
 </style>
 </head>
 <body>
-<div class="glow-1"></div>
-<div class="glow-2"></div>
- 
+
 <nav>
   <a href="#hero" class="nav-logo">Shruthi Senthilarasu</a>
   <ul class="nav-links">
@@ -235,159 +228,482 @@ Index · HTML
     <li><a href="#projects">Projects</a></li>
     <li><a href="#writing">Writing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#" class="nav-resume">↓ Resume</a></li>
   </ul>
 </nav>
- 
+
 <div class="page-num" id="pageNum">01 / 05</div>
- 
+
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-illustration">
+    <svg viewBox="0 0 600 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- ── L1: URBAN TOPOLOGY — faint city block suggestion ── -->
+      <line x1="0"   y1="110" x2="600" y2="110" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="0"   y1="220" x2="600" y2="220" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="0"   y1="330" x2="600" y2="330" stroke="#2B6CB0" stroke-width="0.35" opacity="0.06"/>
+      <line x1="0"   y1="440" x2="600" y2="440" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="0"   y1="550" x2="600" y2="550" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="100" y1="0"   x2="100" y2="660" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="210" y1="0"   x2="210" y2="660" stroke="#2B6CB0" stroke-width="0.35" opacity="0.06"/>
+      <line x1="340" y1="0"   x2="340" y2="660" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="460" y1="0"   x2="460" y2="660" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <line x1="560" y1="0"   x2="560" y2="660" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <!-- City block outlines in corners and edges -->
+      <rect x="8"   y="8"   width="82" height="90" stroke="#2B6CB0" stroke-width="0.4" opacity="0.09"/>
+      <rect x="12"  y="12"  width="34" height="38" stroke="#2B6CB0" stroke-width="0.3" opacity="0.07"/>
+      <rect x="50"  y="12"  width="36" height="38" stroke="#2B6CB0" stroke-width="0.3" opacity="0.07"/>
+      <rect x="12"  y="54"  width="74" height="40" stroke="#2B6CB0" stroke-width="0.3" opacity="0.07"/>
+      <rect x="518" y="8"   width="74" height="90" stroke="#2B6CB0" stroke-width="0.4" opacity="0.08"/>
+      <rect x="522" y="12"  width="66" height="82" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="8"   y="568" width="82" height="84" stroke="#2B6CB0" stroke-width="0.4" opacity="0.08"/>
+      <rect x="12"  y="572" width="36" height="76" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="52"  y="572" width="34" height="36" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="518" y="568" width="74" height="84" stroke="#2B6CB0" stroke-width="0.4" opacity="0.08"/>
+      <rect x="110" y="118" width="88" height="88" stroke="#2B6CB0" stroke-width="0.35" opacity="0.08"/>
+      <rect x="114" y="122" width="36" height="36" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="154" y="122" width="40" height="80" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="114" y="162" width="36" height="40" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="420" y="118" width="88" height="88" stroke="#2B6CB0" stroke-width="0.35" opacity="0.08"/>
+      <rect x="424" y="122" width="80" height="36" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="424" y="162" width="36" height="40" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="464" y="162" width="40" height="40" stroke="#2B6CB0" stroke-width="0.3" opacity="0.06"/>
+      <rect x="110" y="452" width="88" height="88" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <rect x="420" y="452" width="88" height="88" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <rect x="216" y="8"   width="116" height="88" stroke="#2B6CB0" stroke-width="0.35" opacity="0.07"/>
+      <rect x="220" y="12"  width="50"  height="80" stroke="#2B6CB0" stroke-width="0.3" opacity="0.05"/>
+      <rect x="274" y="12"  width="54"  height="38" stroke="#2B6CB0" stroke-width="0.3" opacity="0.05"/>
+
+      <!-- ── L2: SECONDARY INFORMATION MESH — scattered nodes + web ── -->
+      <circle cx="155" cy="175" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.35"/>
+      <circle cx="82"  cy="250" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="185" cy="285" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.32"/>
+      <circle cx="135" cy="385" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="78"  cy="435" r="2.5" stroke="#2C7A7B" stroke-width="0.9" opacity="0.32"/>
+      <circle cx="172" cy="465" r="2"   stroke="#2C7A7B" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="354" cy="145" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.35"/>
+      <circle cx="415" cy="172" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="344" cy="245" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.32"/>
+      <circle cx="462" cy="265" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="515" cy="205" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.3"/>
+      <circle cx="522" cy="395" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="502" cy="455" r="2.5" stroke="#2C7A7B" stroke-width="0.9" opacity="0.32"/>
+      <circle cx="362" cy="505" r="2"   stroke="#2C7A7B" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="294" cy="465" r="2.5" stroke="#2C7A7B" stroke-width="0.9" opacity="0.3"/>
+      <circle cx="204" cy="162" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.28"/>
+      <circle cx="444" cy="365" r="2.5" stroke="#2B6CB0" stroke-width="0.9" opacity="0.3"/>
+      <circle cx="142" cy="562" r="2"   stroke="#2C7A7B" stroke-width="0.8" opacity="0.25"/>
+      <circle cx="484" cy="562" r="2"   stroke="#2C7A7B" stroke-width="0.8" opacity="0.25"/>
+      <circle cx="314" cy="582" r="2.5" stroke="#2C7A7B" stroke-width="0.9" opacity="0.28"/>
+      <circle cx="258" cy="195" r="2"   stroke="#2B6CB0" stroke-width="0.8" opacity="0.25"/>
+      <circle cx="385" cy="410" r="2"   stroke="#2C7A7B" stroke-width="0.8" opacity="0.28"/>
+      <!-- Mesh connections -->
+      <line x1="155" y1="175" x2="204" y2="162" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="155" y1="175" x2="82"  y2="250" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+      <line x1="155" y1="175" x2="185" y2="285" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+      <line x1="204" y1="162" x2="354" y2="145" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="354" y1="145" x2="415" y2="172" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="415" y1="172" x2="515" y2="205" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+      <line x1="344" y1="245" x2="462" y2="265" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="462" y1="265" x2="515" y2="205" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+      <line x1="82"  y1="250" x2="185" y2="285" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.17"/>
+      <line x1="82"  y1="250" x2="135" y2="385" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.16"/>
+      <line x1="135" y1="385" x2="78"  y2="435" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="78"  y1="435" x2="172" y2="465" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="172" y1="465" x2="142" y2="562" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.17"/>
+      <line x1="444" y1="365" x2="522" y2="395" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="522" y1="395" x2="502" y2="455" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="502" y1="455" x2="362" y2="505" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="362" y1="505" x2="294" y2="465" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.2"/>
+      <line x1="294" y1="465" x2="172" y2="465" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.17"/>
+      <line x1="362" y1="505" x2="484" y2="562" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.16"/>
+      <line x1="314" y1="582" x2="142" y2="562" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.16"/>
+      <line x1="314" y1="582" x2="484" y2="562" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.16"/>
+      <line x1="258" y1="195" x2="344" y2="245" stroke="#2B6CB0" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+      <line x1="385" y1="410" x2="294" y2="465" stroke="#2C7A7B" stroke-width="0.42" stroke-dasharray="3 4" opacity="0.18"/>
+
+      <!-- ── L3: PRIMARY CROSS-CONNECTIONS between main branches ── -->
+      <line x1="110" y1="105" x2="392" y2="80"  stroke="#2C7A7B" stroke-width="0.6"  stroke-dasharray="6 4" opacity="0.28"/>
+      <line x1="440" y1="80"  x2="492" y2="200" stroke="#2C7A7B" stroke-width="0.55" stroke-dasharray="5 4" opacity="0.24"/>
+      <path d="M 492,200 Q 542,270 532,330"      stroke="#2C7A7B" stroke-width="0.55" stroke-dasharray="5 4" opacity="0.22" fill="none"/>
+      <line x1="532" y1="330" x2="492" y2="460" stroke="#2C7A7B" stroke-width="0.55" stroke-dasharray="5 4" opacity="0.24"/>
+      <line x1="492" y1="460" x2="432" y2="542" stroke="#2C7A7B" stroke-width="0.5"  stroke-dasharray="5 4" opacity="0.22"/>
+      <line x1="100" y1="492" x2="178" y2="542" stroke="#2C7A7B" stroke-width="0.5"  stroke-dasharray="5 4" opacity="0.22"/>
+      <line x1="110" y1="105" x2="90"  y2="492" stroke="#2B6CB0" stroke-width="0.45" stroke-dasharray="4 5" opacity="0.18"/>
+      <line x1="185" y1="285" x2="135" y2="385" stroke="#2B6CB0" stroke-width="0.45" stroke-dasharray="4 5" opacity="0.17"/>
+
+      <!-- ── L4: PRIMARY BRANCH ROUTES — 9 branches, varied routing ── -->
+      <!-- R1: INFORMATION ACCESS — up, left, up, left (3 bends) -->
+      <path d="M 265,332 V 212 H 158 V 132 H 110 V 105" stroke="#2B6CB0" stroke-width="1.1" opacity="0.65"/>
+      <!-- R2: DATA PIPELINES — up to hub then right, extends off canvas -->
+      <path d="M 265,332 V 182 H 392 V 80" stroke="#2B6CB0" stroke-width="1.1" opacity="0.65"/>
+      <line x1="392" y1="80" x2="600" y2="80" stroke="#2B6CB0" stroke-width="0.75" stroke-dasharray="9 5" opacity="0.38"/>
+      <!-- R3: AUTOMATION — right then up -->
+      <path d="M 265,332 H 382 V 202 H 492" stroke="#2B6CB0" stroke-width="1.1" opacity="0.65"/>
+      <!-- R4: SYSTEMS THINKING — straight right, broken at nodes -->
+      <line x1="265" y1="332" x2="532" y2="332" stroke="#2B6CB0" stroke-width="1.1" opacity="0.65"/>
+      <!-- R5: COMMUNITY IMPACT — diagonal leg then L -->
+      <path d="M 265,332 L 342,392 H 442 V 462 H 492" stroke="#2B6CB0" stroke-width="1.1" opacity="0.65"/>
+      <!-- R6: CIVIC TECHNOLOGY — right then down, 2 bends -->
+      <path d="M 265,332 H 362 V 492 H 432 V 545" stroke="#2B6CB0" stroke-width="1.0" opacity="0.6"/>
+      <!-- R7: EQUITY BY DESIGN — down then left -->
+      <path d="M 265,332 V 462 H 178 V 542" stroke="#2B6CB0" stroke-width="1.0" opacity="0.62"/>
+      <!-- R8: PUBLIC SERVICES — left then down, 3 bends -->
+      <path d="M 265,332 H 198 V 432 H 122 V 492" stroke="#2B6CB0" stroke-width="1.0" opacity="0.6"/>
+      <!-- R9: OPERATIONAL FRICTION — left with small jog -->
+      <path d="M 265,332 H 168 V 312 H 20" stroke="#2B6CB0" stroke-width="1.0" opacity="0.58"/>
+
+      <!-- ── RELAY SQUARES at bend points ── -->
+      <rect x="262" y="209" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="155" y="129" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="107" y="102" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="389" y="77"  width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="379" y="329" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="489" y="199" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.62"/>
+      <rect x="439" y="459" width="6" height="6" stroke="#2B6CB0" stroke-width="0.9" opacity="0.6"/>
+      <rect x="359" y="329" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.56"/>
+      <rect x="359" y="489" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.56"/>
+      <rect x="175" y="459" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.56"/>
+      <rect x="195" y="329" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.56"/>
+      <rect x="119" y="429" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.56"/>
+      <rect x="165" y="309" width="6" height="6" stroke="#2B6CB0" stroke-width="0.8" opacity="0.52"/>
+      <!-- Midpoint diamonds -->
+      <path d="M 406,332 L 411,327 L 416,332 L 411,337 Z" stroke="#2B6CB0" stroke-width="0.85" opacity="0.55"/>
+      <path d="M 465,332 L 470,327 L 475,332 L 470,337 Z" stroke="#2B6CB0" stroke-width="0.85" opacity="0.52"/>
+      <path d="M 265,250 L 270,245 L 275,250 L 270,255 Z" stroke="#2B6CB0" stroke-width="0.8"  opacity="0.5"/>
+      <path d="M 301,391 L 306,386 L 311,391 L 306,396 Z" stroke="#2B6CB0" stroke-width="0.8"  opacity="0.5"/>
+
+      <!-- ── TERMINAL NODES ── -->
+      <circle cx="110" cy="105" r="5.5" stroke="#2B6CB0" stroke-width="1.3" opacity="0.72"/>
+      <circle cx="392" cy="80"  r="5.5" stroke="#2B6CB0" stroke-width="1.3" opacity="0.72"/>
+      <circle cx="492" cy="200" r="5.5" stroke="#2B6CB0" stroke-width="1.3" opacity="0.72"/>
+      <circle cx="532" cy="332" r="5.5" stroke="#2B6CB0" stroke-width="1.3" opacity="0.72"/>
+      <circle cx="492" cy="462" r="5.5" stroke="#2B6CB0" stroke-width="1.3" opacity="0.72"/>
+      <circle cx="432" cy="545" r="5"   stroke="#2B6CB0" stroke-width="1.2" opacity="0.68"/>
+      <circle cx="178" cy="542" r="5"   stroke="#2C7A7B" stroke-width="1.2" opacity="0.68"/>
+      <circle cx="122" cy="492" r="5"   stroke="#2C7A7B" stroke-width="1.2" opacity="0.68"/>
+      <circle cx="38"  cy="312" r="4"   stroke="#2B6CB0" stroke-width="1.0" opacity="0.42"/>
+      <circle cx="482" cy="80"  r="3.5" stroke="#2B6CB0" stroke-width="1.0" opacity="0.55"/>
+
+      <!-- ── CENTRAL HUB ── -->
+      <circle cx="265" cy="332" r="3.5" stroke="#2B6CB0" stroke-width="6"    opacity="0.82"/>
+      <circle cx="265" cy="332" r="14"  stroke="#2B6CB0" stroke-width="1.15"  opacity="0.64"/>
+      <circle cx="265" cy="332" r="26"  stroke="#2B6CB0" stroke-width="0.75"  opacity="0.4"/>
+      <circle cx="265" cy="332" r="40"  stroke="#2B6CB0" stroke-width="0.48"  opacity="0.22"/>
+
+      <!-- ── LABELS ── -->
+      <text x="104" y="94"  text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">INFORMATION</text>
+      <text x="104" y="106" text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">ACCESS</text>
+      <text x="400" y="68"  text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">DATA PIPELINES</text>
+      <text x="500" y="194" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">AUTOMATION</text>
+      <text x="540" y="327" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">SYSTEMS</text>
+      <text x="540" y="339" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.58" letter-spacing="0.1">THINKING</text>
+      <text x="500" y="457" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.58" letter-spacing="0.1">COMMUNITY</text>
+      <text x="500" y="469" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.58" letter-spacing="0.1">IMPACT</text>
+      <text x="440" y="558" text-anchor="start" font-family="Inter, sans-serif" font-size="8.5" fill="#2B6CB0" opacity="0.55" letter-spacing="0.1">CIVIC TECH</text>
+      <text x="172" y="556" text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.55" letter-spacing="0.1">EQUITY BY</text>
+      <text x="172" y="568" text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.55" letter-spacing="0.1">DESIGN</text>
+      <text x="116" y="506" text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.55" letter-spacing="0.1">PUBLIC</text>
+      <text x="116" y="518" text-anchor="end"   font-family="Inter, sans-serif" font-size="8.5" fill="#2C7A7B" opacity="0.55" letter-spacing="0.1">SERVICES</text>
+      <text x="18"  y="326" text-anchor="start" font-family="Inter, sans-serif" font-size="8"   fill="#2B6CB0" opacity="0.34" letter-spacing="0.08">OPERATIONAL</text>
+      <text x="18"  y="338" text-anchor="start" font-family="Inter, sans-serif" font-size="8"   fill="#2B6CB0" opacity="0.34" letter-spacing="0.08">FRICTION</text>
+
+      <!-- ── ARCHITECTURAL ANNOTATIONS ── -->
+      <path d="M 32,28 H 26 V 22"   stroke="#2B6CB0" stroke-width="0.6" opacity="0.28"/>
+      <path d="M 568,28 H 574 V 22" stroke="#2B6CB0" stroke-width="0.6" opacity="0.28"/>
+      <path d="M 32,632 H 26 V 638" stroke="#2B6CB0" stroke-width="0.6" opacity="0.28"/>
+      <path d="M 568,632 H 574 V 638" stroke="#2B6CB0" stroke-width="0.6" opacity="0.28"/>
+      <line x1="482" y1="618" x2="578" y2="618" stroke="#2B6CB0" stroke-width="0.7" opacity="0.28"/>
+      <line x1="482" y1="614" x2="482" y2="622" stroke="#2B6CB0" stroke-width="0.7" opacity="0.28"/>
+      <line x1="530" y1="616" x2="530" y2="620" stroke="#2B6CB0" stroke-width="0.5" opacity="0.2"/>
+      <line x1="578" y1="614" x2="578" y2="622" stroke="#2B6CB0" stroke-width="0.7" opacity="0.28"/>
+      <circle cx="202" cy="58"  r="6"  stroke="#2B6CB0" stroke-width="0.6" opacity="0.24"/>
+      <line x1="202" y1="64" x2="202" y2="88" stroke="#2B6CB0" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.16"/>
+      <circle cx="484" cy="582" r="6"  stroke="#2C7A7B" stroke-width="0.6" opacity="0.22"/>
+      <line x1="484" y1="576" x2="484" y2="564" stroke="#2C7A7B" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.15"/>
+      <line x1="342" y1="328" x2="342" y2="336" stroke="#2B6CB0" stroke-width="0.55" opacity="0.32"/>
+      <line x1="414" y1="328" x2="414" y2="336" stroke="#2B6CB0" stroke-width="0.55" opacity="0.32"/>
+      <line x1="468" y1="328" x2="468" y2="336" stroke="#2B6CB0" stroke-width="0.55" opacity="0.32"/>
+      <line x1="265" y1="250" x2="265" y2="258" stroke="#2B6CB0" stroke-width="0.5"  opacity="0.26"/>
+      <line x1="265" y1="412" x2="265" y2="420" stroke="#2B6CB0" stroke-width="0.5"  opacity="0.26"/>
+
+    </svg>
+  </div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Software Development and Data Automation · Building tools that make complex systems easier to navigate</p>
-    <h1 class="hero-title">
-      <span class="w">systems.</span>
-      <span class="w">data.</span>
-      <span class="w"><em>equity.</em></span>
-    </h1>
-    <p class="hero-line">Technology should reduce friction, not create more of it.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-editorial">Let's talk <span class="arr">↗</span></a>
-      <a href="#" class="btn-ghost">↓ Download resume</a>
+    <div class="hero-text">
+      <p class="hero-eyebrow">Software Development · Data Automation · Civic Tech</p>
+      <h1 class="hero-title">
+        <span class="w">building things.</span>
+        <span class="w">breaking things.</span>
+        <span class="w">writing about both.</span>
+      </h1>
+      <p class="hero-sub">Software engineer and writer focused on civic tech, data systems, and tools that make a real-world impact.</p>
+      <a href="#projects" class="hero-link">View my work <span class="arr">→</span></a>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
 </section>
- 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
-    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
-    <span class="marquee-item">builder who writes<span class="sym">✦</span>writer who builds<span class="sym">✦</span></span>
-    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
-    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
-    <span class="marquee-item">builder who writes<span class="sym">✦</span>writer who builds<span class="sym">✦</span></span>
-    <span class="marquee-item">systems.<span class="sym">✦</span>data.<span class="sym">✦</span><em>equity.</em><span class="sym">✦</span></span>
-    <span class="marquee-item">technology should reduce friction<span class="sym">✦</span>not create more of it<span class="sym">✦</span></span>
-  </div>
-</div>
- 
+
+<div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+
 <!-- ABOUT -->
 <section id="about" class="page" data-page="02 / 05">
   <div class="wrap">
-    <div class="label"><span>About</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <div class="label">About</div>
     <div class="about-layout">
       <div>
         <div class="about-photo-wrap">
           <span class="about-greeting">hi, I'm Shruthi :)</span>
           <img src="IMG_3449.JPG" alt="Shruthi Senthilarasu" class="about-photo" />
         </div>
-        <h2 class="about-h">I learn best<br>by <em>building.</em></h2>
-        <p class="about-lede">I'm especially drawn to problems where the people who most need good software are often the last to get it.</p>
-        <p class="about-body">I've been prototyping ways for startups and nonprofits to use AI and automation to simplify workflows and reduce operational friction. The technical setup can get complicated — but done well, it changes how a team operates entirely.</p>
-        <p class="about-body">I work best in small teams where everyone wears multiple hats and the user is someone most software ignores.</p>
-        <div class="pullquote"><p>"Good software quietly makes someone's work easier."</p></div>
+        <h2 class="about-h">I don't start with technologies.<br>I start with <em>friction.</em></h2>
+        <p class="about-lede">Most of my projects begin the same way. I become obsessed with a question I can't stop thinking about.</p>
+        <ul class="about-questions">
+          <li>Why is finding a public restroom so difficult for someone who needs one?</li>
+          <li>Why is important information trapped inside documents that no one can navigate?</li>
+          <li>Why do websites optimize for bots instead of people?</li>
+          <li>Why do students disappear from educational systems without anyone noticing?</li>
+        </ul>
+        <p class="about-body">Those questions eventually became projects. Once I find where a system is harder than it needs to be, I tend to stay there until I understand it well enough to try to fix it.</p>
+        <p class="about-body">I work best in small teams where the problem matters more than the process, and where the person using the software is someone most products weren't designed for.</p>
+        <div class="pullquote"><p>"Most systems make sense once you find where the friction lives."</p></div>
         <div class="stack-prose">
-          <span class="stack-label">Stack</span>
-          <p class="stack-list">Python <span>·</span> TypeScript <span>·</span> JavaScript <span>·</span> SQL <span>·</span> Claude API <span>·</span> React Native <span>·</span> C <span>·</span> Git</p>
+          <span class="stack-label">Currently Exploring</span>
+          <ul class="stack-exploring">
+            <li>AI adoption inside organizations</li>
+            <li>Information accessibility and civic technology</li>
+            <li>Operational workflows and automation</li>
+            <li>Human-centered systems design</li>
+          </ul>
+          <p class="stack-tools">Python · TypeScript · SQL · React Native · Claude API</p>
+          <p class="stack-note">Tools change. The problems worth solving usually don't.</p>
         </div>
       </div>
       <div>
-        <div class="trait"><p class="trait-title">Implementation-focused</p><p class="trait-desc">Not just prototyping ideas — building things that actually get adopted and used by the people they're built for.</p></div>
-        <div class="trait"><p class="trait-title">Systems thinker</p><p class="trait-desc">Interested in the whole picture — how data flows, where friction lives, and what it takes to make complex processes feel simple.</p></div>
-        <div class="trait"><p class="trait-title">Mission-driven</p><p class="trait-desc">Drawn to organizations that care not just about what they're building, but who it serves.</p></div>
-        <div class="trait"><p class="trait-title">Builder who writes</p><p class="trait-desc">Writing is how I process what I build — the ideas, the failures, and the things that surprised me.</p></div>
-        <div class="now-block">
-          <p class="now-label">currently</p>
-          <ul class="now-list">
-            <li>Building a website for an Indigenous maternal health nonprofit in Montana</li>
-            <li>Thinking about how AI tools actually get adopted inside organizations</li>
-            <li>Writing about operational friction and why it matters more than features</li>
-            <li class="open">→ Open to internships & contract work now · Full-time from December 2026</li>
-          </ul>
-        </div>
+        <p class="trait-section-label">What I'm interested in</p>
+        <div class="trait"><p class="trait-title">Information Access</p><p class="trait-desc">I'm interested in the places where information exists but remains difficult to find, understand, or use. Whether it's public infrastructure, policy documents, or organizational knowledge, I'm drawn to making important information more accessible.</p></div>
+        <div class="trait"><p class="trait-title">Operational Friction</p><p class="trait-desc">Most of my projects begin with a workflow that feels harder than it should be. I enjoy finding unnecessary complexity and designing systems that reduce it.</p></div>
+        <div class="trait"><p class="trait-title">People & Systems</p><p class="trait-desc">The most interesting problems live at the boundary between people and complicated systems. Good software helps the interaction feel simpler without hiding the complexity underneath.</p></div>
+        <div class="trait"><p class="trait-title">Writing</p><p class="trait-desc">Building helps me understand systems. Writing helps me understand what I learned. Most of my essays are attempts to make sense of projects after they're finished.</p></div>
       </div>
     </div>
   </div>
 </section>
- 
+
 <div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
- 
+
 <!-- PROJECTS -->
 <section id="projects" class="page" data-page="03 / 05">
   <div class="wrap">
-    <div class="label"><span>Projects</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <div class="label">Featured Projects</div>
     <div class="projects-grid">
+
       <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">Saheli</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
-        <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
-        <p class="project-card-stack">React Native <span>·</span> TypeScript <span>·</span> Supabase <span>·</span> Mapbox</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#F1F5F9"/>
+            <line x1="0" y1="60" x2="320" y2="60" stroke="#2C7A7B" stroke-width="1.5" opacity="0.3"/>
+            <line x1="0" y1="120" x2="320" y2="120" stroke="#2C7A7B" stroke-width="1.5" opacity="0.3"/>
+            <line x1="80" y1="0" x2="80" y2="200" stroke="#2C7A7B" stroke-width="1.5" opacity="0.3"/>
+            <line x1="180" y1="0" x2="180" y2="200" stroke="#2C7A7B" stroke-width="1.5" opacity="0.3"/>
+            <line x1="260" y1="0" x2="260" y2="200" stroke="#2C7A7B" stroke-width="1.5" opacity="0.3"/>
+            <rect x="90" y="68" width="80" height="44" rx="1" stroke="#2B6CB0" stroke-width="1" fill="rgba(43,108,176,0.07)"/>
+            <rect x="188" y="68" width="64" height="44" rx="1" stroke="#2B6CB0" stroke-width="1" fill="rgba(43,108,176,0.05)"/>
+            <rect x="10" y="68" width="62" height="44" rx="1" stroke="#2B6CB0" stroke-width="1" fill="rgba(43,108,176,0.05)"/>
+            <circle cx="130" cy="56" r="7" fill="#2B6CB0" opacity="0.85"/>
+            <circle cx="130" cy="54" r="3" fill="white" opacity="0.9"/>
+            <circle cx="220" cy="100" r="5" fill="#38A169" opacity="0.7"/>
+            <circle cx="60" cy="90" r="5" fill="#E53E3E" opacity="0.6"/>
+            <circle cx="280" cy="80" r="5" fill="#2B6CB0" opacity="0.7"/>
+            <line x1="60" y1="90" x2="130" y2="56" stroke="#4A90E2" stroke-width="0.8" opacity="0.3" stroke-dasharray="3 2"/>
+            <line x1="130" y1="56" x2="220" y2="100" stroke="#4A90E2" stroke-width="0.8" opacity="0.3" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
+          <p class="project-card-title">Saheli</p>
+          <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
+          <div class="project-card-stack">
+            <span>React Native</span><span>TypeScript</span><span>Supabase</span><span>Mapbox</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
       <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">SEO City Suite</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Replaced a manual 3-hour weekly process for a real client</span>
-        <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
-        <p class="project-card-stack">JavaScript <span>·</span> Claude API <span>·</span> Vercel <span>·</span> React</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#F1F5F9"/>
+            <rect x="16" y="16" width="288" height="24" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="24" y="22" width="80" height="12" rx="2" fill="#E2E8F0"/>
+            <rect x="16" y="52" width="288" height="132" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="24" y="62" width="120" height="8" rx="2" fill="#2B6CB0" opacity="0.15"/>
+            <rect x="24" y="76" width="270" height="5" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="85" width="220" height="5" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="100" width="270" height="5" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="109" width="190" height="5" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="124" width="80" height="20" rx="3" fill="#2B6CB0" opacity="0.8"/>
+            <rect x="24" y="152" width="270" height="5" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="162" width="240" height="5" rx="1" fill="#E2E8F0"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Replaced a manual 3-hour weekly process for a real client</span>
+          <p class="project-card-title">SEO City Suite</p>
+          <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
+          <div class="project-card-stack">
+            <span>JavaScript</span><span>Claude API</span><span>Vercel</span><span>React</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
       <a href="https://github.com/shruthisenthilarasu/Student-Funnel-Analysis-Equity-Audit" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">Student Funnel & Equity Audit</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Identified where stopped-out students actually disappear</span>
-        <p class="project-card-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
-        <p class="project-card-stack">Python <span>·</span> Pandas <span>·</span> scikit-learn <span>·</span> Jupyter</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#F1F5F9"/>
+            <rect x="16" y="16" width="288" height="168" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="16" y1="48" x2="304" y2="48" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="24" y="24" width="60" height="8" rx="2" fill="#2B6CB0" opacity="0.2"/>
+            <rect x="24" y="58" width="270" height="1" stroke="none" fill="#E2E8F0"/>
+            <rect x="24" y="60" width="200" height="12" rx="2" fill="#2B6CB0" opacity="0.5"/>
+            <rect x="24" y="78" width="150" height="12" rx="2" fill="#2C7A7B" opacity="0.4"/>
+            <rect x="24" y="96" width="220" height="12" rx="2" fill="#2B6CB0" opacity="0.3"/>
+            <rect x="24" y="114" width="100" height="12" rx="2" fill="#E53E3E" opacity="0.3"/>
+            <rect x="24" y="132" width="170" height="12" rx="2" fill="#38A169" opacity="0.4"/>
+            <rect x="24" y="150" width="130" height="12" rx="2" fill="#2B6CB0" opacity="0.25"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Identified where stopped-out students actually disappear</span>
+          <p class="project-card-title">Student Funnel & Equity Audit</p>
+          <p class="project-card-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
+          <div class="project-card-stack">
+            <span>Python</span><span>Pandas</span><span>scikit-learn</span><span>Jupyter</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
       <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">TinyShell</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Built to understand how operating systems actually work at the process level</span>
-        <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
-        <p class="project-card-stack">C <span>·</span> Unix <span>·</span> POSIX <span>·</span> Systems</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#1A202C"/>
+            <rect x="16" y="16" width="288" height="168" rx="4" fill="#2D3748"/>
+            <circle cx="32" cy="32" r="5" fill="#FC8181" opacity="0.8"/>
+            <circle cx="46" cy="32" r="5" fill="#F6AD55" opacity="0.8"/>
+            <circle cx="60" cy="32" r="5" fill="#68D391" opacity="0.8"/>
+            <rect x="24" y="50" width="100" height="6" rx="1" fill="#68D391" opacity="0.7"/>
+            <rect x="24" y="64" width="160" height="6" rx="1" fill="#E2E8F0" opacity="0.4"/>
+            <rect x="24" y="78" width="130" height="6" rx="1" fill="#E2E8F0" opacity="0.3"/>
+            <rect x="24" y="92" width="80" height="6" rx="1" fill="#63B3ED" opacity="0.6"/>
+            <rect x="24" y="106" width="180" height="6" rx="1" fill="#E2E8F0" opacity="0.4"/>
+            <rect x="24" y="120" width="140" height="6" rx="1" fill="#E2E8F0" opacity="0.3"/>
+            <rect x="24" y="134" width="60" height="6" rx="1" fill="#68D391" opacity="0.5"/>
+            <rect x="24" y="148" width="12" height="6" rx="1" fill="#68D391" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Built to understand how operating systems actually work</span>
+          <p class="project-card-title">TinyShell</p>
+          <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
+          <div class="project-card-stack">
+            <span>C</span><span>Unix</span><span>POSIX</span><span>Systems</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
       <a href="https://github.com/shruthisenthilarasu/Trust-Aware-SEO" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">Trust-Aware SEO</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Most SEO tools miss the dimension of who a site actually serves</span>
-        <p class="project-card-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — SEO, UX, and trust exposure in one report.</p>
-        <p class="project-card-stack">Python <span>·</span> FastAPI <span>·</span> BeautifulSoup <span>·</span> Jinja2</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#F1F5F9"/>
+            <rect x="16" y="16" width="130" height="168" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="155" y="16" width="149" height="78" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="155" y="106" width="149" height="78" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="24" y="26" width="60" height="6" rx="1" fill="#2B6CB0" opacity="0.3"/>
+            <rect x="24" y="38" width="110" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="46" width="90" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="58" width="110" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="66" width="70" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="80" width="40" height="14" rx="2" fill="#38A169" opacity="0.7"/>
+            <rect x="70" y="80" width="40" height="14" rx="2" fill="#E53E3E" opacity="0.5"/>
+            <rect x="163" y="26" width="50" height="6" rx="1" fill="#E53E3E" opacity="0.4"/>
+            <rect x="163" y="38" width="133" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="163" y="46" width="100" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="163" y="116" width="50" height="6" rx="1" fill="#38A169" opacity="0.4"/>
+            <rect x="163" y="128" width="133" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="163" y="136" width="110" height="4" rx="1" fill="#E2E8F0"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Most SEO tools miss who a site actually serves</span>
+          <p class="project-card-title">Trust-Aware SEO</p>
+          <p class="project-card-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — SEO, UX, and trust exposure in one report.</p>
+          <div class="project-card-stack">
+            <span>Python</span><span>FastAPI</span><span>BeautifulSoup</span><span>Jinja2</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
       <a href="https://github.com/shruthisenthilarasu/LogLLM" target="_blank" class="project-card">
-        <div class="project-card-top"><p class="project-card-title">LogLLM</p><span class="project-card-arr">↗</span></div>
-        <span class="project-card-constraint">Manually classifying log lines is a systems problem, not a human one</span>
-        <p class="project-card-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
-        <p class="project-card-stack">Python <span>·</span> PyTorch <span>·</span> HuggingFace <span>·</span> DistilBERT</p>
+        <div class="project-card-img">
+          <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#F1F5F9"/>
+            <rect x="16" y="16" width="288" height="168" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+            <line x1="16" y1="48" x2="304" y2="48" stroke="#E2E8F0" stroke-width="1"/>
+            <rect x="24" y="24" width="60" height="8" rx="2" fill="#2B6CB0" opacity="0.2"/>
+            <rect x="24" y="60" width="36" height="10" rx="2" fill="#63B3ED" opacity="0.5"/>
+            <rect x="24" y="76" width="270" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="84" width="220" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="96" width="36" height="10" rx="2" fill="#F6AD55" opacity="0.6"/>
+            <rect x="24" y="112" width="270" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="120" width="180" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="132" width="36" height="10" rx="2" fill="#FC8181" opacity="0.5"/>
+            <rect x="24" y="148" width="270" height="4" rx="1" fill="#E2E8F0"/>
+            <rect x="24" y="156" width="200" height="4" rx="1" fill="#E2E8F0"/>
+          </svg>
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-constraint">Manually classifying log lines is a systems problem, not a human one</span>
+          <p class="project-card-title">LogLLM</p>
+          <p class="project-card-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
+          <div class="project-card-stack">
+            <span>Python</span><span>PyTorch</span><span>HuggingFace</span><span>DistilBERT</span>
+          </div>
+          <span class="project-card-link">View Project <span class="arr">→</span></span>
+        </div>
       </a>
+
     </div>
   </div>
 </section>
- 
+
 <div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
- 
+
 <!-- WRITING -->
 <section id="writing" class="page" data-page="04 / 05">
   <div class="wrap">
-    <div class="label"><span>Writing</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
+    <div class="label">Writing</div>
     <p class="writing-intro">I write in two registers — technical essays about systems and implementation, and personal essays about everything else. Both are how I make sense of the world.</p>
     <div class="writing-layout">
       <div>
         <span class="writing-col-label">Technical — Medium</span>
-        <a href="https://medium.com/@shruthi.senth/i-thought-i-was-building-a-map-app-i-was-actually-building-for-someone-with-2-battery-and-no-data-cf5a048bbbc6" target="_blank" class="essay-item">
-          <div class="essay-meta"><span class="essay-tag-published">published</span><span class="essay-date">May 2026</span></div>
-          <p class="essay-title">I thought I was building a map app. I was actually building for someone with 2% battery and no data.</p>
-          <p class="essay-excerpt">On offline-first design, real constraints, and what Saheli taught me about building software that holds up under pressure.</p>
-        </a>
-        <a href="https://medium.com" target="_blank" class="essay-item">
-          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
-          <p class="essay-title">Why operational friction matters more than flashy features</p>
-          <p class="essay-excerpt">The tools that actually change how organizations work are rarely the impressive ones.</p>
-        </a>
-        <a href="https://medium.com" target="_blank" class="essay-item">
-          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">May 2026</span></div>
-          <p class="essay-title">What nonprofits actually need from AI tools</p>
-          <p class="essay-excerpt">Most AI tooling is built for teams with engineers, budget, and time. Nonprofits have none of those.</p>
-        </a>
-        <a href="https://medium.com" target="_blank" class="essay-item">
-          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">Apr 2026</span></div>
-          <p class="essay-title">The hidden systems behind public safety infrastructure</p>
+        <a href="https://medium.com/@shruthi.senth/the-places-maps-forget-ee288881f61c" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag-published">published</span><span class="essay-date">Apr 2026</span></div>
+          <p class="essay-title">The Places Maps Forget</p>
           <p class="essay-excerpt">Building Saheli made me realize how much critical infrastructure is either undocumented, outdated, or inaccessible.</p>
+        </a>
+        <a href="https://medium.com/@shruthi.senth/good-for-google-great-for-scrapers-d02b39829aeb" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag-published">published</span><span class="essay-date">Apr 2026</span></div>
+          <p class="essay-title">Good for Google, Great for Scrapers</p>
+          <p class="essay-excerpt">Most SEO tools optimize for bots while making sites harder for real users to navigate — and almost no one talks about that tradeoff.</p>
+        </a>
+        <a href="https://medium.com" target="_blank" class="essay-item">
+          <div class="essay-meta"><span class="essay-tag">draft</span><span class="essay-date">Jun 2026</span></div>
+          <p class="essay-title">We keep asking 'should we regulate AI?' when the real question is 'what are we actually trying to protect?'</p>
+          <p class="essay-excerpt">The regulation debate keeps stalling because we're arguing about the tool, not the harm. Naming what we're actually protecting changes the whole conversation.</p>
         </a>
       </div>
       <div>
@@ -415,35 +731,85 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
- 
+
 <!-- CONTACT -->
 <section id="contact" class="page" data-page="05 / 05">
   <div class="wrap">
-    <div class="label"><span>Contact</span><span class="star">✦</span><span class="star" style="opacity:0.12">✦</span></div>
-    <h2 class="contact-h">Let's build something <em>useful.</em></h2>
-    <p class="contact-body">I'm currently available for internships and contract work — and open to full-time roles from December 2026. I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams. If that sounds like you, let's talk.</p>
-    <p class="contact-avail">Available for internships & contract work now · Full-time from December 2026</p>
-    <div class="contact-links">
-      <a href="mailto:hello@shruthisenthil.com" class="contact-btn">Email me <span class="arr">↗</span></a>
-      <a href="#" class="contact-btn">Resume <span class="arr">↓</span></a>
-      <a href="https://linkedin.com/in/shruthi-senthilarasu" target="_blank" class="contact-link-sm">LinkedIn ↗</a>
-      <a href="https://github.com/shruthisenthilarasu" target="_blank" class="contact-link-sm">GitHub ↗</a>
-      <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="contact-link-sm">Substack ↗</a>
+    <div class="label">Contact</div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-h">Let's build something <em>useful.</em></h2>
+        <p class="contact-body">I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams working on problems that actually matter. If that sounds like you, let's talk.</p>
+        <div class="avail-block page">
+          <p class="avail-block-label">Availability</p>
+          <div class="avail-row">
+            <div class="avail-dot green"></div>
+            <div>
+              <p class="avail-text">Internships & contract work</p>
+              <p class="avail-sub">Available now</p>
+            </div>
+          </div>
+          <div class="avail-row">
+            <div class="avail-dot dim"></div>
+            <div>
+              <p class="avail-text">Full-time roles</p>
+              <p class="avail-sub">Available December 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-cards page">
+        <a href="mailto:shruthi.senth@gmail.com" class="contact-card">
+          <div class="contact-card-left">
+            <span class="contact-card-name">Email me</span>
+            <span class="contact-card-detail">Click to send a message</span>
+          </div>
+          <span class="contact-card-arr">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/shruthi-senthilarasu" target="_blank" class="contact-card">
+          <div class="contact-card-left">
+            <span class="contact-card-name">LinkedIn</span>
+            <span class="contact-card-detail">shruthi-senthilarasu</span>
+          </div>
+          <span class="contact-card-arr">↗</span>
+        </a>
+        <a href="https://github.com/shruthisenthilarasu" target="_blank" class="contact-card">
+          <div class="contact-card-left">
+            <span class="contact-card-name">GitHub</span>
+            <span class="contact-card-detail">shruthisenthilarasu</span>
+          </div>
+          <span class="contact-card-arr">↗</span>
+        </a>
+        <a href="https://shruthisenthilarasu.substack.com" target="_blank" class="contact-card">
+          <div class="contact-card-left">
+            <span class="contact-card-name">Substack</span>
+            <span class="contact-card-detail">The Unsent Letter Project</span>
+          </div>
+          <span class="contact-card-arr">↗</span>
+        </a>
+        <a href="https://medium.com/@shruthi.senth" target="_blank" class="contact-card">
+          <div class="contact-card-left">
+            <span class="contact-card-name">Medium</span>
+            <span class="contact-card-detail">Technical writing</span>
+          </div>
+          <span class="contact-card-arr">↗</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
- 
+
 <footer>
   <span class="footer-manifesto">"Technology should reduce friction, not create more of it."</span>
-  <span class="footer-copy">© 2026 Shruthi Senthilarasu · shruthisenthil.com</span>
+  <span class="footer-copy">© 2026 Shruthi Senthilarasu · shruthisenthilarasu.com</span>
 </footer>
- 
+
 <script>
   const pages = document.querySelectorAll('.page');
   const pageNum = document.getElementById('pageNum');
- 
+
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -452,9 +818,9 @@ Index · HTML
       }
     });
   }, { threshold: 0.08 });
- 
+
   pages.forEach(p => obs.observe(p));
- 
+
   const heroObs = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) pageNum.textContent = '01 / 05'; });
   }, { threshold: 0.3 });
