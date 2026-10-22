@@ -195,8 +195,159 @@
   @keyframes fadeIn { from { opacity:0; } to { opacity:0.5; } }
   @keyframes pulse { 0%,100% { opacity:0.3; } 50% { opacity:0.9; } }
 
+  /* ── MODE TOGGLE ── */
+  html:not([data-mode="recruiter"]) .r-only { display: none !important; }
+  html:not([data-mode="builder"]) .b-only { display: none !important; }
+  html[data-mode="recruiter"] .hero-scroll, html[data-mode="builder"] .hero-scroll { display: none; }
+  .mode-toggle { position: fixed; bottom: 2rem; left: 4rem; z-index: 120; display: flex; align-items: center; gap: 0.2rem; padding: 0.3rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border: 1px solid var(--border-strong); box-shadow: 0 2px 14px rgba(26,32,44,0.06); }
+  .mode-label { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.8rem; color: var(--text-light); padding: 0 0.5rem 0 0.4rem; }
+  .mode-toggle button { font-family: 'Inter', sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); background: none; border: none; padding: 0.45rem 0.8rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .mode-toggle button:hover { color: var(--blue); }
+  .mode-toggle button[aria-pressed="true"] { background: var(--blue); color: var(--white); }
+  .mode-toggle button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  /* ── RECRUITER: HERO BRIEF ── */
+  .r-brief { margin-top: 2.4rem; max-width: 440px; padding: 1.2rem 1.4rem; background: rgba(255,255,255,0.9); border: 1px solid var(--border-strong); border-left: 3px solid var(--teal); opacity: 0; animation: up 0.7s ease forwards 0.2s; }
+  .r-brief-label { font-size: 0.6rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.8rem; display: block; }
+  .r-brief-row { display: grid; grid-template-columns: 84px 1fr; gap: 0.8rem; font-size: 0.8rem; line-height: 1.55; padding: 0.35rem 0; border-top: 1px solid var(--border); }
+  .r-brief-row:first-of-type { border-top: none; }
+  .r-brief-row dt { color: var(--text-light); font-size: 0.7rem; letter-spacing: 0.04em; padding-top: 0.08rem; }
+  .r-brief-row dd { color: var(--text); font-weight: 500; }
+  .r-brief-actions { display: flex; gap: 1.2rem; margin-top: 0.9rem; }
+  .r-brief-actions a { font-size: 0.78rem; font-weight: 500; color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(43,108,176,0.3); padding-bottom: 1px; }
+  .r-brief-actions a:hover { border-color: var(--blue); }
+
+  /* ── RECRUITER: HOW I WORK ── */
+  #how { background: var(--white); }
+  .how-intro { max-width: 560px; color: #374151; font-size: 0.95rem; line-height: 1.95; margin-bottom: 3.5rem; }
+  .flow-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--border-strong); }
+  .flow-step { padding: 1.6rem 1.2rem 0 0; border-right: 1px solid var(--border); padding-left: 1.2rem; }
+  .flow-step:first-child { padding-left: 0; }
+  .flow-step:last-child { border-right: none; }
+  .flow-num { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.85rem; color: var(--teal); display: block; margin-bottom: 0.6rem; }
+  .flow-title { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.25; margin-bottom: 0.6rem; }
+  .flow-desc { font-size: 0.82rem; color: #374151; line-height: 1.75; margin-bottom: 1rem; }
+  .flow-proof { font-size: 0.72rem; color: var(--text-muted); line-height: 1.6; padding-top: 0.7rem; border-top: 1px dashed var(--border-strong); }
+  .flow-proof b { color: var(--blue); font-weight: 600; }
+
+  /* ── RECRUITER: CASE FILE + CARD SIGNALS ── */
+  .case-file { grid-column: 1 / -1; display: grid; grid-template-columns: 1.1fr 1fr; background: var(--white); border: 1px solid var(--border-strong); border-top: 3px solid var(--teal); }
+  .case-file-main { padding: 2.2rem 2.4rem; border-right: 1px solid var(--border); }
+  .case-file-id { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: var(--teal); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; }
+  .case-live { color: var(--green); border: 1px solid rgba(56,161,105,0.35); padding: 0.06rem 0.45rem; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.35rem; }
+  .case-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: availPulse 2s infinite; }
+  .case-file-title { font-family: 'Newsreader', serif; font-size: 1.7rem; font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; }
+  .case-file-desc { font-size: 0.86rem; color: #374151; line-height: 1.8; margin-bottom: 1rem; }
+  .redact { background: var(--text); color: transparent; padding: 0 0.25rem; cursor: help; transition: background 0.25s, color 0.25s; border-radius: 1px; }
+  .redact:hover, .redact:focus { background: rgba(44,122,123,0.1); color: var(--teal); outline: none; }
+  .case-file-hint { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.78rem; color: var(--text-light); }
+  .case-file-phases { padding: 2.2rem 2.4rem; list-style: none; display: flex; flex-direction: column; justify-content: center; }
+  .case-phase { display: grid; grid-template-columns: 14px 1fr; gap: 0.9rem; padding-bottom: 1rem; position: relative; }
+  .case-phase:not(:last-child)::after { content: ''; position: absolute; left: 6px; top: 16px; bottom: 0; width: 1px; background: var(--border-strong); }
+  .case-dot { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid var(--border-strong); background: var(--white); margin-top: 0.25rem; }
+  .case-phase.done .case-dot { background: var(--teal); border-color: var(--teal); }
+  .case-phase.now .case-dot { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(43,108,176,0.15); }
+  .case-phase-name { font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .case-phase-note { font-size: 0.74rem; color: var(--text-muted); line-height: 1.55; }
+  .project-card-signal { font-size: 0.72rem; color: var(--text-muted); line-height: 1.6; padding: 0.6rem 0.75rem; margin-bottom: 1.1rem; background: rgba(44,122,123,0.05); border-left: 2px solid var(--teal); }
+  .project-card-signal b { color: var(--teal); font-weight: 600; }
+  .contact-r { padding-top: 0.8rem; margin-top: 0.4rem; border-top: 1px solid var(--border); }
+
+  /* ── RECRUITER: EXPERIENCE ── */
+  #experience { background: var(--white); }
+  .exp-lede { font-family: 'Newsreader', serif; font-size: clamp(1.3rem, 2.2vw, 1.65rem); line-height: 1.5; color: var(--text); max-width: 760px; margin-bottom: 1.2rem; }
+  .exp-lede em { color: var(--blue); }
+  .exp-why { max-width: 640px; color: #374151; font-size: 0.92rem; line-height: 1.9; margin-bottom: 3.5rem; }
+  .exp-list { border-top: 1px solid var(--border-strong); margin-bottom: 4.5rem; }
+  .exp-item { border-bottom: 1px solid var(--border); }
+  .exp-item summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 150px 1fr 24px; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; }
+  .exp-item summary::-webkit-details-marker { display: none; }
+  .exp-item summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+  .exp-dates { font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.04em; }
+  .exp-role { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .exp-org { color: var(--blue); }
+  .exp-one { display: block; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.6; }
+  .exp-chev { color: var(--text-light); font-size: 0.9rem; transition: transform 0.2s; justify-self: end; }
+  .exp-item[open] .exp-chev { transform: rotate(45deg); color: var(--teal); }
+  .exp-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 0 0 1.8rem calc(150px + 1.5rem); }
+  .exp-col-label { font-size: 0.6rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem; display: block; }
+  .exp-col p { font-size: 0.82rem; color: #374151; line-height: 1.75; }
+  .ask-label { font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.6rem; display: block; }
+  .ask-intro { font-family: 'Newsreader', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.8rem; }
+  .ask-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .ask-card { border: 1px solid var(--border-strong); background: var(--bg); padding: 1.3rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ask-tag { font-size: 0.6rem; color: var(--text-light); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .ask-q { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.02rem; color: var(--blue); line-height: 1.4; }
+  .ask-a { font-size: 0.77rem; color: #374151; line-height: 1.65; }
+
+  /* ── BUILDER: UNDER THE HOOD ── */
+  #hood { background: var(--bg-mid); }
+  .hood-intro { max-width: 600px; color: #374151; font-size: 0.95rem; line-height: 1.95; margin-bottom: 2.5rem; }
+  .hood-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .hood-tab { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--text-muted); background: var(--white); border: 1px solid var(--border-strong); padding: 0.5rem 0.95rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .hood-tab:hover { color: var(--blue); border-color: var(--blue); }
+  .hood-tab[aria-selected="true"] { background: var(--text); border-color: var(--text); color: var(--white); }
+  .hood-tab:focus-visible, .trace-node:focus-visible, .trace-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .hood-panel { background: var(--white); border: 1px solid var(--border-strong); }
+  .hood-head { padding: 1.8rem 2rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+  .hood-name { font-family: 'Newsreader', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+  .hood-trace-title { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; }
+  .hood-trace-title code, .trace-file code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.85em; background: var(--bg-mid); padding: 0.05rem 0.35rem; color: var(--text); }
+  .hood-repo { font-size: 0.75rem; font-weight: 500; color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(43,108,176,0.3); white-space: nowrap; }
+  .hood-repo:hover { border-color: var(--blue); }
+  .hood-note { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.82rem; color: var(--text-light); }
+  .trace { padding: 1.8rem 2rem; border-bottom: 1px solid var(--border); }
+  .trace-nodes { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-bottom: 1.4rem; }
+  .trace-nodes li { display: flex; align-items: center; gap: 0.35rem; }
+  .trace-nodes li:not(:last-child)::after { content: '→'; color: var(--border-strong); font-size: 0.85rem; }
+  .trace-node { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border-strong); padding: 0.45rem 0.75rem; cursor: pointer; transition: all 0.2s; }
+  .trace-node .n { color: var(--text-light); margin-right: 0.35rem; font-variant-numeric: tabular-nums; }
+  .trace-node.seen { border-color: rgba(44,122,123,0.5); color: var(--teal); background: rgba(44,122,123,0.05); }
+  .trace-node.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .trace-node.active .n { color: rgba(255,255,255,0.7); }
+  .trace-detail { border-left: 3px solid var(--blue); background: rgba(43,108,176,0.04); padding: 1.2rem 1.4rem; min-height: 120px; }
+  .trace-step-title { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+  .trace-file { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+  .trace-file a { color: var(--blue); text-decoration: none; }
+  .trace-file a:hover { text-decoration: underline; }
+  .trace-text { font-size: 0.86rem; color: #374151; line-height: 1.8; max-width: 720px; }
+  .trace-controls { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.1rem; }
+  .trace-btn { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; color: var(--blue); background: var(--white); border: 1px solid rgba(43,108,176,0.4); padding: 0.45rem 0.9rem; cursor: pointer; }
+  .trace-btn:hover:not(:disabled) { background: rgba(43,108,176,0.06); }
+  .trace-btn:disabled { opacity: 0.35; cursor: default; }
+  .trace-count { font-size: 0.72rem; color: var(--text-light); margin-left: 0.4rem; font-variant-numeric: tabular-nums; }
+  .hood-cols { display: grid; grid-template-columns: 1fr 1.3fr; }
+  .hood-col { padding: 1.8rem 2rem; }
+  .hood-col + .hood-col { border-left: 1px solid var(--border); }
+  .hood-col-label { font-size: 0.62rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 1rem; display: block; }
+  .hood-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .decision { font-size: 0.82rem; color: #374151; line-height: 1.7; padding-left: 1rem; position: relative; }
+  .decision::before { content: '◆'; position: absolute; left: 0; top: 0.1rem; font-size: 0.5rem; color: var(--teal); }
+  .decision b { color: var(--text); font-weight: 600; }
+  .limit { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px dashed var(--border); }
+  .limit:last-child { border-bottom: none; padding-bottom: 0; }
+  .limit-issue, .limit-fix { font-size: 0.8rem; line-height: 1.65; }
+  .limit-issue { color: var(--text); }
+  .limit-fix { color: var(--text-muted); }
+  .limit-fix::before { content: 'Next → '; color: var(--green); font-weight: 600; font-size: 0.72rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .r-brief, .case-live::before { animation: none; opacity: 1; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
+    .mode-toggle { left: 1.5rem; bottom: 1.5rem; }
+    .flow-grid { grid-template-columns: 1fr 1fr; }
+    .flow-step, .flow-step:first-child { padding: 1.4rem 1rem 1.4rem 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .case-file { grid-template-columns: 1fr; }
+    .case-file-main { border-right: none; border-bottom: 1px solid var(--border); }
+    .ask-grid { grid-template-columns: 1fr 1fr; }
+    .exp-item summary { grid-template-columns: 1fr 24px; gap: 0.3rem 1rem; }
+    .exp-dates { grid-column: 1 / -1; }
+    .exp-body { grid-template-columns: 1fr; padding-left: 0; gap: 1rem; }
+    .hood-cols { grid-template-columns: 1fr; }
+    .hood-col + .hood-col { border-left: none; border-top: 1px solid var(--border); }
     nav { padding: 1.1rem 1.5rem; }
     .wrap { padding: 0 1.5rem; }
     .hero-inner { padding: 0 1.5rem; }
@@ -216,6 +367,13 @@
     section { padding: 5rem 0; }
     .projects-grid { grid-template-columns: 1fr; }
     .contact-h { font-size: clamp(2.2rem, 10vw, 3rem); }
+    .flow-grid { grid-template-columns: 1fr; }
+    .case-file-main, .case-file-phases { padding: 1.6rem 1.4rem; }
+    .mode-label { display: none; }
+    .mode-toggle button { padding: 0.45rem 0.6rem; }
+    .hood-head, .trace, .hood-col { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .limit { grid-template-columns: 1fr; gap: 0.3rem; }
+    .ask-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -232,6 +390,13 @@
 </nav>
 
 <div class="page-num" id="pageNum">01 / 05</div>
+
+<div class="mode-toggle" role="group" aria-label="View mode">
+  <span class="mode-label">view as</span>
+  <button type="button" data-mode="story" aria-pressed="true">Story</button>
+  <button type="button" data-mode="recruiter" aria-pressed="false">Recruiter</button>
+  <button type="button" data-mode="builder" aria-pressed="false">Builder</button>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -439,6 +604,32 @@
       </h1>
       <p class="hero-sub">Software engineer and writer focused on civic tech, data systems, and tools that make a real-world impact.</p>
       <a href="#projects" class="hero-link">View my work <span class="arr">→</span></a>
+      <div class="r-brief r-only">
+        <span class="r-brief-label">The short version</span>
+        <dl>
+          <div class="r-brief-row"><dt>Targeting</dt><dd>Solutions Engineering · Forward Deployed Engineering · Applied AI</dd></div>
+          <div class="r-brief-row"><dt>Strengths</dt><dd>Discovery, rapid prototyping, shipping for real users and clients</dd></div>
+          <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · SQL · React · FastAPI · Claude API</dd></div>
+          <div class="r-brief-row"><dt>Available</dt><dd>Internships &amp; contract now · Full-time Dec 2026</dd></div>
+        </dl>
+        <div class="r-brief-actions">
+          <a href="#how">How I work ↓</a>
+          <a href="mailto:shruthi.senth@gmail.com">Email me ↗</a>
+        </div>
+      </div>
+      <div class="r-brief b-only">
+        <span class="r-brief-label">Builder notes</span>
+        <dl>
+          <div class="r-brief-row"><dt>Trace</dt><dd>Step through how data actually moves in each project</dd></div>
+          <div class="r-brief-row"><dt>Linked</dt><dd>Real files and functions, straight to GitHub</dd></div>
+          <div class="r-brief-row"><dt>Honest</dt><dd>Every project lists what's still broken and what I'd fix next</dd></div>
+          <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · C · SQL · DuckDB · PostGIS · React</dd></div>
+        </dl>
+        <div class="r-brief-actions">
+          <a href="#hood">Under the hood ↓</a>
+          <a href="https://github.com/shruthisenthilarasu" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
@@ -490,6 +681,132 @@
   </div>
 </section>
 
+<div class="page-divider r-only"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+
+<!-- EXPERIENCE (recruiter mode) -->
+<section id="experience" class="page r-only" data-page="">
+  <div class="wrap">
+    <div class="label">The 60-Second Version</div>
+    <p class="exp-lede">I'm a computer science student at UTSA, graduating <em>December 2026</em>. I build backend systems and the tooling that makes them trustworthy, then take them out of the lab and into the hands of real clients.</p>
+    <p class="exp-why">So far that's meant diagnostics and contract testing on a large Python engine, a nonprofit site built for families on slow rural connections, and freelance software for 10+ small businesses and nonprofits. The part I like most is the same every time: understanding how someone actually works, then shipping something that holds up in their environment. That's why I'm moving toward solutions and forward deployed engineering.</p>
+
+    <div class="exp-list">
+      <details class="exp-item" open>
+        <summary>
+          <span class="exp-dates">Jun 2026 – Present</span>
+          <span class="exp-role">Software Engineer Intern · <span class="exp-org">LuMATH</span><span class="exp-one">Diagnostics, contract testing, and integration auditing on a large Python computing engine.</span></span>
+          <span class="exp-chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="exp-body">
+          <div class="exp-col"><span class="exp-col-label">Owned</span><p>A Python diagnostics module instrumenting multiple components, and a contract-test suite for it enforcing dependency boundaries and deterministic behavior.</p></div>
+          <div class="exp-col"><span class="exp-col-label">How</span><p>Diagnostics separate outcomes that look identical to a user ("nothing happened") but have different causes. The suite runs within a codebase of 6,000+ collected pytest cases across 663 modules.</p></div>
+          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Reviewed architecture and integration points, flagged 10+ engineering risks, and turned them into scoped, testable requirements. Internals stay internal; the patterns are fair game.</p></div>
+        </div>
+      </details>
+      <details class="exp-item">
+        <summary>
+          <span class="exp-dates">May – Aug 2026</span>
+          <span class="exp-role">Software Engineer Intern · <span class="exp-org">Develop for Good</span><span class="exp-one">Built and launched a public site for Berry Medicine Native Birthwork Initiatives.</span></span>
+          <span class="exp-chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="exp-body">
+          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Resource libraries, donation infrastructure, and community tools for Native families and birthworkers across Montana.</p></div>
+          <div class="exp-col"><span class="exp-col-label">How</span><p>Reduced page weight and deferred non-critical assets so the site stays usable on slow and intermittent connections.</p></div>
+          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Shipped over a 12-week engagement with ~8 engineers, designers, and nonprofit stakeholders, translating community requirements into production features.</p></div>
+        </div>
+      </details>
+      <details class="exp-item">
+        <summary>
+          <span class="exp-dates">Dec 2025 – Present</span>
+          <span class="exp-role">Software Developer &amp; Solutions Engineer · <span class="exp-org">Freelance</span><span class="exp-one">Custom software, prototypes, and automation for 10+ small businesses and nonprofits.</span></span>
+          <span class="exp-chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="exp-body">
+          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Scoping ambiguous operational needs into technical solutions, from the first conversation to the delivered tool.</p></div>
+          <div class="exp-col"><span class="exp-col-label">How</span><p>Supported 3–5 concurrent production client sites for RR Digital Media in JavaScript, HTML/CSS, Framer, and Squarespace, under client deadlines.</p></div>
+          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Built SEO City Suite, an AI local-SEO generator and auditor, and PolicyDecode, a Q&amp;A tool for zoning codes, QAPs, and land-use policy. Now leading Case File 001.</p></div>
+        </div>
+      </details>
+      <details class="exp-item">
+        <summary>
+          <span class="exp-dates">Jul – Dec 2025</span>
+          <span class="exp-role">Founding Engineer · <span class="exp-org">Axiom Labs</span><span class="exp-one">Automation tooling and internal systems for ~3 pilot organizations.</span></span>
+          <span class="exp-chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="exp-body">
+          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Early technical implementation across pilot deployments.</p></div>
+          <div class="exp-col"><span class="exp-col-label">How</span><p>Translated user feedback and operational constraints into workflow, reporting, and automation features.</p></div>
+          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Iterated on architecture and product requirements as real-world constraints surfaced during the pilots.</p></div>
+        </div>
+      </details>
+      <details class="exp-item">
+        <summary>
+          <span class="exp-dates">Aug – Dec 2024</span>
+          <span class="exp-role">Advocate &amp; Web Development Intern · <span class="exp-org">Cyber Collective</span><span class="exp-one">Public-facing digital-safety curriculum for Internet Street Smarts.</span></span>
+          <span class="exp-chev" aria-hidden="true">+</span>
+        </summary>
+        <div class="exp-body">
+          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Structuring educational web content on privacy and online risk awareness.</p></div>
+          <div class="exp-col"><span class="exp-col-label">How</span><p>Organized content data for reporting and worked alongside policy advocates, designers, and developers.</p></div>
+          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Turned technical security concepts into guidance non-technical readers could act on.</p></div>
+        </div>
+      </details>
+    </div>
+
+    <span class="ask-label">Ask me about</span>
+    <p class="ask-intro">Five stories I'm happy to go deep on in an interview.</p>
+    <div class="ask-grid">
+      <div class="ask-card"><span class="ask-tag">Technical judgment</span><p class="ask-q">The code path that skipped the real runtime.</p><p class="ask-a">An integration audit turned up a legacy-dependent path that could bypass the intended runtime. I fixed the routing and pinned it with a regression test.</p></div>
+      <div class="ask-card"><span class="ask-tag">Ownership &amp; scope</span><p class="ask-q">Why I didn't change another team's code to make tests pass.</p><p class="ask-a">Focused tests passed, but the live pipeline never delivered the evidence. I traced the producer–consumer boundary and documented the missing contract for its owner.</p></div>
+      <div class="ask-card"><span class="ask-tag">Debugging discipline</span><p class="ask-q">My regression, or already broken?</p><p class="ask-a">I installed the previous release separately and compared behavior side by side, so preexisting failures weren't blamed on new work.</p></div>
+      <div class="ask-card"><span class="ask-tag">Ambiguous clients</span><p class="ask-q">Turning "we need more city pages" into a tool.</p><p class="ask-a">I mapped a repetitive manual workflow into a fixed page schema, a generator, and a human review step before anything gets published.</p></div>
+      <div class="ask-card"><span class="ask-tag">Users on the margins</span><p class="ask-q">Building for people with bad connections.</p><p class="ask-a">Two projects, same constraint: Berry Medicine's low-bandwidth site and Saheli's offline queue. What changes when the network can't be trusted.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider r-only"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+
+<!-- HOW I WORK (recruiter mode) -->
+<section id="how" class="page r-only" data-page="">
+  <div class="wrap">
+    <div class="label">How I Work</div>
+    <p class="how-intro">Every project I take on runs the same loop, whether the stakeholder is a client, a team, or the people a product was never designed for. Here's the loop, with where I've done each step.</p>
+    <div class="flow-grid">
+      <div class="flow-step">
+        <span class="flow-num">01</span>
+        <p class="flow-title">Discover</p>
+        <p class="flow-desc">Learn the workflow from the people inside it: what they do today, where it breaks, what "fixed" would look like.</p>
+        <p class="flow-proof"><b>Student Funnel</b> — found where stopped-out students actually disappear.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">02</span>
+        <p class="flow-title">Scope</p>
+        <p class="flow-desc">Decide what ships first, what waits, and which platform owns what, so the first release actually lands.</p>
+        <p class="flow-proof"><b>Case File 001</b> — two platforms, one checkout; AI content saved for phase two.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">03</span>
+        <p class="flow-title">Prototype</p>
+        <p class="flow-desc">Get a rough working version in front of someone fast. Real feedback on real data beats any spec.</p>
+        <p class="flow-proof"><b>LogLLM</b> — model, CLI, and web demo for showing it to stakeholders.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">04</span>
+        <p class="flow-title">Deploy for reality</p>
+        <p class="flow-desc">Design for the constraints the solution will run under: spotty connectivity, messy data, non-technical users.</p>
+        <p class="flow-proof"><b>Saheli</b> — offline-first for users with no reliable internet.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">05</span>
+        <p class="flow-title">Hand off &amp; measure</p>
+        <p class="flow-desc">Leave something the owner can run without me, and know whether it actually saved time or made money.</p>
+        <p class="flow-proof"><b>SEO City Suite</b> — turned a repetitive page-writing workflow into a reusable, human-reviewed generator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
 
 <!-- PROJECTS -->
@@ -497,6 +814,23 @@
   <div class="wrap">
     <div class="label">Featured Projects</div>
     <div class="projects-grid">
+
+      <div class="case-file r-only">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 001 <span class="case-live">Live engagement</span></p>
+          <p class="case-file-title">Rebuilding a <span class="redact" tabindex="0">founder-led wellness brand</span>'s storefront — then automating its content.</p>
+          <p class="case-file-desc">A small business with a fragmented site, a catalog split across platforms, and one owner who has to run it all. I'm leading it end to end: discovery, architecture, build, and a phase-two AI content pipeline with a claims guardrail and one-tap owner approval.</p>
+          <div class="project-card-stack"><span>Squarespace</span><span>Shopify</span><span>Claude API</span><span>Automation</span></div>
+          <p class="case-file-hint">Client details redacted — hover to declassify. Full walkthrough coming soon.</p>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Discovery &amp; audiences</p><p class="case-phase-note">Four problem hypotheses, four customer journeys</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Architecture &amp; scope</p><p class="case-phase-note">Squarespace owns content, Shopify owns commerce; P0/P1/P2 launch plan</p></div></li>
+          <li class="case-phase now"><span class="case-dot"></span><div><p class="case-phase-name">Build &amp; commerce pilot</p><p class="case-phase-note">Pilot one product end to end before scaling the template</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Launch &amp; handoff</p><p class="case-phase-note">Acceptance checklist, owner training, maintenance guide</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Phase 2 · AI content pipeline</p><p class="case-phase-note">Real reviews → scripts → claims check → owner approval → publish</p></div></li>
+        </ol>
+      </div>
 
       <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card">
         <div class="project-card-img">
@@ -523,6 +857,7 @@
           <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
           <p class="project-card-title">Saheli</p>
           <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> designing for field constraints, not ideal conditions.</p>
           <div class="project-card-stack">
             <span>React Native</span><span>TypeScript</span><span>Supabase</span><span>Mapbox</span>
           </div>
@@ -551,6 +886,7 @@
           <span class="project-card-constraint">Replaced a manual 3-hour weekly process for a real client</span>
           <p class="project-card-title">SEO City Suite</p>
           <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> shipped for a real client and automated a recurring workflow.</p>
           <div class="project-card-stack">
             <span>JavaScript</span><span>Claude API</span><span>Vercel</span><span>React</span>
           </div>
@@ -578,6 +914,7 @@
           <span class="project-card-constraint">Identified where stopped-out students actually disappear</span>
           <p class="project-card-title">Student Funnel & Equity Audit</p>
           <p class="project-card-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> turning messy institutional data into a decision.</p>
           <div class="project-card-stack">
             <span>Python</span><span>Pandas</span><span>scikit-learn</span><span>Jupyter</span>
           </div>
@@ -607,6 +944,7 @@
           <span class="project-card-constraint">Built to understand how operating systems actually work</span>
           <p class="project-card-title">TinyShell</p>
           <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> low-level systems fundamentals for debugging what's underneath.</p>
           <div class="project-card-stack">
             <span>C</span><span>Unix</span><span>POSIX</span><span>Systems</span>
           </div>
@@ -640,6 +978,7 @@
           <span class="project-card-constraint">Most SEO tools miss who a site actually serves</span>
           <p class="project-card-title">Trust-Aware SEO</p>
           <p class="project-card-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — SEO, UX, and trust exposure in one report.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> audit tooling that turns findings into one readable report.</p>
           <div class="project-card-stack">
             <span>Python</span><span>FastAPI</span><span>BeautifulSoup</span><span>Jinja2</span>
           </div>
@@ -669,6 +1008,7 @@
           <span class="project-card-constraint">Manually classifying log lines is a systems problem, not a human one</span>
           <p class="project-card-title">LogLLM</p>
           <p class="project-card-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
+          <p class="project-card-signal r-only"><b>Signal:</b> applied ML end to end, from training to CLI to demo.</p>
           <div class="project-card-stack">
             <span>Python</span><span>PyTorch</span><span>HuggingFace</span><span>DistilBERT</span>
           </div>
@@ -681,6 +1021,18 @@
 </section>
 
 <div class="page-divider"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
+
+<!-- UNDER THE HOOD (builder mode) -->
+<section id="hood" class="page b-only" data-page="">
+  <div class="wrap">
+    <div class="label">Under the Hood</div>
+    <p class="hood-intro">Pick a project and step through one real request, from input to storage. Each step names the file that does the work. Below the trace: the decisions behind it, and what's still broken.</p>
+    <div class="hood-tabs" role="tablist" aria-label="Projects" id="hoodTabs"></div>
+    <div class="hood-panel" role="tabpanel" id="hoodPanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="page-divider b-only"><div class="page-divider-line"></div><span class="page-divider-sym">— turn the page —</span><div class="page-divider-line"></div></div>
 
 <!-- WRITING -->
 <section id="writing" class="page" data-page="04 / 05">
@@ -742,6 +1094,7 @@
       <div>
         <h2 class="contact-h">Let's build something <em>useful.</em></h2>
         <p class="contact-body">I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams working on problems that actually matter. If that sounds like you, let's talk.</p>
+        <p class="contact-body contact-r r-only">Hiring for solutions engineering, forward deployed, or applied AI roles? I'm happy to walk through any case file live, from the first discovery call to what shipped.</p>
         <div class="avail-block page">
           <p class="avail-block-label">Availability</p>
           <div class="avail-row">
@@ -809,6 +1162,37 @@
 <script>
   const pages = document.querySelectorAll('.page');
   const pageNum = document.getElementById('pageNum');
+  const modeButtons = document.querySelectorAll('.mode-toggle button');
+  let pageTotal = '05';
+
+  // number only the sections visible in the current mode
+  function renumber() {
+    const visible = [...document.querySelectorAll('section.page')].filter(s => s.offsetParent !== null);
+    const pad = n => String(n).padStart(2, '0');
+    pageTotal = pad(visible.length + 1);
+    visible.forEach((s, i) => { s.dataset.page = pad(i + 2) + ' / ' + pageTotal; });
+  }
+
+  // mode: ?mode= link wins, then the viewer's last choice
+  const MODES = ['story', 'recruiter', 'builder'];
+  function setMode(mode, updateUrl) {
+    document.documentElement.dataset.mode = mode;
+    modeButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    try { localStorage.setItem('siteView', mode); } catch (e) {}
+    if (updateUrl) {
+      const url = new URL(location.href);
+      if (mode === 'story') url.searchParams.delete('mode'); else url.searchParams.set('mode', mode);
+      history.replaceState(null, '', url);
+    }
+    renumber();
+  }
+
+  let initialMode = new URLSearchParams(location.search).get('mode');
+  if (!MODES.includes(initialMode)) {
+    try { initialMode = localStorage.getItem('siteView'); } catch (e) { initialMode = null; }
+  }
+  setMode(MODES.includes(initialMode) ? initialMode : 'story', false);
+  modeButtons.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode, true)));
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -822,9 +1206,240 @@
   pages.forEach(p => obs.observe(p));
 
   const heroObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) pageNum.textContent = '01 / 05'; });
+    entries.forEach(entry => { if (entry.isIntersecting) pageNum.textContent = '01 / ' + pageTotal; });
   }, { threshold: 0.3 });
   heroObs.observe(document.getElementById('hero'));
+
+  // ── UNDER THE HOOD: step-through traces ──
+  const GH = 'https://github.com/shruthisenthilarasu/';
+  const HOOD = [
+    {
+      id: 'saheli', name: 'Saheli', repo: 'Saheli-Navigation',
+      trace: 'Trace: a safety report filed with no signal',
+      steps: [
+        { label: 'Submit', file: 'components/ReportStationIssueModal.tsx', text: 'A user flags a station for safety, cleanliness, or access issues from the map. The modal hands the report to the sync service rather than calling the backend directly.' },
+        { label: 'Check network', file: 'services/offlineSync.ts', text: 'NetInfo reports connectivity. Online: try Supabase first. Offline, or the request fails: fall through to the local queue, so the report is never just dropped.' },
+        { label: 'Queue locally', file: 'services/offlineStorage.ts', text: 'The report is written to AsyncStorage with a queuedAt timestamp. It survives app restarts because it lives on the device, not in React state.' },
+        { label: 'Reconnect', file: 'hooks/useOfflineSync.ts', text: 'When sync is triggered and the connection is back, the hook reads every queued report and submits each one to Supabase.' },
+        { label: 'Persist', file: 'supabase/schema.sql', text: 'Reports land in station_reports, linked to stations by foreign key. Locations are PostGIS geography columns with GiST indexes, so "what’s near me" stays a fast spatial query.' },
+        { label: 'Dequeue', file: 'services/offlineSync.ts', text: 'Successful items are removed from the queue, processed in reverse index order so removing one item never shifts the index of the next.' }
+      ],
+      decisions: [
+        ['Cache-first reads.', 'useStations() renders cached stations immediately, then reconciles with a background fetch, so the map works on degraded connections.'],
+        ['PostGIS over lat/lng columns.', 'Real geographic types and spatial indexes instead of hand-rolled distance math.'],
+        ['Layered architecture.', 'UI components, hooks for state, services for data access, and the database each own one job.']
+      ],
+      limits: [
+        ['No idempotency: a timeout after a successful insert makes the retry create a duplicate report.', 'Client-generated report ID plus a unique constraint so retries are safe.'],
+        ['Cached stations expire after one hour, so after a long outage the map has no station data to show.', 'Serve stale data with a visible "last updated" label instead of nothing.'],
+        ['Report insert and station status update are separate writes; one can succeed without the other.', 'Wrap both in a single RPC or transaction.'],
+        ['Conflict resolution for simultaneous offline edits is still pending.', 'Define merge rules per field (latest-wins for status, append-only for reports).']
+      ]
+    },
+    {
+      id: 'loglens', name: 'LogLens++', repo: 'LogLens_Plus',
+      trace: 'Trace: one raw log line becoming an anomaly flag',
+      steps: [
+        { label: 'CLI', file: 'loglens/cli/main.py', text: 'A Typer command loads configuration and points the ingestor at a log file.' },
+        { label: 'Detect & parse', file: 'loglens/ingestion/ingestor.py', text: 'ingest_file() reads line by line with a generator. Each line is detected as JSON or plain text and routed to _ingest_json() or _ingest_text(), so the whole file never sits in memory.' },
+        { label: 'Normalize', file: 'loglens/models.py', text: 'Every line becomes a LogEvent dataclass with the same fields: timestamp, level, source, message, metadata. Timestamps are normalized to one datetime form.' },
+        { label: 'Store', file: 'loglens/storage/database.py', text: 'LogStorage writes the event into a DuckDB events table, so ad-hoc questions become plain SQL: SELECT level, COUNT(*) FROM events GROUP BY level.' },
+        { label: 'Window', file: 'loglens/processing/window_processor.py', text: 'RollingWindowProcessor summarizes recent events over sliding (overlapping) or tumbling (back-to-back) windows into metrics.' },
+        { label: 'Detect', file: 'loglens/analytics/anomaly_detector.py', text: 'AnomalyDetector keeps recent metric values in a deque, computes mean and standard deviation, and flags any value whose z-score reaches the threshold (default 2.0).' }
+      ],
+      decisions: [
+        ['Generators, not lists.', 'Yielding one event at a time keeps memory flat regardless of file size.'],
+        ['DuckDB over SQLite.', 'Embedded like SQLite, but built for analytical scans and aggregates, which is the whole workload here.'],
+        ['Statistics before ML.', 'Z-scores and moving averages are explainable and need no training data.']
+      ],
+      limits: [
+        ['Each new sample is added before the baseline is computed, so it influences the mean it is judged against.', 'Score against the prior window, then append.'],
+        ['Detection is skipped when standard deviation is ~0, missing a jump from a flat baseline.', 'Use an epsilon floor or median absolute deviation.'],
+        ['Event IDs use MAX(id)+1, which breaks under concurrent writers.', 'Let the database generate IDs.'],
+        ['Events insert one row at a time, and metrics re-read the file in a second pass.', 'Batch inserts and compute metrics in the same pass.']
+      ]
+    },
+    {
+      id: 'tinyshell', name: 'TinyShell', repo: 'TinyShell',
+      trace: 'Trace: what happens when you type <code>ls | grep .c</code>',
+      steps: [
+        { label: 'Read', file: 'shell.c', text: 'fgets() reads the line at the prompt.' },
+        { label: 'Parse', file: 'shell.c', text: 'parse_input() splits it into heap-allocated argv arrays and spots the pipe, plus any < or > redirection.' },
+        { label: 'pipe()', file: 'shell.c', text: 'execute_single_pipeline() calls pipe(), creating a read end and a write end. Anything written to one can be read from the other.' },
+        { label: 'Fork ls', file: 'shell.c', text: 'Child one: dup2() points stdout (fd 1) at the pipe’s write end, unused ends are closed, and execvp("ls") replaces the child, searching PATH for the binary.' },
+        { label: 'Fork grep', file: 'shell.c', text: 'Child two: dup2() points stdin (fd 0) at the read end, then execvp("grep"). ls output now flows straight into grep.' },
+        { label: 'Reap & free', file: 'shell.c', text: 'The parent closes both ends (or grep would wait forever for EOF), waitpid()s each child so none linger as zombies, and free_argv() releases the parsed arguments.' }
+      ],
+      decisions: [
+        ['cd and exit are built in.', 'A child can’t change its parent’s working directory, so chdir() has to run in the shell itself.'],
+        ['Close every unused descriptor.', 'Prevents fd leaks and lets readers see end-of-file.'],
+        ['Debug tooling in the Makefile.', 'make debug and make valgrind targets for GDB and memory checks.']
+      ],
+      limits: [
+        ['A SIGCHLD handler calls cleanup_zombies(), which can race with the foreground waitpid().', 'Block the signal during foreground waits, or reap in the main loop.'],
+        ['A general execute_pipeline() exists but isn’t wired into the main loop, so only two-stage pipes run.', 'Route all pipelines through the general executor.'],
+        ['No automated test suite documents the edge cases.', 'Add parser and process-behavior tests.']
+      ]
+    },
+    {
+      id: 'policydecode', name: 'PolicyDecode', repo: 'PolicyDecode',
+      trace: 'Trace: asking a question about a zoning PDF',
+      steps: [
+        { label: 'Upload', file: 'index.html', text: 'A developer picks a preloaded document or uploads a PDF, TXT, or Markdown file of zoning, land-use, or tax-credit rules.' },
+        { label: 'Extract', file: 'index.html', text: 'PDF.js pulls text out of each page in the browser, so the prototype needs no PDF-processing backend.' },
+        { label: 'Retrieve', file: 'index.html', text: 'getRelevantChunks() scores pages by the question’s keywords and keeps only the highest-scoring pages as context.' },
+        { label: 'Proxy', file: 'api/chat.js', text: 'A Vercel serverless function adds the API key from an environment variable and forwards the question and context to Claude, with streaming support. The key never touches browser code.' },
+        { label: 'Answer', file: 'index.html', text: 'The response streams into the UI, which distinguishes document-grounded text from general model knowledge.' }
+      ],
+      decisions: [
+        ['Keyword retrieval before vectors.', 'Cheap, inspectable, and enough to test whether the workflow is useful before building embeddings and an index.'],
+        ['Extraction in the browser.', 'One less service to deploy for a prototype.'],
+        ['Server-side key.', 'Every model call goes through the proxy.']
+      ],
+      limits: [
+        ['Keyword matching misses synonyms and paraphrases.', 'Hybrid keyword plus embedding retrieval.'],
+        ['Source labels are not proof of accuracy for high-stakes decisions.', 'Page-level citations with the quoted passage.'],
+        ['Poorly extracted or scanned PDFs lose text.', 'OCR fallback and an extraction-quality warning.'],
+        ['No document versioning.', 'Track version and effective date per source.']
+      ]
+    },
+    {
+      id: 'seo', name: 'SEO City Suite', repo: 'SEO-City-Suite',
+      trace: 'Trace: generating one city landing page',
+      steps: [
+        { label: 'Inputs', file: 'src/App.jsx', text: 'In Generator(), the user enters the business, industry, city, services, and optional local details.' },
+        { label: 'Prompt', file: 'src/App.jsx', text: 'The app builds a prompt around a fixed page schema, so every city page has the same structure.' },
+        { label: 'Proxy', file: 'api/claude.js', text: 'A Vercel function attaches the key server-side and forwards the request to Claude.' },
+        { label: 'Structure', file: 'src/App.jsx', text: 'Claude returns JSON. React parses it into title, meta description, slug, headings, service copy, CTA, and FAQ, each rendered separately.' },
+        { label: 'Review', file: 'src/App.jsx', text: 'A person copies each section into Squarespace. Nothing publishes without a human reading it first.' }
+      ],
+      decisions: [
+        ['JSON, not free text.', 'A predictable shape lets the UI render and copy each section independently.'],
+        ['Human in the loop.', 'Generated copy is a draft; publishing stays a deliberate step.'],
+        ['Standardize the workflow first.', 'The schema encodes how the pages were already being written by hand.']
+      ],
+      limits: [
+        ['The auditor passes a URL to the model without fetching the page, so its scores are AI assessments, not measurements.', 'Fetch the HTML, check tags, links, and schema in code, and use AI only for commentary.'],
+        ['Rendering depends on the model returning valid JSON.', 'Schema validation with an automatic retry.'],
+        ['Generated local claims can be wrong.', 'Flag factual statements for review before copy-out.']
+      ]
+    },
+    {
+      id: 'diagnostics', name: 'Integration diagnostics', repo: null,
+      trace: 'Pattern: why didn’t the system act?',
+      note: 'Generalized from internship work. Internal names and code stay private.',
+      steps: [
+        { label: 'Request', file: null, text: 'A request reaches a subsystem that may act on it. To the user, every failure below looks the same: nothing happened.' },
+        { label: 'No evidence', file: null, text: 'Diagnostic state 1: the input the subsystem needs never arrived. The bug is upstream, in whoever was supposed to send it.' },
+        { label: 'No candidate', file: null, text: 'State 2: evidence arrived, but nothing qualified. The problem is in the rules or the data, not the wiring.' },
+        { label: 'Rejected', file: null, text: 'State 3: a candidate existed but the authorization gate refused it. The system fails closed: missing authority means no action.' },
+        { label: 'Selected', file: null, text: 'State 4: success. Separating four outcomes that look identical turns "it doesn’t work" into a pointer at the right component and owner.' }
+      ],
+      decisions: [
+        ['Fail closed.', 'When a stale test lacked the required authority, the fix was the test double, not weakening the production gate.'],
+        ['Baseline before blame.', 'Install the previous release separately and compare, so old failures aren’t attributed to new work.'],
+        ['Respect ownership boundaries.', 'Document the missing caller contract for its owner instead of editing another subsystem to make tests green.']
+      ],
+      limits: [
+        ['Focused tests can pass while the live path still never supplies the evidence.', 'End-to-end tests that exercise the real producer, not a fixture.'],
+        ['Legacy paths can silently bypass the canonical runtime.', 'Regression tests that assert which path ran, not just the result.']
+      ]
+    }
+  ];
+
+  const hoodTabs = document.getElementById('hoodTabs');
+  const hoodPanel = document.getElementById('hoodPanel');
+  const el = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
+
+  function renderHood(project) {
+    let step = 0;
+    hoodTabs.querySelectorAll('.hood-tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.id === project.id)));
+    hoodPanel.innerHTML = '';
+
+    const head = el('div', 'hood-head');
+    const headText = el('div');
+    headText.append(el('p', 'hood-name', project.name), el('p', 'hood-trace-title', project.trace));
+    if (project.note) headText.append(el('p', 'hood-note', project.note));
+    head.append(headText);
+    if (project.repo) {
+      const a = el('a', 'hood-repo', 'View repo ↗');
+      a.href = GH + project.repo; a.target = '_blank';
+      head.append(a);
+    }
+
+    const trace = el('div', 'trace');
+    const nodes = el('ol', 'trace-nodes');
+    const detail = el('div', 'trace-detail');
+    const controls = el('div', 'trace-controls');
+    const prev = el('button', 'trace-btn', '← Back');
+    const next = el('button', 'trace-btn', 'Next step →');
+    const count = el('span', 'trace-count');
+    prev.type = next.type = 'button';
+    controls.append(prev, next, count);
+
+    const nodeBtns = project.steps.map((s, i) => {
+      const li = el('li');
+      const b = el('button', 'trace-node', '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' + s.label);
+      b.type = 'button';
+      b.addEventListener('click', () => { step = i; paint(); });
+      li.append(b); nodes.append(li);
+      return b;
+    });
+
+    function paint() {
+      const s = project.steps[step];
+      nodeBtns.forEach((b, i) => {
+        b.classList.toggle('active', i === step);
+        b.classList.toggle('seen', i < step);
+        b.setAttribute('aria-current', i === step ? 'step' : 'false');
+      });
+      detail.innerHTML = '';
+      detail.append(el('p', 'trace-step-title', String(step + 1).padStart(2, '0') + ' · ' + s.label));
+      if (s.file) {
+        const f = el('p', 'trace-file', 'in ');
+        const a = el('a', null, '<code>' + s.file + '</code>');
+        a.href = GH + project.repo + '/blob/main/' + s.file; a.target = '_blank';
+        f.append(a); detail.append(f);
+      }
+      detail.append(el('p', 'trace-text', s.text), controls);
+      prev.disabled = step === 0;
+      next.disabled = step === project.steps.length - 1;
+      count.textContent = (step + 1) + ' / ' + project.steps.length;
+    }
+    prev.addEventListener('click', () => { if (step > 0) { step--; paint(); } });
+    next.addEventListener('click', () => { if (step < project.steps.length - 1) { step++; paint(); } });
+
+    trace.append(nodes, detail);
+
+    const cols = el('div', 'hood-cols');
+    const dCol = el('div', 'hood-col');
+    dCol.append(el('span', 'hood-col-label', 'Decisions'));
+    const dList = el('ul');
+    project.decisions.forEach(([b, t]) => dList.append(el('li', 'decision', '<b>' + b + '</b> ' + t)));
+    dCol.append(dList);
+    const lCol = el('div', 'hood-col');
+    lCol.append(el('span', 'hood-col-label', "Known limitations · what I'd fix next"));
+    const lList = el('ul');
+    project.limits.forEach(([issue, fix]) => {
+      const li = el('li', 'limit');
+      li.append(el('span', 'limit-issue', issue), el('span', 'limit-fix', fix));
+      lList.append(li);
+    });
+    lCol.append(lList);
+    cols.append(dCol, lCol);
+
+    hoodPanel.append(head, trace, cols);
+    paint();
+  }
+
+  HOOD.forEach(p => {
+    const t = el('button', 'hood-tab', p.name);
+    t.type = 'button'; t.dataset.id = p.id;
+    t.setAttribute('role', 'tab');
+    t.addEventListener('click', () => renderHood(p));
+    hoodTabs.append(t);
+  });
+  renderHood(HOOD[0]);
 </script>
 </body>
 </html>
