@@ -196,9 +196,9 @@
   @keyframes pulse { 0%,100% { opacity:0.3; } 50% { opacity:0.9; } }
 
   /* ── MODE TOGGLE ── */
-  html:not([data-mode="recruiter"]) .r-only { display: none !important; }
-  html:not([data-mode="builder"]) .b-only { display: none !important; }
-  html[data-mode="recruiter"] .hero-scroll, html[data-mode="builder"] .hero-scroll { display: none; }
+  html:not([data-mode="technical"]) .r-only, html:not([data-mode="technical"]) .b-only { display: none !important; }
+  html[data-mode="technical"] .hero-scroll { display: none; }
+  .mode-tagline { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.78rem; color: var(--teal); padding: 0 0.6rem 0 0.7rem; margin-left: 0.3rem; border-left: 1px solid var(--border); white-space: nowrap; }
   .mode-toggle { position: fixed; bottom: 2rem; left: 4rem; z-index: 120; display: flex; align-items: center; gap: 0.2rem; padding: 0.3rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border: 1px solid var(--border-strong); box-shadow: 0 2px 14px rgba(26,32,44,0.06); }
   .mode-label { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.8rem; color: var(--text-light); padding: 0 0.5rem 0 0.4rem; }
   .mode-toggle button { font-family: 'Inter', sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); background: none; border: none; padding: 0.45rem 0.8rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
@@ -370,7 +370,10 @@
     .flow-grid { grid-template-columns: 1fr; }
     .case-file-main, .case-file-phases { padding: 1.6rem 1.4rem; }
     .mode-label { display: none; }
+    .mode-toggle { flex-wrap: wrap; right: 1.5rem; max-width: 260px; }
     .mode-toggle button { padding: 0.45rem 0.6rem; }
+    .mode-tagline { order: -1; width: 100%; border-left: none; margin: 0; padding: 0.2rem 0.4rem 0.35rem; white-space: normal; }
+    .page-num { bottom: 5.5rem; }
     .hood-head, .trace, .hood-col { padding-left: 1.2rem; padding-right: 1.2rem; }
     .limit { grid-template-columns: 1fr; gap: 0.3rem; }
     .ask-grid { grid-template-columns: 1fr; }
@@ -393,9 +396,9 @@
 
 <div class="mode-toggle" role="group" aria-label="View mode">
   <span class="mode-label">view as</span>
-  <button type="button" data-mode="story" aria-pressed="true">Story</button>
-  <button type="button" data-mode="recruiter" aria-pressed="false">Recruiter</button>
-  <button type="button" data-mode="builder" aria-pressed="false">Builder</button>
+  <button type="button" data-mode="whimsical" aria-pressed="true">Whimsical</button>
+  <button type="button" data-mode="technical" aria-pressed="false">Technical</button>
+  <span class="mode-tagline" id="modeTagline" aria-live="polite"></span>
 </div>
 
 <!-- HERO -->
@@ -609,25 +612,13 @@
         <dl>
           <div class="r-brief-row"><dt>Targeting</dt><dd>Solutions Engineering · Forward Deployed Engineering · Applied AI</dd></div>
           <div class="r-brief-row"><dt>Strengths</dt><dd>Discovery, rapid prototyping, shipping for real users and clients</dd></div>
-          <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · SQL · React · FastAPI · Claude API</dd></div>
+          <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · C · SQL · DuckDB · PostGIS · React · Claude API</dd></div>
           <div class="r-brief-row"><dt>Available</dt><dd>Internships &amp; contract now · Full-time Dec 2026</dd></div>
         </dl>
         <div class="r-brief-actions">
-          <a href="#how">How I work ↓</a>
-          <a href="mailto:shruthi.senth@gmail.com">Email me ↗</a>
-        </div>
-      </div>
-      <div class="r-brief b-only">
-        <span class="r-brief-label">Builder notes</span>
-        <dl>
-          <div class="r-brief-row"><dt>Trace</dt><dd>Step through how data actually moves in each project</dd></div>
-          <div class="r-brief-row"><dt>Linked</dt><dd>Real files and functions, straight to GitHub</dd></div>
-          <div class="r-brief-row"><dt>Honest</dt><dd>Every project lists what's still broken and what I'd fix next</dd></div>
-          <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · C · SQL · DuckDB · PostGIS · React</dd></div>
-        </dl>
-        <div class="r-brief-actions">
+          <a href="#experience">Experience ↓</a>
           <a href="#hood">Under the hood ↓</a>
-          <a href="https://github.com/shruthisenthilarasu" target="_blank">GitHub ↗</a>
+          <a href="mailto:shruthi.senth@gmail.com">Email me ↗</a>
         </div>
       </div>
     </div>
@@ -1174,24 +1165,34 @@
   }
 
   // mode: ?mode= link wins, then the viewer's last choice
-  const MODES = ['story', 'recruiter', 'builder'];
+  const TAGLINES = {
+    whimsical: 'for the girls who want whimsy ✿',
+    technical: 'for the tech bros who want the deep dive ⌘'
+  };
+  // older links (?mode=recruiter / builder / story) still land somewhere sensible
+  const ALIASES = { story: 'whimsical', recruiter: 'technical', builder: 'technical' };
+  const normalizeMode = m => (m in TAGLINES ? m : ALIASES[m] || null);
+  const modeTagline = document.getElementById('modeTagline');
+
   function setMode(mode, updateUrl) {
     document.documentElement.dataset.mode = mode;
     modeButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    modeTagline.textContent = TAGLINES[mode];
     try { localStorage.setItem('siteView', mode); } catch (e) {}
     if (updateUrl) {
       const url = new URL(location.href);
-      if (mode === 'story') url.searchParams.delete('mode'); else url.searchParams.set('mode', mode);
+      if (mode === 'whimsical') url.searchParams.delete('mode'); else url.searchParams.set('mode', mode);
       history.replaceState(null, '', url);
     }
     renumber();
+    pageNum.textContent = pageNum.textContent.replace(/\d+$/, pageTotal);
   }
 
-  let initialMode = new URLSearchParams(location.search).get('mode');
-  if (!MODES.includes(initialMode)) {
-    try { initialMode = localStorage.getItem('siteView'); } catch (e) { initialMode = null; }
+  let initialMode = normalizeMode(new URLSearchParams(location.search).get('mode'));
+  if (!initialMode) {
+    try { initialMode = normalizeMode(localStorage.getItem('siteView')); } catch (e) { initialMode = null; }
   }
-  setMode(MODES.includes(initialMode) ? initialMode : 'story', false);
+  setMode(initialMode || 'whimsical', false);
   modeButtons.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode, true)));
 
   const obs = new IntersectionObserver(entries => {
