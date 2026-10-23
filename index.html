@@ -335,8 +335,36 @@
     .r-brief, .case-live::before { animation: none; opacity: 1; }
   }
 
+  /* ── WHIMSICAL VIEW: original palette, plus sparkles ── */
+  html:not([data-mode="whimsical"]) .w-only { display: none !important; }
+  .hero-text { position: relative; }
+  .doodle { position: absolute; pointer-events: none; animation: twinkle 3.2s ease-in-out infinite; }
+  .doodle svg { display: block; width: 100%; height: 100%; }
+  .doodle.d1 { width: 26px; height: 26px; top: -38px; right: 40px; color: var(--blue-light); }
+  .doodle.d2 { width: 13px; height: 13px; top: -14px; right: 78px; color: var(--teal); animation-delay: -1.1s; }
+  .doodle.d3 { width: 18px; height: 18px; top: 96px; right: 8px; color: var(--blue); animation-delay: -2s; }
+  .doodle.d4 { width: 12px; height: 12px; top: 172px; left: -26px; color: var(--teal); animation-delay: -0.6s; }
+  @keyframes twinkle { 0%,100% { opacity: 0.35; transform: scale(0.8) rotate(0); } 50% { opacity: 1; transform: scale(1.1) rotate(20deg); } }
+
+  /* a sparkle pops in the corner of cards on hover */
+  [data-mode="whimsical"] .project-card, [data-mode="whimsical"] .contact-card { position: relative; }
+  [data-mode="whimsical"] .project-card::after, [data-mode="whimsical"] .contact-card::after { content: '✦'; position: absolute; top: -9px; right: -7px; font-size: 1.1rem; line-height: 1; color: var(--blue-light); opacity: 0; transform: scale(0) rotate(-45deg); transition: opacity 0.25s, transform 0.35s cubic-bezier(.34,1.56,.64,1); pointer-events: none; }
+  [data-mode="whimsical"] .project-card:hover::after, [data-mode="whimsical"] .contact-card:hover::after { opacity: 1; transform: scale(1) rotate(0); }
+  [data-mode="whimsical"] .page-divider-sym { font-size: 0; }
+  [data-mode="whimsical"] .page-divider-sym::after { content: '✦ turn the page ✦'; font-size: 0.78rem; }
+
+  /* sparkle cursor trail */
+  .sparkle { position: fixed; z-index: 200; pointer-events: none; font-size: 12px; line-height: 1; animation: sparkle 0.9s ease-out forwards; }
+  @keyframes sparkle { from { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); } to { opacity: 0; transform: translate(-50%, 10px) scale(0.3) rotate(90deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .doodle { animation: none; opacity: 0.7; }
+    [data-mode="whimsical"] .project-card::after, [data-mode="whimsical"] .contact-card::after { transition: none; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
+    .doodle.d4 { display: none; }
     .mode-toggle { left: 1.5rem; bottom: 1.5rem; }
     .flow-grid { grid-template-columns: 1fr 1fr; }
     .flow-step, .flow-step:first-child { padding: 1.4rem 1rem 1.4rem 0; border-right: none; border-bottom: 1px solid var(--border); }
@@ -599,6 +627,12 @@
   </div>
   <div class="hero-inner">
     <div class="hero-text">
+      <div class="w-only" aria-hidden="true">
+        <span class="doodle d1"><svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z" fill="currentColor"/></svg></span>
+        <span class="doodle d2"><svg viewBox="0 0 24 24"><path d="M12 1.5l3 7.6 8 .6-6.1 5.2 1.9 7.9L12 18.6l-6.8 4.2 1.9-7.9L1 9.7l8-.6z" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"/></svg></span>
+        <span class="doodle d3"><svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z" fill="currentColor"/></svg></span>
+        <span class="doodle d4"><svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z" fill="currentColor"/></svg></span>
+      </div>
       <p class="hero-eyebrow">Software Development · Data Automation · Civic Tech</p>
       <h1 class="hero-title">
         <span class="w">building things.</span>
@@ -1441,6 +1475,29 @@
     hoodTabs.append(t);
   });
   renderHood(HOOD[0]);
+
+  // ── WHIMSICAL: sparkle cursor trail (mouse only, motion-safe) ──
+  const SPARKS = ['✦', '✧', '⋆'];
+  const SPARK_COLORS = ['#4A90E2', '#2C7A7B', '#2B6CB0'];
+  const finePointer = matchMedia('(pointer: fine)');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let lastSpark = 0;
+  document.addEventListener('pointermove', e => {
+    if (document.documentElement.dataset.mode !== 'whimsical' || !finePointer.matches || reduceMotion.matches) return;
+    const now = performance.now();
+    if (now - lastSpark < 45) return;
+    lastSpark = now;
+    const s = document.createElement('span');
+    s.className = 'sparkle';
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = SPARKS[Math.floor(Math.random() * SPARKS.length)];
+    s.style.left = (e.clientX + (Math.random() * 14 - 7)) + 'px';
+    s.style.top = (e.clientY + (Math.random() * 14 - 7)) + 'px';
+    s.style.color = SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)];
+    s.style.fontSize = (9 + Math.random() * 7) + 'px';
+    document.body.appendChild(s);
+    s.addEventListener('animationend', () => s.remove());
+  });
 </script>
 </body>
 </html>
