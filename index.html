@@ -298,6 +298,8 @@
   .role-proj.sealed { grid-column: 1 / -1; gap: 0.7rem; }
   .sealed-lines { display: flex; flex-direction: column; gap: 0.45rem; max-width: 520px; }
   .sealed-lines span { display: block; height: 0.7rem; background: var(--text); border-radius: 1px; }
+  .role-proj.sealed .project-card-stack { margin: 0; padding: 0; }
+  .sealed-note { font-family: 'Newsreader', serif; font-style: italic; color: var(--text-muted); }
   .ask-label { font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.6rem; display: block; }
   .ask-intro { font-family: 'Newsreader', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.8rem; }
   .ask-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
@@ -916,16 +918,18 @@
       </div>
       <div class="role-group">
         <div class="role-head">
-          <span class="exp-dates">Current</span>
-          <p class="exp-role">AI Engineer · <span class="exp-org">Confidential</span></p>
-          <p class="exp-one">Helping design and build a deterministic intelligence system.</p>
-          <p class="review"><b>@shruthi</b><span>redacted for NDA. ask me how, not what.</span></p>
+          <span class="exp-dates">Jun 2026 – Present · Internship</span>
+          <p class="exp-role">Software Engineer · <span class="exp-org">LuMATH</span></p>
+          <p class="exp-one">Helping design and build an intelligent computing system in Python, across reasoning, memory, retrieval, and goal-driven behavior.</p>
+          <p class="review"><b>@shruthi</b><span>ask me about the how. the what stays sealed.</span></p>
         </div>
         <div class="role-projects">
           <div class="role-proj sealed">
             <span class="role-proj-tag">Sealed file</span>
+            <p class="role-proj-text">Working between research and implementation: turning architectural ideas into tested software, keeping component boundaries clear, debugging behavior that crosses systems, and checking that each change improves the system without breaking what already works.</p>
+            <div class="project-card-stack"><span>Python</span><span>Modular architecture</span><span>Automated testing</span><span>AI-assisted workflows</span></div>
             <div class="sealed-lines" aria-hidden="true"><span style="width:92%"></span><span style="width:78%"></span><span style="width:85%"></span><span style="width:40%"></span></div>
-            <p class="role-proj-text">The details of this one stay under NDA. Happy to talk about how I work on it.</p>
+            <p class="role-proj-text sealed-note">The specifics stay under NDA.</p>
           </div>
         </div>
       </div>
