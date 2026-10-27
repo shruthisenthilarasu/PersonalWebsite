@@ -405,7 +405,8 @@
   .do-step svg { width: 34px; height: 34px; color: var(--teal); margin-bottom: 0.9rem; display: block; }
   .do-step-title { font-family: 'Newsreader', serif; font-size: 1.25rem; font-weight: 600; color: var(--text); line-height: 1.25; margin-bottom: 0.45rem; }
   .do-step-text { font-size: 0.84rem; color: #374151; line-height: 1.7; }
-  .do-step:not(:last-child)::after { content: '→'; position: absolute; right: -1rem; top: 50%; transform: translate(50%, -50%); color: var(--blue-light); font-size: 1.1rem; }
+  /* arrows sit in the middle of the 1.2rem gap between steps */
+  .do-step:not(:last-child)::after { content: '→'; position: absolute; right: -0.6rem; top: 50%; transform: translate(50%, -50%); color: var(--blue-light); font-size: 1.1rem; line-height: 1; z-index: 1; }
 
   /* red pencil circles around numbers */
   [data-mode="whimsical"] .page-num { font-family: 'Caveat', cursive; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--text-muted); opacity: 0.85; }
@@ -428,7 +429,7 @@
   .essay-gist::before { content: '✦ the gist: '; font-style: normal; font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
   @media (max-width: 700px) {
     .do-steps { grid-template-columns: 1fr; }
-    .do-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -1rem; transform: translate(50%, 50%); }
+    .do-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -0.6rem; transform: translate(50%, 50%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -796,7 +797,7 @@
       </div>
       <div>
         <p class="trait-section-label">What I'm interested in</p>
-        <div class="trait"><p class="trait-title">Information Access</p><p class="trait-desc">I'm interested in the places where information exists but remains difficult to find, understand, or use. Whether it's public infrastructure, policy documents, or organizational knowledge, I'm drawn to making important information more accessible.</p></div>
+        <div class="trait"><p class="trait-title">Accessibility</p><p class="trait-desc">I'm interested in the places where information exists but remains difficult to find, understand, or use. Whether it's public infrastructure, policy documents, or organizational knowledge, I'm drawn to making important information more accessible.</p></div>
         <div class="trait"><p class="trait-title">Operational Friction</p><p class="trait-desc">Most of my projects begin with a workflow that feels harder than it should be. I enjoy finding unnecessary complexity and designing systems that reduce it.</p></div>
         <div class="trait"><p class="trait-title">People & Systems</p><p class="trait-desc">The most interesting problems live at the boundary between people and complicated systems. Good software helps the interaction feel simpler without hiding the complexity underneath.</p></div>
         <div class="trait"><p class="trait-title">Writing</p><p class="trait-desc">Building helps me understand systems. Writing helps me understand what I learned. Most of my essays are attempts to make sense of projects after they're finished.</p></div>
