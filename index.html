@@ -6,7 +6,7 @@
 <title>Shruthi Senthilarasu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F8FAFC;
@@ -384,7 +384,7 @@
 
   /* plain-English project cards: one line plus jargon chips instead of the stack */
   [data-mode="whimsical"] .project-card-constraint, [data-mode="whimsical"] .project-card-desc, [data-mode="whimsical"] .project-card-stack { display: none; }
-  .project-card-plain { font-family: 'Newsreader', serif; font-size: 1.05rem; line-height: 1.55; color: var(--text); margin-bottom: 1.1rem; flex: 1; }
+  .project-card-plain { font-family: 'Newsreader', serif; font-size: 0.98rem; line-height: 1.6; color: var(--text); margin-bottom: 1.1rem; flex: 1; }
   .jargon-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.2rem; }
   .jargon-chips-label { font-size: 0.6rem; color: var(--text-light); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; width: 100%; }
 
@@ -406,6 +406,22 @@
   .do-step-title { font-family: 'Newsreader', serif; font-size: 1.25rem; font-weight: 600; color: var(--text); line-height: 1.25; margin-bottom: 0.45rem; }
   .do-step-text { font-size: 0.84rem; color: #374151; line-height: 1.7; }
   .do-step:not(:last-child)::after { content: '→'; position: absolute; right: -1rem; top: 50%; transform: translate(50%, -50%); color: var(--blue-light); font-size: 1.1rem; }
+
+  /* red pencil circles around numbers */
+  [data-mode="whimsical"] .page-num { font-family: 'Caveat', cursive; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--text-muted); opacity: 0.85; }
+  [data-mode="whimsical"] .pn-cur, .pencil-num { position: relative; display: inline-block; min-width: 1.6em; text-align: center; font-family: 'Caveat', cursive; font-weight: 600; color: #C53030; }
+  [data-mode="whimsical"] .pn-cur::before, .pencil-num::before, [data-mode="whimsical"] .pn-cur::after, .pencil-num::after { content: ''; position: absolute; inset: -0.2em -0.1em -0.1em -0.25em; border: 1.6px solid rgba(197,48,48,0.8); border-radius: 52% 46% 55% 44% / 50% 56% 44% 52%; transform: rotate(-8deg); pointer-events: none; }
+  [data-mode="whimsical"] .pn-cur::after, .pencil-num::after { inset: -0.12em -0.22em -0.2em -0.12em; border-width: 1px; border-color: rgba(197,48,48,0.45); border-radius: 46% 54% 48% 52% / 56% 44% 56% 44%; transform: rotate(6deg); }
+  .pencil-num { font-size: 1.5rem; line-height: 1.2; margin-bottom: 0.6rem; }
+  .do-step .pencil-num { position: absolute; top: 1.1rem; right: 1.3rem; margin: 0; }
+
+  /* pencil annotations: little handwritten notes in the margins */
+  .pencil { font-family: 'Caveat', cursive; font-weight: 500; font-size: 1.3rem; line-height: 1.2; color: #4A5568; text-shadow: 0 0 0.5px rgba(74,85,104,0.5); display: flex; align-items: flex-start; gap: 0.35rem; transform: rotate(-1.8deg); transform-origin: left center; max-width: 420px; }
+  .pencil svg { width: 34px; height: 30px; flex: none; color: #718096; margin-top: 0.15rem; }
+  .pencil.tilt-r { transform: rotate(1.4deg); }
+  .pencil-after-label { margin: -2.3rem 0 2rem 0.2rem; }
+  .pencil-hero { margin: -1rem 0 1.6rem; opacity: 0; animation: up 0.7s ease forwards 0.95s; }
+  .pencil-avail { margin: 0.9rem 0 0 0.4rem; }
 
   /* essay gists */
   .essay-gist { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.86rem; color: var(--teal); line-height: 1.5; margin-top: 0.45rem; }
@@ -696,7 +712,8 @@
         <span class="w">breaking things.</span>
         <span class="w">writing about both.</span>
       </h1>
-      <p class="hero-sub">Software engineer and writer focused on <span class="jargon" tabindex="0" data-say="Technology that helps communities and public services work better for the people who rely on them.">civic tech</span>, <span class="jargon" tabindex="0" data-say="The behind-the-scenes plumbing that collects, stores, and makes sense of information.">data systems</span>, and tools that make a real-world impact.</p>
+      <p class="hero-sub">Software engineer and writer focused on <span class="jargon" tabindex="0" data-say="Software as a well-lit sidewalk: public infrastructure that makes services easier to reach for the people who rely on them.">civic tech</span>, <span class="jargon" tabindex="0" data-say="The plumbing behind the walls. Pipes that collect, store, and route information so it shows up where it's needed.">data systems</span>, and tools that make a real-world impact.</p>
+      <p class="pencil pencil-hero w-only"><svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M28 26C16 26 8 20 8 6"/><path d="M3 10l5-5 5 5"/></svg>translation: I build software that bends to how you already work, not the other way around</p>
       <a href="#projects" class="hero-link">View my work <span class="arr">→</span></a>
       <div class="r-brief r-only">
         <span class="r-brief-label">The short version</span>
@@ -726,19 +743,23 @@
     <div class="label">About</div>
     <div class="do-strip w-only">
       <p class="trait-section-label">What I do, in one breath</p>
+      <p class="pencil tilt-r w-only" style="margin:-0.4rem 0 1.4rem">(honestly, this is the whole job)</p>
       <div class="do-steps">
         <div class="do-step">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5C5 6 6.2 5 7.6 5h16.8C25.8 5 27 6 27 7.5v11c0 1.4-1.2 2.5-2.6 2.5H14l-6 5v-5h-.4C6.2 21 5 19.9 5 18.5z"/><path d="M11 11.5h10M11 15.5h6"/></svg>
+          <span class="pencil-num" aria-hidden="true">1</span>
           <p class="do-step-title">You tell me what's annoying.</p>
           <p class="do-step-text">The slow, repetitive, or confusing part of how you work, or the idea you haven't figured out how to build yet.</p>
         </div>
         <div class="do-step">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 6.5a5 5 0 0 0-6.3 6.3L5.5 20.5a2.1 2.1 0 0 0 3 3l7.7-7.7a5 5 0 0 0 6.3-6.3l-3.1 3.1-2.6-.4-.4-2.6z"/><path d="M25 21l.8 2.2L28 24l-2.2.8L25 27l-.8-2.2L22 24l2.2-.8z" fill="currentColor" stroke="none"/></svg>
+          <span class="pencil-num" aria-hidden="true">2</span>
           <p class="do-step-title">I build the thing.</p>
           <p class="do-step-text">A website, a tool, or a little automation, shaped around the way you actually work.</p>
         </div>
         <div class="do-step">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="16" r="5"/><path d="M15.5 16H27M23 16v4M27 16v3"/></svg>
+          <span class="pencil-num" aria-hidden="true">3</span>
           <p class="do-step-title">You run it without me.</p>
           <p class="do-step-text">I hand it over with simple instructions, so it keeps working long after I step away.</p>
         </div>
@@ -924,6 +945,7 @@
 <section id="projects" class="page" data-page="03 / 05">
   <div class="wrap">
     <div class="label">Featured Projects</div>
+    <p class="pencil pencil-after-label w-only">psst: the squiggly words are a decoder ring. tap one <svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M4 5c12 0 20 6 19 20"/><path d="M18 21l5 5 4-6"/></svg></p>
     <div class="declassify-bar r-only">
       <p>Each case file has a redacted line. Hover or tap to declassify it.</p>
       <button type="button" class="declassify-btn" id="declassifyAll" aria-pressed="false">Declassify all</button>
@@ -1073,8 +1095,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
           <p class="project-card-title">Saheli</p>
-          <p class="project-card-plain w-only">A map that helps people find a safe, clean public restroom, even when there's no signal.</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="It still works in a dead zone. The app keeps what you need on your phone and catches up when the signal comes back.">offline-first</span><span class="jargon" tabindex="0" data-say="Updates show up as soon as someone reports them, like a restroom that's clean, dirty, or closed.">real-time status</span></div>
+          <p class="project-card-plain w-only">A pocket guidebook that never needs wifi. A React Native map of safe, clean public restrooms, because the people who need one most are often the ones with the worst signal.</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="Packing a paper map before the road trip. The app keeps a copy on your phone, and jots new reports in a little notebook (a queue) until there's signal to mail them.">offline-first</span><span class="jargon" tabindex="0" data-say="A bulletin board that updates itself. When someone reports a closed or dirty restroom, Supabase passes the note along to everyone else.">real-time status</span><span class="jargon" tabindex="0" data-say="A database that knows geography. Instead of asking for rows, you can ask what's within 500 meters of me.">PostGIS</span></div>
           <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
           <div class="project-card-stack">
             <span>React Native</span><span>TypeScript</span><span>Supabase</span><span>Mapbox</span>
@@ -1103,8 +1125,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Automated a repetitive page-writing job for a real client</span>
           <p class="project-card-title">SEO City Suite</p>
-          <p class="project-card-plain w-only">A tool that drafts a web page for every city a business serves, so the owner doesn't have to start from scratch each time.</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="Search engine optimization: helping the right people find a website when they search on Google.">SEO</span><span class="jargon" tabindex="0" data-say="A way for my code to ask an AI model (Claude) to help draft the text. A person still checks every page before it goes live.">Claude API</span></div>
+          <p class="project-card-plain w-only">A cookie cutter for web pages. Every city page had the same shape, so I built the cutter with React and the Claude API, and kept a human taste-tester before anything goes in the oven (online).</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="Labeling the spine of a book so Google's librarian shelves it where the right readers are already looking.">SEO</span><span class="jargon" tabindex="0" data-say="A very fast ghostwriter on retainer. My code hands Claude the business details, and it drafts each page in a fixed shape that a person then edits.">Claude API</span><span class="jargon" tabindex="0" data-say="Renting a kitchen by the minute instead of owning a restaurant. The code that talks to Claude only runs when asked, and keeps the secret key out of your browser.">serverless</span></div>
           <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
           <div class="project-card-stack">
             <span>JavaScript</span><span>Claude API</span><span>Vercel</span><span>React</span>
@@ -1132,8 +1154,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Identified where stopped-out students actually disappear</span>
           <p class="project-card-title">Student Funnel & Equity Audit</p>
-          <p class="project-card-plain w-only">I followed the numbers to find where students quietly drop out of college, and who it happens to most.</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="Students who left college partway through, without finishing their degree.">stopped-out</span><span class="jargon" tabindex="0" data-say="Checking whether some groups of students are being left behind more than others.">equity audit</span></div>
+          <p class="project-card-plain w-only">College enrollment is a leaky pipe. With Python and pandas I traced where it leaks for students who stop out, and whether some groups get soaked more than others.</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="A pause, not a period. Students who left college partway through, and might come back with the right nudge.">stopped-out</span><span class="jargon" tabindex="0" data-say="Counting people on every floor of a building to find the staircase that loses the most. Each stage of enrollment is a floor.">funnel</span><span class="jargon" tabindex="0" data-say="Checking whether the leak is the same size for everyone, or whether some groups lose more water than others.">equity audit</span></div>
           <p class="project-card-desc">A data-first analysis of re-enrollment outcomes for stopped-out college students using statistical modeling and equity auditing.</p>
           <p class="project-card-signal r-only"><b>Signal:</b> turning messy institutional data into a decision.</p>
           <div class="project-card-stack">
@@ -1164,8 +1186,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Built to understand how operating systems actually work</span>
           <p class="project-card-title">TinyShell</p>
-          <p class="project-card-plain w-only">I rebuilt the black window where you type commands to a computer, to see how it really works underneath.</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="The text window where you type commands to a computer, instead of clicking around.">shell</span><span class="jargon" tabindex="0" data-say="The family of operating systems behind Macs, Linux, and most of the internet's servers.">Unix</span></div>
+          <p class="project-card-plain w-only">The command line is a restaurant's front counter: you order, something in the back cooks. I built my own in C to see the kitchen, where orders become processes and plates get passed between cooks.</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="The waiter between you and the operating system. You type an order, and it finds the right program to cook it.">shell</span><span class="jargon" tabindex="0" data-say="Cloning the waiter, then turning the clone into the cook you asked for. That's how one program starts another on Unix.">fork &amp; exec</span><span class="jargon" tabindex="0" data-say="A conveyor belt between two cooks. What one command makes slides straight into the next, like ls | grep.">pipes</span></div>
           <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
           <div class="project-card-stack">
             <span>C</span><span>Unix</span><span>POSIX</span><span>Systems</span>
@@ -1199,8 +1221,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Most SEO tools miss who a site actually serves</span>
           <p class="project-card-title">Trust-Aware SEO</p>
-          <p class="project-card-plain w-only">A checkup that tells you whether a website is built for the people reading it, or for bots.</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="When bots automatically copy a website's content, often without asking.">scraping</span><span class="jargon" tabindex="0" data-say="User experience: how easy and pleasant something is to use.">UX</span></div>
+          <p class="project-card-plain w-only">A home inspection for websites. A Python tool walks through a site and writes one report: is this house welcoming to guests, or did someone leave the back door open for bots?</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="Someone photocopying the whole library overnight. Bots that copy a site's content automatically, usually without asking.">scraping</span><span class="jargon" tabindex="0" data-say="Whether the door handle is where your hand expects it. How easy and pleasant something is to use.">UX</span></div>
           <p class="project-card-desc">A web audit tool that surfaces patterns making sites easy for bots to scrape but hard for real users to navigate — SEO, UX, and trust exposure in one report.</p>
           <p class="project-card-signal r-only"><b>Signal:</b> audit tooling that turns findings into one readable report.</p>
           <div class="project-card-stack">
@@ -1231,8 +1253,8 @@
         <div class="project-card-body">
           <span class="project-card-constraint">Manually classifying log lines is a systems problem, not a human one</span>
           <p class="project-card-title">LogLLM</p>
-          <p class="project-card-plain w-only">I taught a program to sort a computer's diary into "all good", "hmm", and "uh oh".</p>
-          <div class="jargon-chips w-only"><span class="jargon-chips-label">Words you might hear</span><span class="jargon" tabindex="0" data-say="The running diary a computer keeps of everything it does, line by line.">logs</span><span class="jargon" tabindex="0" data-say="Giving an existing AI model extra practice on one specific job, so it gets good at it.">fine-tuning</span></div>
+          <p class="project-card-plain w-only">Computers keep a diary of everything they do, line after line. I fine-tuned DistilBERT to skim it and sort each line into "all good", "hmm", and "uh oh", so no human has to read the whole thing.</p>
+          <div class="jargon-chips w-only"><span class="jargon-chips-label">Decoder ring</span><span class="jargon" tabindex="0" data-say="A ship's logbook, written by the computer. Every event gets a line, whether it's routine or the start of a fire.">logs</span><span class="jargon" tabindex="0" data-say="Hiring someone who already reads English and training them on your company's lingo. The model already reads; I taught it one job.">fine-tuning</span><span class="jargon" tabindex="0" data-say="The pocket edition of a big language model. Smaller and faster, which is plenty for sorting sentences.">DistilBERT</span></div>
           <p class="project-card-desc">An end-to-end NLP pipeline that fine-tunes DistilBERT to automatically classify system logs into INFO, WARNING, and ERROR — with a CLI inference tool and web demo.</p>
           <p class="project-card-signal r-only"><b>Signal:</b> applied ML end to end, from training to CLI to demo.</p>
           <div class="project-card-stack">
@@ -1264,6 +1286,7 @@
 <section id="writing" class="page" data-page="04 / 05">
   <div class="wrap">
     <div class="label">Writing</div>
+    <p class="pencil pencil-after-label tilt-r w-only">left side: the nerdy stuff. right side: the feelings.</p>
     <p class="writing-intro">I write in two registers — technical essays about systems and implementation, and personal essays about everything else. Both are how I make sense of the world.</p>
     <div class="writing-layout">
       <div>
@@ -1336,6 +1359,7 @@
               <p class="avail-sub">Taking on new work now</p>
             </div>
           </div>
+          <p class="pencil pencil-avail w-only"><svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M28 26C16 26 8 20 8 6"/><path d="M3 10l5-5 5 5"/></svg>yes, really. there's room on my desk for your thing.</p>
         </div>
       </div>
       <div class="contact-cards page">
@@ -1389,13 +1413,22 @@
   const pageNum = document.getElementById('pageNum');
   const modeButtons = document.querySelectorAll('.mode-toggle button');
   let pageTotal = '05';
+  let pageCurrent = '01';
 
-  // number only the sections visible in the current mode
+  // number only the sections visible in the current mode (whimsical drops the leading zero)
+  const pad = n => document.documentElement.dataset.mode === 'whimsical' ? String(n) : String(n).padStart(2, '0');
   function renumber() {
     const visible = [...document.querySelectorAll('section.page')].filter(s => s.offsetParent !== null);
-    const pad = n => String(n).padStart(2, '0');
     pageTotal = pad(visible.length + 1);
     visible.forEach((s, i) => { s.dataset.page = pad(i + 2) + ' / ' + pageTotal; });
+  }
+  // the current number sits in its own span so whimsical can circle it in red pencil
+  function showPage(label) {
+    const [cur, total] = label.split(' / ');
+    pageCurrent = cur;
+    pageNum.innerHTML = '<span class="pn-cur"></span> / ';
+    pageNum.firstChild.textContent = cur;
+    pageNum.append(total);
   }
 
   // mode: ?mode= link wins, then the viewer's last choice
@@ -1419,7 +1452,7 @@
       history.replaceState(null, '', url);
     }
     renumber();
-    pageNum.textContent = pageNum.textContent.replace(/\d+$/, pageTotal);
+    showPage(pad(Number(pageCurrent)) + ' / ' + pageTotal);
   }
 
   let initialMode = normalizeMode(new URLSearchParams(location.search).get('mode'));
@@ -1433,7 +1466,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        if (entry.target.dataset.page) pageNum.textContent = entry.target.dataset.page;
+        if (entry.target.dataset.page) showPage(entry.target.dataset.page);
       }
     });
   }, { threshold: 0.08 });
@@ -1441,7 +1474,7 @@
   pages.forEach(p => obs.observe(p));
 
   const heroObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) pageNum.textContent = '01 / ' + pageTotal; });
+    entries.forEach(entry => { if (entry.isIntersecting) showPage(pad(1) + ' / ' + pageTotal); });
   }, { threshold: 0.3 });
   heroObs.observe(document.getElementById('hero'));
 
@@ -1675,7 +1708,7 @@
   function showJargon(el) {
     if (document.documentElement.dataset.mode !== 'whimsical') return;
     jargonOpen = el;
-    jargonNote.innerHTML = '<b>in plain English</b>';
+    jargonNote.innerHTML = '<b>decoded</b>';
     jargonNote.append(el.dataset.say);
     const r = el.getBoundingClientRect();
     const w = Math.min(260, innerWidth - 32);
