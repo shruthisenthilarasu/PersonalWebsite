@@ -238,8 +238,21 @@
   .case-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: availPulse 2s infinite; }
   .case-file-title { font-family: 'Newsreader', serif; font-size: 1.7rem; font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; }
   .case-file-desc { font-size: 0.86rem; color: #374151; line-height: 1.8; margin-bottom: 1rem; }
-  .redact { background: var(--text); color: transparent; padding: 0 0.25rem; cursor: help; transition: background 0.25s, color 0.25s; border-radius: 1px; }
-  .redact:hover, .redact:focus { background: rgba(44,122,123,0.1); color: var(--teal); outline: none; }
+  /* Redaction bar wipes off to the right, leaving a teal highlighter stroke behind */
+  .redact { color: transparent; padding: 0 0.25rem; cursor: help; border-radius: 1px; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    background-image: linear-gradient(var(--text), var(--text)), linear-gradient(transparent 52%, rgba(44,122,123,0.2) 52%, rgba(44,122,123,0.2) 92%, transparent 92%);
+    background-repeat: no-repeat; background-position: right center, left center; background-size: 100% 100%, 100% 100%;
+    transition: background-size 0.45s cubic-bezier(0.65,0,0.35,1), color 0.2s 0.15s; }
+  .redact:hover, .redact:focus, .declassified .redact { background-size: 0% 100%, 100% 100%; color: var(--text); outline: none; }
+  .redact:focus-visible { outline: 1px dashed var(--teal); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .redact { transition: none; } }
+  .declassify-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: -0.6rem 0 1.4rem; font-size: 0.74rem; color: var(--text-muted); }
+  .declassify-bar p { font-family: 'Newsreader', serif; font-style: italic; }
+  .declassify-btn { font-family: 'Inter', sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); background: none; border: 1px solid var(--border-strong); padding: 0.4rem 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: border-color 0.2s, color 0.2s; }
+  .declassify-btn::before { content: ''; width: 14px; height: 7px; background: var(--text); transition: width 0.3s, background 0.3s; }
+  .declassify-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .declassify-btn[aria-pressed="true"]::before { width: 4px; background: rgba(44,122,123,0.45); }
+  .declassify-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   .case-file-hint { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.78rem; color: var(--text-light); }
   .case-badge { color: var(--blue); border: 1px solid rgba(43,108,176,0.35); padding: 0.06rem 0.45rem; letter-spacing: 0.1em; }
   .case-file { scroll-margin-top: 90px; }
@@ -840,6 +853,10 @@
 <section id="projects" class="page" data-page="03 / 05">
   <div class="wrap">
     <div class="label">Featured Projects</div>
+    <div class="declassify-bar r-only">
+      <p>Each case file has a redacted line. Hover or tap to declassify it.</p>
+      <button type="button" class="declassify-btn" id="declassifyAll" aria-pressed="false">Declassify all</button>
+    </div>
     <div class="projects-grid">
 
       <div class="case-file r-only" id="case-001">
@@ -848,7 +865,7 @@
           <p class="case-file-title">Rebuilding a <span class="redact" tabindex="0">founder-led wellness brand</span>'s storefront — then automating its content.</p>
           <p class="case-file-desc">A small business with a fragmented site, a catalog split across platforms, and one owner who has to run it all. I'm leading it end to end: discovery, architecture, build, and a phase-two AI content pipeline with a claims guardrail and one-tap owner approval.</p>
           <div class="project-card-stack"><span>Squarespace</span><span>Shopify</span><span>Claude API</span><span>Automation</span></div>
-          <p class="case-file-hint">Client details redacted — hover to declassify. Full walkthrough coming soon.</p>
+          <p class="case-file-hint">Client details redacted. Full walkthrough coming soon.</p>
         </div>
         <ol class="case-file-phases">
           <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Discovery &amp; audiences</p><p class="case-phase-note">Four problem hypotheses, four customer journeys</p></div></li>
@@ -862,7 +879,7 @@
       <div class="case-file r-only" id="case-seo">
         <div class="case-file-main">
           <p class="case-file-id">Case File 002 <span class="case-badge">Client workflow</span></p>
-          <p class="case-file-title">Turning a repetitive page-writing job into a reusable generator.</p>
+          <p class="case-file-title">Turning a repetitive page-writing job into a <span class="redact" tabindex="0">reusable generator</span>.</p>
           <p class="case-file-desc">A service business covering many cities needed a landing page for each one, and writing them by hand was slow and inconsistent. I mapped the page that was already being written into a fixed schema, then built a generator and an AI-assisted auditor around it.</p>
           <div class="project-card-stack"><span>React</span><span>Vite</span><span>Claude API</span><span>Vercel</span></div>
           <div class="case-file-actions">
@@ -882,7 +899,7 @@
       <div class="case-file r-only" id="case-policydecode">
         <div class="case-file-main">
           <p class="case-file-id">Case File 003 <span class="case-badge">Prototype</span></p>
-          <p class="case-file-title">Making zoning codes and QAPs answerable in plain English.</p>
+          <p class="case-file-title">Making zoning codes and QAPs <span class="redact" tabindex="0">answerable in plain English</span>.</p>
           <p class="case-file-desc">Real estate developers make expensive site decisions from long zoning, land-use, and housing-tax-credit documents. I built a focused prototype to test whether simple retrieval plus an LLM could answer their questions usefully, before investing in heavier infrastructure.</p>
           <div class="project-card-stack"><span>JavaScript</span><span>PDF.js</span><span>Claude API</span><span>Vercel</span></div>
           <div class="case-file-actions">
@@ -902,7 +919,7 @@
       <div class="case-file r-only" id="case-saheli">
         <div class="case-file-main">
           <p class="case-file-id">Case File 004 <span class="case-badge">Self-initiated</span></p>
-          <p class="case-file-title">A safety map that keeps working when the signal doesn&#x27;t.</p>
+          <p class="case-file-title">A safety map that <span class="redact" tabindex="0">keeps working when the signal doesn&#x27;t</span>.</p>
           <p class="case-file-desc">Finding a safe, clean public restroom is hardest for the people who need one most, often on unreliable connections. Saheli helps users find facilities, see safety and cleanliness status, and report issues, with a local-first data layer so the map stays useful when the network drops.</p>
           <div class="project-card-stack"><span>React Native</span><span>TypeScript</span><span>Supabase</span><span>PostGIS</span></div>
           <div class="case-file-actions">
@@ -922,7 +939,7 @@
       <div class="case-file r-only" id="case-loglens">
         <div class="case-file-main">
           <p class="case-file-id">Case File 005 <span class="case-badge">Personal build</span></p>
-          <p class="case-file-title">From raw logs to SQL and anomaly flags in one pipeline.</p>
+          <p class="case-file-title">From raw logs to <span class="redact" tabindex="0">SQL and anomaly flags</span> in one pipeline.</p>
           <p class="case-file-desc">Reading thousands of log lines by hand doesn&#x27;t scale. LogLens++ parses JSON and plain-text logs into normalized events, stores them in DuckDB for SQL queries, and adds rolling-window metrics with statistical anomaly detection.</p>
           <div class="project-card-stack"><span>Python</span><span>DuckDB</span><span>Typer</span></div>
           <div class="case-file-actions">
@@ -942,7 +959,7 @@
       <div class="case-file r-only" id="case-tinyshell">
         <div class="case-file-main">
           <p class="case-file-id">Case File 006 <span class="case-badge">Systems study</span></p>
-          <p class="case-file-title">A Unix shell in C, to understand what everything else runs on.</p>
+          <p class="case-file-title">A Unix shell in C, to understand <span class="redact" tabindex="0">what everything else runs on</span>.</p>
           <p class="case-file-desc">I built a command-line shell from scratch to learn how processes, file descriptors, and pipes actually work. It parses commands, runs programs with fork and execvp, and supports redirection, a two-stage pipe, and built-ins like cd.</p>
           <div class="project-card-stack"><span>C</span><span>Unix</span><span>GDB</span><span>Valgrind</span></div>
           <div class="case-file-actions">
@@ -1559,6 +1576,14 @@
     document.getElementById('hood').scrollIntoView({ behavior: reduceMotionPref() ? 'auto' : 'smooth' });
   });
   function reduceMotionPref() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  // case files: declassify every redacted line at once
+  const declassifyBtn = document.getElementById('declassifyAll');
+  declassifyBtn.addEventListener('click', () => {
+    const on = document.getElementById('projects').classList.toggle('declassified');
+    declassifyBtn.setAttribute('aria-pressed', on);
+    declassifyBtn.textContent = on ? 'Redact again' : 'Declassify all';
+  });
 
   // ── WHIMSICAL: sparkle cursor trail (mouse only, motion-safe) ──
   const SPARKS = ['✦', '✧', '⋆'];
