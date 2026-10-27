@@ -241,6 +241,14 @@
   .redact { background: var(--text); color: transparent; padding: 0 0.25rem; cursor: help; transition: background 0.25s, color 0.25s; border-radius: 1px; }
   .redact:hover, .redact:focus { background: rgba(44,122,123,0.1); color: var(--teal); outline: none; }
   .case-file-hint { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.78rem; color: var(--text-light); }
+  .case-badge { color: var(--blue); border: 1px solid rgba(43,108,176,0.35); padding: 0.06rem 0.45rem; letter-spacing: 0.1em; }
+  .case-file { scroll-margin-top: 90px; }
+  .case-file-actions { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.4rem; }
+  .case-file-actions a, .case-file-actions button { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--blue); text-decoration: none; background: none; border: none; border-bottom: 1px solid rgba(43,108,176,0.3); padding: 0 0 1px; cursor: pointer; }
+  .case-file-actions a:hover, .case-file-actions button:hover { border-color: var(--blue); }
+  .case-file-actions button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  .case-phase:last-child .case-phase-name { color: var(--text-muted); }
+  .more-projects { grid-column: 1 / -1; font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin: 2.5rem 0 0.5rem; }
   .case-file-phases { padding: 2.2rem 2.4rem; list-style: none; display: flex; flex-direction: column; justify-content: center; }
   .case-phase { display: grid; grid-template-columns: 14px 1fr; gap: 0.9rem; padding-bottom: 1rem; position: relative; }
   .case-phase:not(:last-child)::after { content: ''; position: absolute; left: 6px; top: 16px; bottom: 0; width: 1px; background: var(--border-strong); }
@@ -258,20 +266,21 @@
   .exp-lede { font-family: 'Newsreader', serif; font-size: clamp(1.3rem, 2.2vw, 1.65rem); line-height: 1.5; color: var(--text); max-width: 760px; margin-bottom: 1.2rem; }
   .exp-lede em { color: var(--blue); }
   .exp-why { max-width: 640px; color: #374151; font-size: 0.92rem; line-height: 1.9; margin-bottom: 3.5rem; }
-  .exp-list { border-top: 1px solid var(--border-strong); margin-bottom: 4.5rem; }
-  .exp-item { border-bottom: 1px solid var(--border); }
-  .exp-item summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 150px 1fr 24px; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; }
-  .exp-item summary::-webkit-details-marker { display: none; }
-  .exp-item summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
   .exp-dates { font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.04em; }
-  .exp-role { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .exp-role { font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.3; margin: 0.3rem 0 0.4rem; }
   .exp-org { color: var(--blue); }
-  .exp-one { display: block; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.6; }
-  .exp-chev { color: var(--text-light); font-size: 0.9rem; transition: transform 0.2s; justify-self: end; }
-  .exp-item[open] .exp-chev { transform: rotate(45deg); color: var(--teal); }
-  .exp-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 0 0 1.8rem calc(150px + 1.5rem); }
-  .exp-col-label { font-size: 0.6rem; color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem; display: block; }
-  .exp-col p { font-size: 0.82rem; color: #374151; line-height: 1.75; }
+  .exp-one { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+  .role-intro { font-family: 'Newsreader', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.4rem; }
+  .role-list { border-top: 1px solid var(--border-strong); margin-bottom: 4.5rem; }
+  .role-group { display: grid; grid-template-columns: 230px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
+  .role-projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .role-proj { border: 1px solid var(--border-strong); background: var(--bg); padding: 1.2rem; display: flex; flex-direction: column; gap: 0.45rem; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+  a.role-proj:hover { border-color: var(--blue); box-shadow: 0 2px 12px rgba(43,108,176,0.08); }
+  .role-proj-tag { font-size: 0.6rem; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .role-proj-title { font-family: 'Newsreader', serif; font-size: 1.08rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+  a.role-proj .role-proj-title { color: var(--blue); }
+  .role-proj-text { font-size: 0.78rem; color: #374151; line-height: 1.65; }
+  .role-proj .project-card-stack { margin: auto 0 0; padding-top: 0.4rem; }
   .ask-label { font-size: 0.68rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.6rem; display: block; }
   .ask-intro { font-family: 'Newsreader', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.8rem; }
   .ask-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
@@ -371,9 +380,8 @@
     .case-file { grid-template-columns: 1fr; }
     .case-file-main { border-right: none; border-bottom: 1px solid var(--border); }
     .ask-grid { grid-template-columns: 1fr 1fr; }
-    .exp-item summary { grid-template-columns: 1fr 24px; gap: 0.3rem 1rem; }
-    .exp-dates { grid-column: 1 / -1; }
-    .exp-body { grid-template-columns: 1fr; padding-left: 0; gap: 1rem; }
+    .role-group { grid-template-columns: 1fr; gap: 1.2rem; }
+    .role-projects { grid-template-columns: 1fr; }
     .hood-cols { grid-template-columns: 1fr; }
     .hood-col + .hood-col { border-left: none; border-top: 1px solid var(--border); }
     nav { padding: 1.1rem 1.5rem; }
@@ -644,10 +652,10 @@
       <div class="r-brief r-only">
         <span class="r-brief-label">The short version</span>
         <dl>
-          <div class="r-brief-row"><dt>Targeting</dt><dd>Solutions Engineering · Forward Deployed Engineering · Applied AI</dd></div>
+          <div class="r-brief-row"><dt>I take on</dt><dd>Contract solutions projects: scoping, prototyping, AI integration</dd></div>
           <div class="r-brief-row"><dt>Strengths</dt><dd>Discovery, rapid prototyping, shipping for real users and clients</dd></div>
           <div class="r-brief-row"><dt>Stack</dt><dd>Python · TypeScript · C · SQL · DuckDB · PostGIS · React · Claude API</dd></div>
-          <div class="r-brief-row"><dt>Available</dt><dd>Internships &amp; contract now · Full-time Dec 2026</dd></div>
+          <div class="r-brief-row"><dt>Available</dt><dd>Contract work, starting now</dd></div>
         </dl>
         <div class="r-brief-actions">
           <a href="#experience">Experience ↓</a>
@@ -713,79 +721,73 @@
   <div class="wrap">
     <div class="label">The 60-Second Version</div>
     <p class="exp-lede">I'm a computer science student at UTSA, graduating <em>December 2026</em>. I build backend systems and the tooling that makes them trustworthy, then take them out of the lab and into the hands of real clients.</p>
-    <p class="exp-why">So far that's meant diagnostics and contract testing on a large Python engine, a nonprofit site built for families on slow rural connections, and freelance software for 10+ small businesses and nonprofits. The part I like most is the same every time: understanding how someone actually works, then shipping something that holds up in their environment. That's why I'm moving toward solutions and forward deployed engineering.</p>
+    <p class="exp-why">So far that's meant a nonprofit site built for families on slow rural connections, a storefront rebuild for a founder-led brand, and freelance software for 10+ small businesses and nonprofits. The part I like most is the same every time: understanding how someone actually works, then shipping something that holds up in their environment. That's the work I take on now, as contract solutions projects.</p>
 
-    <div class="exp-list">
-      <details class="exp-item" open>
-        <summary>
-          <span class="exp-dates">Jun 2026 – Present</span>
-          <span class="exp-role">Software Engineer Intern · <span class="exp-org">LuMATH</span><span class="exp-one">Diagnostics, contract testing, and integration auditing on a large Python computing engine.</span></span>
-          <span class="exp-chev" aria-hidden="true">+</span>
-        </summary>
-        <div class="exp-body">
-          <div class="exp-col"><span class="exp-col-label">Owned</span><p>A Python diagnostics module instrumenting multiple components, and a contract-test suite for it enforcing dependency boundaries and deterministic behavior.</p></div>
-          <div class="exp-col"><span class="exp-col-label">How</span><p>Diagnostics separate outcomes that look identical to a user ("nothing happened") but have different causes. The suite runs within a codebase of 6,000+ collected pytest cases across 663 modules.</p></div>
-          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Reviewed architecture and integration points, flagged 10+ engineering risks, and turned them into scoped, testable requirements. Internals stay internal; the patterns are fair game.</p></div>
-        </div>
-      </details>
-      <details class="exp-item">
-        <summary>
-          <span class="exp-dates">May – Aug 2026</span>
-          <span class="exp-role">Software Engineer Intern · <span class="exp-org">Develop for Good</span><span class="exp-one">Built and launched a public site for Berry Medicine Native Birthwork Initiatives.</span></span>
-          <span class="exp-chev" aria-hidden="true">+</span>
-        </summary>
-        <div class="exp-body">
-          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Resource libraries, donation infrastructure, and community tools for Native families and birthworkers across Montana.</p></div>
-          <div class="exp-col"><span class="exp-col-label">How</span><p>Reduced page weight and deferred non-critical assets so the site stays usable on slow and intermittent connections.</p></div>
-          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Shipped over a 12-week engagement with ~8 engineers, designers, and nonprofit stakeholders, translating community requirements into production features.</p></div>
-        </div>
-      </details>
-      <details class="exp-item">
-        <summary>
+    <span class="ask-label">Work, by where I did it</span>
+    <p class="role-intro">A few projects from each role, not the whole résumé.</p>
+    <div class="role-list">
+      <div class="role-group">
+        <div class="role-head">
           <span class="exp-dates">Dec 2025 – Present</span>
-          <span class="exp-role">Software Developer &amp; Solutions Engineer · <span class="exp-org">Freelance</span><span class="exp-one">Custom software, prototypes, and automation for 10+ small businesses and nonprofits.</span></span>
-          <span class="exp-chev" aria-hidden="true">+</span>
-        </summary>
-        <div class="exp-body">
-          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Scoping ambiguous operational needs into technical solutions, from the first conversation to the delivered tool.</p></div>
-          <div class="exp-col"><span class="exp-col-label">How</span><p>Supported 3–5 concurrent production client sites for RR Digital Media in JavaScript, HTML/CSS, Framer, and Squarespace, under client deadlines.</p></div>
-          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Built SEO City Suite, an AI local-SEO generator and auditor, and PolicyDecode, a Q&amp;A tool for zoning codes, QAPs, and land-use policy. Now leading Case File 001.</p></div>
+          <p class="exp-role">Software Developer &amp; Solutions Engineer · <span class="exp-org">Freelance</span></p>
+          <p class="exp-one">Custom software, prototypes, and automation for 10+ small businesses and nonprofits, plus 3–5 concurrent production sites for RR Digital Media.</p>
         </div>
-      </details>
-      <details class="exp-item">
-        <summary>
-          <span class="exp-dates">Jul – Dec 2025</span>
-          <span class="exp-role">Founding Engineer · <span class="exp-org">Axiom Labs</span><span class="exp-one">Automation tooling and internal systems for ~3 pilot organizations.</span></span>
-          <span class="exp-chev" aria-hidden="true">+</span>
-        </summary>
-        <div class="exp-body">
-          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Early technical implementation across pilot deployments.</p></div>
-          <div class="exp-col"><span class="exp-col-label">How</span><p>Translated user feedback and operational constraints into workflow, reporting, and automation features.</p></div>
-          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Iterated on architecture and product requirements as real-world constraints surfaced during the pilots.</p></div>
+        <div class="role-projects">
+          <a class="role-proj" href="#case-001">
+            <span class="role-proj-tag">Client · in progress</span>
+            <p class="role-proj-title">Case File 001</p>
+            <p class="role-proj-text">A storefront rebuild for a founder-led wellness brand. Squarespace owns the content, Shopify owns catalog and checkout, and phase two is an AI content pipeline with owner approval.</p>
+            <div class="project-card-stack"><span>Squarespace</span><span>Shopify</span><span>Claude API</span></div>
+          </a>
+          <a class="role-proj" href="#case-seo">
+            <span class="role-proj-tag">Client workflow</span>
+            <p class="role-proj-title">SEO City Suite</p>
+            <p class="role-proj-text">Turned repetitive city-page writing into a generator: business details in, a structured Squarespace-ready page out, with a human review before anything is published.</p>
+            <div class="project-card-stack"><span>React</span><span>Claude API</span><span>Vercel</span></div>
+          </a>
+          <a class="role-proj" href="#case-policydecode">
+            <span class="role-proj-tag">Prototype</span>
+            <p class="role-proj-title">PolicyDecode</p>
+            <p class="role-proj-text">Plain-English Q&amp;A over zoning codes, QAPs, and land-use policy for real estate developers, using in-browser PDF extraction, keyword page retrieval, and a server-side Claude proxy.</p>
+            <div class="project-card-stack"><span>JavaScript</span><span>PDF.js</span><span>Claude API</span></div>
+          </a>
         </div>
-      </details>
-      <details class="exp-item">
-        <summary>
-          <span class="exp-dates">Aug – Dec 2024</span>
-          <span class="exp-role">Advocate &amp; Web Development Intern · <span class="exp-org">Cyber Collective</span><span class="exp-one">Public-facing digital-safety curriculum for Internet Street Smarts.</span></span>
-          <span class="exp-chev" aria-hidden="true">+</span>
-        </summary>
-        <div class="exp-body">
-          <div class="exp-col"><span class="exp-col-label">Owned</span><p>Structuring educational web content on privacy and online risk awareness.</p></div>
-          <div class="exp-col"><span class="exp-col-label">How</span><p>Organized content data for reporting and worked alongside policy advocates, designers, and developers.</p></div>
-          <div class="exp-col"><span class="exp-col-label">Outcome</span><p>Turned technical security concepts into guidance non-technical readers could act on.</p></div>
+      </div>
+      <div class="role-group">
+        <div class="role-head">
+          <span class="exp-dates">May – Aug 2026</span>
+          <p class="exp-role">Software Engineer · <span class="exp-org">Develop for Good</span></p>
+          <p class="exp-one">Built and launched the public site for Berry Medicine Native Birthwork Initiatives over 12 weeks with ~8 engineers, designers, and nonprofit stakeholders.</p>
         </div>
-      </details>
+        <div class="role-projects">
+          <div class="role-proj">
+            <span class="role-proj-tag">Content</span>
+            <p class="role-proj-title">Resource library</p>
+            <p class="role-proj-text">A public library of resources for Native families and birthworkers across Montana.</p>
+          </div>
+          <div class="role-proj">
+            <span class="role-proj-tag">Nonprofit operations</span>
+            <p class="role-proj-title">Donations &amp; community tools</p>
+            <p class="role-proj-text">Donation infrastructure and community tools, translated from community requirements into production features.</p>
+          </div>
+          <div class="role-proj">
+            <span class="role-proj-tag">Performance</span>
+            <p class="role-proj-title">Low-bandwidth delivery</p>
+            <p class="role-proj-text">Reduced page weight and deferred non-critical assets so the site stays usable on slow and intermittent connections.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <span class="ask-label">Ask me about</span>
-    <p class="ask-intro">Five stories I'm happy to go deep on in an interview.</p>
+    <p class="ask-intro">Five things I'm happy to go deep on over a call.</p>
     <div class="ask-grid">
-      <div class="ask-card"><span class="ask-tag">Technical judgment</span><p class="ask-q">The code path that skipped the real runtime.</p><p class="ask-a">An integration audit turned up a legacy-dependent path that could bypass the intended runtime. I fixed the routing and pinned it with a regression test.</p></div>
-      <div class="ask-card"><span class="ask-tag">Ownership &amp; scope</span><p class="ask-q">Why I didn't change another team's code to make tests pass.</p><p class="ask-a">Focused tests passed, but the live pipeline never delivered the evidence. I traced the producer–consumer boundary and documented the missing contract for its owner.</p></div>
-      <div class="ask-card"><span class="ask-tag">Debugging discipline</span><p class="ask-q">My regression, or already broken?</p><p class="ask-a">I installed the previous release separately and compared behavior side by side, so preexisting failures weren't blamed on new work.</p></div>
       <div class="ask-card"><span class="ask-tag">Ambiguous clients</span><p class="ask-q">Turning "we need more city pages" into a tool.</p><p class="ask-a">I mapped a repetitive manual workflow into a fixed page schema, a generator, and a human review step before anything gets published.</p></div>
+      <div class="ask-card"><span class="ask-tag">Scoping</span><p class="ask-q">Two platforms, one checkout.</p><p class="ask-a">Why Case File 001 splits content and commerce between Squarespace and Shopify, and why I pilot one product before scaling the template.</p></div>
+      <div class="ask-card"><span class="ask-tag">Tradeoffs</span><p class="ask-q">Keyword search before vectors.</p><p class="ask-a">Why PolicyDecode starts with retrieval you can inspect, and what would make me switch to embeddings.</p></div>
+      <div class="ask-card"><span class="ask-tag">Honest limits</span><p class="ask-q">What I'd fix first in Saheli.</p><p class="ask-a">Retries can duplicate offline reports. A client-generated ID and a unique constraint would make them safe.</p></div>
       <div class="ask-card"><span class="ask-tag">Users on the margins</span><p class="ask-q">Building for people with bad connections.</p><p class="ask-a">Two projects, same constraint: Berry Medicine's low-bandwidth site and Saheli's offline queue. What changes when the network can't be trusted.</p></div>
+    </div>
     </div>
   </div>
 </section>
@@ -840,7 +842,7 @@
     <div class="label">Featured Projects</div>
     <div class="projects-grid">
 
-      <div class="case-file r-only">
+      <div class="case-file r-only" id="case-001">
         <div class="case-file-main">
           <p class="case-file-id">Case File 001 <span class="case-live">Live engagement</span></p>
           <p class="case-file-title">Rebuilding a <span class="redact" tabindex="0">founder-led wellness brand</span>'s storefront — then automating its content.</p>
@@ -857,7 +859,109 @@
         </ol>
       </div>
 
-      <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card">
+      <div class="case-file r-only" id="case-seo">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 002 <span class="case-badge">Client workflow</span></p>
+          <p class="case-file-title">Turning a repetitive page-writing job into a reusable generator.</p>
+          <p class="case-file-desc">A service business covering many cities needed a landing page for each one, and writing them by hand was slow and inconsistent. I mapped the page that was already being written into a fixed schema, then built a generator and an AI-assisted auditor around it.</p>
+          <div class="project-card-stack"><span>React</span><span>Vite</span><span>Claude API</span><span>Vercel</span></div>
+          <div class="case-file-actions">
+            <button type="button" data-hood="seo">Trace the data flow ↓</button>
+            <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank">View repo ↗</a>
+          </div>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Discovery</p><p class="case-phase-note">The same page structure, rewritten by hand for every city</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Scope</p><p class="case-phase-note">Fixed page schema; a person reviews before anything publishes</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Build</p><p class="case-phase-note">React form → serverless Claude proxy → structured JSON</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Handoff</p><p class="case-phase-note">Copy-ready sections pasted into Squarespace</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">An auditor that fetches the real HTML and checks tags in code</p></div></li>
+        </ol>
+      </div>
+
+      <div class="case-file r-only" id="case-policydecode">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 003 <span class="case-badge">Prototype</span></p>
+          <p class="case-file-title">Making zoning codes and QAPs answerable in plain English.</p>
+          <p class="case-file-desc">Real estate developers make expensive site decisions from long zoning, land-use, and housing-tax-credit documents. I built a focused prototype to test whether simple retrieval plus an LLM could answer their questions usefully, before investing in heavier infrastructure.</p>
+          <div class="project-card-stack"><span>JavaScript</span><span>PDF.js</span><span>Claude API</span><span>Vercel</span></div>
+          <div class="case-file-actions">
+            <button type="button" data-hood="policydecode">Trace the data flow ↓</button>
+            <a href="https://github.com/shruthisenthilarasu/PolicyDecode" target="_blank">View repo ↗</a>
+          </div>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Problem</p><p class="case-phase-note">Expensive decisions hinge on dense policy documents</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Scope</p><p class="case-phase-note">Keyword retrieval first: cheap, inspectable, quick to validate</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Build</p><p class="case-phase-note">In-browser PDF extraction → page scoring → server-side Claude proxy</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Trust</p><p class="case-phase-note">The UI separates document-grounded text from general knowledge</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">Page-level citations, hybrid retrieval, document versioning</p></div></li>
+        </ol>
+      </div>
+
+      <div class="case-file r-only" id="case-saheli">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 004 <span class="case-badge">Self-initiated</span></p>
+          <p class="case-file-title">A safety map that keeps working when the signal doesn&#x27;t.</p>
+          <p class="case-file-desc">Finding a safe, clean public restroom is hardest for the people who need one most, often on unreliable connections. Saheli helps users find facilities, see safety and cleanliness status, and report issues, with a local-first data layer so the map stays useful when the network drops.</p>
+          <div class="project-card-stack"><span>React Native</span><span>TypeScript</span><span>Supabase</span><span>PostGIS</span></div>
+          <div class="case-file-actions">
+            <button type="button" data-hood="saheli">Trace the data flow ↓</button>
+            <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank">View repo ↗</a>
+          </div>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Problem</p><p class="case-phase-note">Facility information is missing, outdated, or unreachable offline</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Design</p><p class="case-phase-note">Local-first: cached reads, queued writes</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Build</p><p class="case-phase-note">AsyncStorage cache and queue, Supabase sync, PostGIS schema</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Write-up</p><p class="case-phase-note">Published on synchronization and failure modes</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">Idempotent retries and conflict rules before production</p></div></li>
+        </ol>
+      </div>
+
+      <div class="case-file r-only" id="case-loglens">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 005 <span class="case-badge">Personal build</span></p>
+          <p class="case-file-title">From raw logs to SQL and anomaly flags in one pipeline.</p>
+          <p class="case-file-desc">Reading thousands of log lines by hand doesn&#x27;t scale. LogLens++ parses JSON and plain-text logs into normalized events, stores them in DuckDB for SQL queries, and adds rolling-window metrics with statistical anomaly detection.</p>
+          <div class="project-card-stack"><span>Python</span><span>DuckDB</span><span>Typer</span></div>
+          <div class="case-file-actions">
+            <button type="button" data-hood="loglens">Trace the data flow ↓</button>
+            <a href="https://github.com/shruthisenthilarasu/LogLens_Plus" target="_blank">View repo ↗</a>
+          </div>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Ingest</p><p class="case-phase-note">Generator-based parsing of JSON and plain-text logs</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Normalize</p><p class="case-phase-note">One LogEvent shape with consistent timestamps</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Query</p><p class="case-phase-note">Embedded DuckDB for ad-hoc SQL</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Detect</p><p class="case-phase-note">Rolling windows with z-score and moving-average flags</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">Score against the prior window; batch inserts</p></div></li>
+        </ol>
+      </div>
+
+      <div class="case-file r-only" id="case-tinyshell">
+        <div class="case-file-main">
+          <p class="case-file-id">Case File 006 <span class="case-badge">Systems study</span></p>
+          <p class="case-file-title">A Unix shell in C, to understand what everything else runs on.</p>
+          <p class="case-file-desc">I built a command-line shell from scratch to learn how processes, file descriptors, and pipes actually work. It parses commands, runs programs with fork and execvp, and supports redirection, a two-stage pipe, and built-ins like cd.</p>
+          <div class="project-card-stack"><span>C</span><span>Unix</span><span>GDB</span><span>Valgrind</span></div>
+          <div class="case-file-actions">
+            <button type="button" data-hood="tinyshell">Trace the data flow ↓</button>
+            <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank">View repo ↗</a>
+          </div>
+        </div>
+        <ol class="case-file-phases">
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Parse</p><p class="case-phase-note">Read and split commands into argv</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Execute</p><p class="case-phase-note">fork(), execvp() with PATH lookup, waitpid()</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Wire I/O</p><p class="case-phase-note">pipe() and dup2() for redirection and pipes</p></div></li>
+          <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Debug</p><p class="case-phase-note">GDB and Valgrind targets; free and close everything</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">Safer SIGCHLD handling and general pipelines</p></div></li>
+        </ol>
+      </div>
+
+      <p class="more-projects r-only">More projects</p>
+
+      <a href="https://github.com/shruthisenthilarasu/Saheli-Navigation" target="_blank" class="project-card w-only">
         <div class="project-card-img">
           <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="200" fill="#F1F5F9"/>
@@ -882,7 +986,6 @@
           <span class="project-card-constraint">Built for users with no reliable internet and no margin for error</span>
           <p class="project-card-title">Saheli</p>
           <p class="project-card-desc">A map-first safety app that helps users locate safe, clean public sanitation infrastructure — offline-first design, real-time status markers, and emergency SOS access.</p>
-          <p class="project-card-signal r-only"><b>Signal:</b> designing for field constraints, not ideal conditions.</p>
           <div class="project-card-stack">
             <span>React Native</span><span>TypeScript</span><span>Supabase</span><span>Mapbox</span>
           </div>
@@ -890,7 +993,7 @@
         </div>
       </a>
 
-      <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank" class="project-card">
+      <a href="https://github.com/shruthisenthilarasu/SEO-City-Suite" target="_blank" class="project-card w-only">
         <div class="project-card-img">
           <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="200" fill="#F1F5F9"/>
@@ -911,7 +1014,6 @@
           <span class="project-card-constraint">Replaced a manual 3-hour weekly process for a real client</span>
           <p class="project-card-title">SEO City Suite</p>
           <p class="project-card-desc">An AI-powered tool that generates and audits local SEO pages for service businesses — built to automate a previously manual, time-intensive workflow.</p>
-          <p class="project-card-signal r-only"><b>Signal:</b> shipped for a real client and automated a recurring workflow.</p>
           <div class="project-card-stack">
             <span>JavaScript</span><span>Claude API</span><span>Vercel</span><span>React</span>
           </div>
@@ -947,7 +1049,7 @@
         </div>
       </a>
 
-      <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank" class="project-card">
+      <a href="https://github.com/shruthisenthilarasu/TinyShell" target="_blank" class="project-card w-only">
         <div class="project-card-img">
           <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="200" fill="#1A202C"/>
@@ -969,7 +1071,6 @@
           <span class="project-card-constraint">Built to understand how operating systems actually work</span>
           <p class="project-card-title">TinyShell</p>
           <p class="project-card-desc">A Unix shell implemented in C. Process creation, lifecycle management, piping, I/O redirection, and signal handling — the kind of project that changes how you think about everything above it.</p>
-          <p class="project-card-signal r-only"><b>Signal:</b> low-level systems fundamentals for debugging what's underneath.</p>
           <div class="project-card-stack">
             <span>C</span><span>Unix</span><span>POSIX</span><span>Systems</span>
           </div>
@@ -1119,21 +1220,14 @@
       <div>
         <h2 class="contact-h">Let's build something <em>useful.</em></h2>
         <p class="contact-body">I'm especially drawn to early-stage startups, civic tech orgs, nonprofits, and ed-tech teams working on problems that actually matter. If that sounds like you, let's talk.</p>
-        <p class="contact-body contact-r r-only">Hiring for solutions engineering, forward deployed, or applied AI roles? I'm happy to walk through any case file live, from the first discovery call to what shipped.</p>
+        <p class="contact-body contact-r r-only">Have a messy workflow, a half-built tool, or an AI idea that needs to work for real users? I take on contract solutions projects, from the first discovery call to handoff.</p>
         <div class="avail-block page">
           <p class="avail-block-label">Availability</p>
           <div class="avail-row">
             <div class="avail-dot green"></div>
             <div>
-              <p class="avail-text">Internships & contract work</p>
-              <p class="avail-sub">Available now</p>
-            </div>
-          </div>
-          <div class="avail-row">
-            <div class="avail-dot dim"></div>
-            <div>
-              <p class="avail-text">Full-time roles</p>
-              <p class="avail-sub">Available December 2026</p>
+              <p class="avail-text">Contract solutions projects</p>
+              <p class="avail-sub">Taking on new work now</p>
             </div>
           </div>
         </div>
@@ -1358,27 +1452,6 @@
         ['Rendering depends on the model returning valid JSON.', 'Schema validation with an automatic retry.'],
         ['Generated local claims can be wrong.', 'Flag factual statements for review before copy-out.']
       ]
-    },
-    {
-      id: 'diagnostics', name: 'Integration diagnostics', repo: null,
-      trace: 'Pattern: why didn’t the system act?',
-      note: 'Generalized from internship work. Internal names and code stay private.',
-      steps: [
-        { label: 'Request', file: null, text: 'A request reaches a subsystem that may act on it. To the user, every failure below looks the same: nothing happened.' },
-        { label: 'No evidence', file: null, text: 'Diagnostic state 1: the input the subsystem needs never arrived. The bug is upstream, in whoever was supposed to send it.' },
-        { label: 'No candidate', file: null, text: 'State 2: evidence arrived, but nothing qualified. The problem is in the rules or the data, not the wiring.' },
-        { label: 'Rejected', file: null, text: 'State 3: a candidate existed but the authorization gate refused it. The system fails closed: missing authority means no action.' },
-        { label: 'Selected', file: null, text: 'State 4: success. Separating four outcomes that look identical turns "it doesn’t work" into a pointer at the right component and owner.' }
-      ],
-      decisions: [
-        ['Fail closed.', 'When a stale test lacked the required authority, the fix was the test double, not weakening the production gate.'],
-        ['Baseline before blame.', 'Install the previous release separately and compare, so old failures aren’t attributed to new work.'],
-        ['Respect ownership boundaries.', 'Document the missing caller contract for its owner instead of editing another subsystem to make tests green.']
-      ],
-      limits: [
-        ['Focused tests can pass while the live path still never supplies the evidence.', 'End-to-end tests that exercise the real producer, not a fixture.'],
-        ['Legacy paths can silently bypass the canonical runtime.', 'Regression tests that assert which path ran, not just the result.']
-      ]
     }
   ];
 
@@ -1475,6 +1548,17 @@
     hoodTabs.append(t);
   });
   renderHood(HOOD[0]);
+
+  // case file "Trace the data flow" buttons open the matching tab
+  document.addEventListener('click', e => {
+    const trigger = e.target.closest('[data-hood]');
+    if (!trigger) return;
+    const project = HOOD.find(p => p.id === trigger.dataset.hood);
+    if (!project) return;
+    renderHood(project);
+    document.getElementById('hood').scrollIntoView({ behavior: reduceMotionPref() ? 'auto' : 'smooth' });
+  });
+  function reduceMotionPref() { return matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
   // ── WHIMSICAL: sparkle cursor trail (mouse only, motion-safe) ──
   const SPARKS = ['✦', '✧', '⋆'];
