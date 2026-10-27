@@ -6,7 +6,7 @@
 <title>Shruthi Senthilarasu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F8FAFC;
@@ -351,13 +351,71 @@
   .decision b { color: var(--text); font-weight: 600; }
   .limit { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px dashed var(--border); }
   .limit:last-child { border-bottom: none; padding-bottom: 0; }
-  .limit-issue, .limit-fix { font-size: 0.8rem; line-height: 1.65; }
-  .limit-issue { color: var(--text); }
-  .limit-fix { color: var(--text-muted); }
-  .limit-fix::before { content: 'Next → '; color: var(--green); font-weight: 600; font-size: 0.72rem; }
+  .limit-plan, .limit-why { font-size: 0.8rem; line-height: 1.65; }
+  .limit-plan { color: var(--text); }
+  .limit-plan::before { content: 'Next → '; color: var(--blue); font-weight: 600; font-size: 0.72rem; }
+  .limit-why { color: var(--text-muted); }
 
   @media (prefers-reduced-motion: reduce) {
     .r-brief, .case-live::before { animation: none; opacity: 1; }
+  }
+
+  /* ── TECHNICAL VIEW: the site as a codebase ── */
+  /* code-review comments, the technical twin of the pencil notes */
+  .review { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; line-height: 1.55; color: var(--text-muted); background: var(--white); border: 1px solid var(--border-strong); border-left: 3px solid var(--teal); padding: 0.5rem 0.75rem; margin-top: 0.9rem; display: flex; gap: 0.6rem; align-items: baseline; max-width: 480px; }
+  .review b { color: var(--teal); font-weight: 500; white-space: nowrap; }
+  .review span::before { content: '// '; color: var(--text-light); }
+  .review-block { margin: -1.2rem 0 2.2rem; }
+  .review-contact { margin: -0.4rem 0 1.4rem; }
+
+  /* ⌘K command palette */
+  .cmdk-btn { margin-left: 0.2rem; padding: 0.3rem 0.45rem !important; }
+  .cmdk-btn kbd { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0; text-transform: none; color: var(--text-muted); border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 3px; padding: 0.1rem 0.35rem; background: var(--bg); }
+  .cmdk-btn:hover kbd { color: var(--blue); border-color: var(--blue); }
+  .cmdk { position: fixed; inset: 0; z-index: 300; background: rgba(26,32,44,0.35); backdrop-filter: blur(2px); display: flex; align-items: flex-start; justify-content: center; padding: 14vh 16px 16px; }
+  .cmdk[hidden] { display: none; }
+  .cmdk-box { width: 100%; max-width: 560px; background: var(--white); border: 1px solid var(--border-strong); border-top: 3px solid var(--teal); box-shadow: 0 18px 50px rgba(26,32,44,0.22); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .cmdk-input-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); }
+  .cmdk-prompt { color: var(--teal); font-weight: 500; }
+  .cmdk-input-row input { flex: 1; min-width: 0; border: none; outline: none; font: inherit; font-size: 0.9rem; color: var(--text); background: none; }
+  .cmdk-list { list-style: none; max-height: 340px; overflow-y: auto; padding: 0.35rem 0; }
+  .cmdk-list li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 1rem; font-size: 0.8rem; color: var(--text); cursor: pointer; }
+  .cmdk-list li small { color: var(--text-light); font-size: 0.68rem; white-space: nowrap; }
+  .cmdk-list li[aria-selected="true"] { background: rgba(44,122,123,0.09); box-shadow: inset 2px 0 0 var(--teal); }
+  .cmdk-empty { color: var(--text-light) !important; cursor: default !important; }
+  .cmdk-foot { display: flex; gap: 1.2rem; padding: 0.55rem 1rem; border-top: 1px solid var(--border); font-size: 0.64rem; color: var(--text-light); }
+
+  /* project status board */
+  .status-board { margin-top: 3.5rem; border-top: 1px solid var(--border-strong); padding-top: 1.6rem; }
+  .status-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  .status-sum { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.74rem; color: var(--green); }
+  .status-legend { font-size: 0.72rem; color: var(--text-light); margin: 0.3rem 0 1.2rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+  .status-legend .sq:not(:first-child) { margin-left: 0.8rem; }
+  .sq { display: inline-block; width: 10px; height: 10px; border-radius: 1px; background: var(--green); flex: none; }
+  .sq.next { background: var(--blue); opacity: 0.55; }
+  .status-row { border: 1px solid var(--border); background: var(--white); margin-bottom: 0.5rem; }
+  .status-row summary { display: grid; grid-template-columns: 1.1fr auto 1.6fr; align-items: center; gap: 1rem; padding: 0.8rem 1rem; cursor: pointer; list-style: none; font-size: 0.84rem; }
+  .status-row summary::-webkit-details-marker { display: none; }
+  .status-row summary:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
+  .status-name { font-weight: 600; color: var(--text); }
+  .status-name::before { content: '▸ '; color: var(--text-light); font-weight: 400; }
+  .status-row[open] .status-name::before { content: '▾ '; }
+  .status-blocks { display: flex; gap: 3px; flex-wrap: wrap; }
+  .status-state { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.7rem; color: var(--text-muted); text-align: right; }
+  .status-state b { color: var(--green); font-weight: 500; }
+  .status-state i { font-style: normal; color: var(--blue); }
+  .status-issues { list-style: none; border-top: 1px dashed var(--border-strong); padding: 0.6rem 1rem 0.9rem; }
+  .status-issues li { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.6rem; font-size: 0.78rem; line-height: 1.6; color: #374151; padding: 0.35rem 0; }
+  .status-issues li .sq { margin-top: 0.45rem; }
+  .status-issues .fix { grid-column: 2; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.7rem; color: var(--teal); }
+  .status-issues .fix::before { content: 'why → '; color: var(--text-light); }
+
+  /* terminal-style page counter */
+  [data-mode="technical"] .page-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.02em; color: var(--teal); opacity: 0.75; }
+  @media (max-width: 700px) {
+    .status-row summary { grid-template-columns: 1fr auto; }
+    .status-state { grid-column: 1 / -1; text-align: left; }
+    .review { max-width: 100%; }
   }
 
   /* ── WHIMSICAL VIEW: original palette, plus sparkles ── */
@@ -501,6 +559,15 @@
   <button type="button" data-mode="whimsical" aria-pressed="true">Whimsical</button>
   <button type="button" data-mode="technical" aria-pressed="false">Technical</button>
   <span class="mode-tagline" id="modeTagline" aria-live="polite"></span>
+  <button type="button" class="cmdk-btn r-only" id="cmdkOpen" aria-haspopup="dialog" title="Jump anywhere"><kbd id="cmdkKey">⌘K</kbd></button>
+</div>
+
+<div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+  <div class="cmdk-box">
+    <div class="cmdk-input-row"><span class="cmdk-prompt">&gt;</span><input id="cmdkInput" type="text" placeholder="trace saheli, open case 003, email…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdkList" aria-autocomplete="list"></div>
+    <ul class="cmdk-list" id="cmdkList" role="listbox"></ul>
+    <p class="cmdk-foot"><span>↑↓ move</span><span>↵ run</span><span>esc close</span></p>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -725,6 +792,7 @@
           <div class="r-brief-row"><dt>Education</dt><dd>B.S. Computer Science, UTSA · December 2026</dd></div>
           <div class="r-brief-row"><dt>Available</dt><dd>Contract work, starting now</dd></div>
         </dl>
+        <p class="review"><b>@shruthi</b><span>contract only. internships are deprecated.</span></p>
         <div class="r-brief-actions">
           <a href="#experience">Experience ↓</a>
           <a href="#hood">Under the hood ↓</a>
@@ -850,6 +918,7 @@
           <span class="exp-dates">Current</span>
           <p class="exp-role">AI Engineer · <span class="exp-org">Confidential</span></p>
           <p class="exp-one">Helping design and build a deterministic intelligence system.</p>
+          <p class="review"><b>@shruthi</b><span>redacted for NDA. ask me how, not what.</span></p>
         </div>
         <div class="role-projects">
           <div class="role-proj sealed">
@@ -891,7 +960,7 @@
       <div class="ask-card"><span class="ask-tag">Ambiguous clients</span><p class="ask-q">Turning "we need more city pages" into a tool.</p><p class="ask-a">I mapped a repetitive manual workflow into a fixed page schema, a generator, and a human review step before anything gets published.</p></div>
       <div class="ask-card"><span class="ask-tag">Scoping</span><p class="ask-q">Two platforms, one checkout.</p><p class="ask-a">Why Case File 001 splits content and commerce between Squarespace and Shopify, and why I pilot one product before scaling the template.</p></div>
       <div class="ask-card"><span class="ask-tag">Tradeoffs</span><p class="ask-q">Keyword search before vectors.</p><p class="ask-a">Why PolicyDecode starts with retrieval you can inspect, and what would make me switch to embeddings.</p></div>
-      <div class="ask-card"><span class="ask-tag">Honest limits</span><p class="ask-q">What I'd fix first in Saheli.</p><p class="ask-a">Retries can duplicate offline reports. A client-generated ID and a unique constraint would make them safe.</p></div>
+      <div class="ask-card"><span class="ask-tag">Tradeoffs I'd revisit</span><p class="ask-q">What I'd change first in Saheli.</p><p class="ask-a">Making offline retries bulletproof: a client-generated ID plus a unique constraint, so a retried report always lands exactly once.</p></div>
       <div class="ask-card"><span class="ask-tag">Users on the margins</span><p class="ask-q">Building for people with bad connections.</p><p class="ask-a">Two projects, same constraint: Berry Medicine's low-bandwidth site and Saheli's offline queue. What changes when the network can't be trusted.</p></div>
     </div>
     </div>
@@ -905,6 +974,7 @@
   <div class="wrap">
     <div class="label">How I Work</div>
     <p class="how-intro">Every project I take on runs the same loop, whether the stakeholder is a client, a team, or the people a product was never designed for. Here's the loop, with where I've done each step.</p>
+    <p class="review review-block"><b>@shruthi</b><span>step 1 is always watching someone do it the slow way.</span></p>
     <div class="flow-grid">
       <div class="flow-step">
         <span class="flow-num">01</span>
@@ -960,6 +1030,7 @@
           <p class="case-file-desc">A small business with a fragmented site, a catalog split across platforms, and one owner who has to run it all. I'm leading it end to end: discovery, architecture, build, and a phase-two AI content pipeline with a claims guardrail and one-tap owner approval.</p>
           <div class="project-card-stack"><span>Squarespace</span><span>Shopify</span><span>Claude API</span><span>Automation</span></div>
           <p class="case-file-hint">Client details redacted. Full walkthrough coming soon.</p>
+          <p class="review"><b>@shruthi</b><span>nit: pilot one product end to end before scaling the template.</span></p>
         </div>
         <ol class="case-file-phases">
           <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Discovery &amp; audiences</p><p class="case-phase-note">Four problem hypotheses, four customer journeys</p></div></li>
@@ -986,7 +1057,7 @@
           <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Scope</p><p class="case-phase-note">Fixed page schema; a person reviews before anything publishes</p></div></li>
           <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Build</p><p class="case-phase-note">React form → serverless Claude proxy → structured JSON</p></div></li>
           <li class="case-phase done"><span class="case-dot"></span><div><p class="case-phase-name">Handoff</p><p class="case-phase-note">Copy-ready sections pasted into Squarespace</p></div></li>
-          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">An auditor that fetches the real HTML and checks tags in code</p></div></li>
+          <li class="case-phase"><span class="case-dot"></span><div><p class="case-phase-name">Next</p><p class="case-phase-note">Extend the same schema to new industries and page types</p></div></li>
         </ol>
       </div>
 
@@ -1275,9 +1346,18 @@
 <section id="hood" class="page b-only" data-page="">
   <div class="wrap">
     <div class="label">Under the Hood</div>
-    <p class="hood-intro">Pick a project and step through one real request, from input to storage. Each step names the file that does the work. Below the trace: the decisions behind it, and what's still broken.</p>
+    <p class="hood-intro">Pick a project and step through one real request, from input to storage. Each step names the file that does the work. Below the trace: the decisions behind it, and what I'd build next.</p>
+    <p class="review review-block"><b>@shruthi</b><span>every step links to the real file. go on, check my work.</span></p>
     <div class="hood-tabs" role="tablist" aria-label="Projects" id="hoodTabs"></div>
     <div class="hood-panel" role="tabpanel" id="hoodPanel" aria-live="polite"></div>
+    <div class="status-board" id="roadmap">
+      <div class="status-head">
+        <span class="ask-label">v2 Roadmap</span>
+        <p class="status-sum" id="statusSum"></p>
+      </div>
+      <p class="status-legend"><span class="sq ok"></span>shipped: a traced step that works today <span class="sq next"></span>next up: planned for v2</p>
+      <div id="statusRows"></div>
+    </div>
   </div>
 </section>
 
@@ -1351,6 +1431,7 @@
         <h2 class="contact-h">Let's build something <em>useful.</em></h2>
         <p class="contact-body w-only">Have a problem that's been annoying you, or an idea you haven't figured out how to build? Tell me about it. I take on contract projects for small businesses, nonprofits, and civic tech teams, from the first conversation to handing it over.</p>
         <p class="contact-body contact-r r-only">Have a messy workflow, a half-built tool, or an AI idea that needs to work for real users? I take on contract solutions projects, from the first discovery call to handoff.</p>
+        <p class="review r-only review-contact"><b>@shruthi</b><span>TODO(you): send the messy workflow.</span></p>
         <div class="avail-block page">
           <p class="avail-block-label">Availability</p>
           <div class="avail-row">
@@ -1412,7 +1493,7 @@
 <script>
   const pages = document.querySelectorAll('.page');
   const pageNum = document.getElementById('pageNum');
-  const modeButtons = document.querySelectorAll('.mode-toggle button');
+  const modeButtons = document.querySelectorAll('.mode-toggle button[data-mode]');
   let pageTotal = '05';
   let pageCurrent = '01';
 
@@ -1427,6 +1508,12 @@
   function showPage(label) {
     const [cur, total] = label.split(' / ');
     pageCurrent = cur;
+    // technical: a terminal progress line, e.g. [03/08] ▓▓▓░░░░░
+    if (document.documentElement.dataset.mode === 'technical') {
+      const n = Number(cur), t = Number(total);
+      pageNum.textContent = '[' + cur + '/' + total + '] ' + '▓'.repeat(n) + '░'.repeat(Math.max(0, t - n));
+      return;
+    }
     pageNum.innerHTML = '<span class="pn-cur"></span> / ';
     pageNum.firstChild.textContent = cur;
     pageNum.append(total);
@@ -1498,11 +1585,11 @@
         ['PostGIS over lat/lng columns.', 'Real geographic types and spatial indexes instead of hand-rolled distance math.'],
         ['Layered architecture.', 'UI components, hooks for state, services for data access, and the database each own one job.']
       ],
-      limits: [
-        ['No idempotency: a timeout after a successful insert makes the retry create a duplicate report.', 'Client-generated report ID plus a unique constraint so retries are safe.'],
-        ['Cached stations expire after one hour, so after a long outage the map has no station data to show.', 'Serve stale data with a visible "last updated" label instead of nothing.'],
-        ['Report insert and station status update are separate writes; one can succeed without the other.', 'Wrap both in a single RPC or transaction.'],
-        ['Conflict resolution for simultaneous offline edits is still pending.', 'Define merge rules per field (latest-wins for status, append-only for reports).']
+      next: [
+        ['Client-generated report IDs with a unique constraint, so retries are always safe.', 'Covers the case where a timeout after a successful insert gets retried.'],
+        ['Serve cached stations with a visible "last updated" label after long outages.', 'Older data beats an empty map.'],
+        ['Write the report and the station status update in one transaction.', 'The two writes can never drift apart.'],
+        ['Per-field merge rules for simultaneous offline edits.', 'Latest-wins for status, append-only for reports.']
       ]
     },
     {
@@ -1521,11 +1608,11 @@
         ['DuckDB over SQLite.', 'Embedded like SQLite, but built for analytical scans and aggregates, which is the whole workload here.'],
         ['Statistics before ML.', 'Z-scores and moving averages are explainable and need no training data.']
       ],
-      limits: [
-        ['Each new sample is added before the baseline is computed, so it influences the mean it is judged against.', 'Score against the prior window, then append.'],
-        ['Detection is skipped when standard deviation is ~0, missing a jump from a flat baseline.', 'Use an epsilon floor or median absolute deviation.'],
-        ['Event IDs use MAX(id)+1, which breaks under concurrent writers.', 'Let the database generate IDs.'],
-        ['Events insert one row at a time, and metrics re-read the file in a second pass.', 'Batch inserts and compute metrics in the same pass.']
+      next: [
+        ['Score each sample against the prior window, then append it.', 'A new value stays out of the baseline it is judged against.'],
+        ['An epsilon floor, or median absolute deviation, for flat baselines.', 'Catches a sudden jump when the spread is near zero.'],
+        ['Database-generated event IDs.', 'Ready for concurrent writers.'],
+        ['Batch inserts, with metrics computed in the same pass.', 'One read of the file instead of two.']
       ]
     },
     {
@@ -1544,10 +1631,10 @@
         ['Close every unused descriptor.', 'Prevents fd leaks and lets readers see end-of-file.'],
         ['Debug tooling in the Makefile.', 'make debug and make valgrind targets for GDB and memory checks.']
       ],
-      limits: [
-        ['A SIGCHLD handler calls cleanup_zombies(), which can race with the foreground waitpid().', 'Block the signal during foreground waits, or reap in the main loop.'],
-        ['A general execute_pipeline() exists but isn’t wired into the main loop, so only two-stage pipes run.', 'Route all pipelines through the general executor.'],
-        ['No automated test suite documents the edge cases.', 'Add parser and process-behavior tests.']
+      next: [
+        ['Block SIGCHLD during foreground waits, or reap in the main loop.', 'One clear owner for reaping child processes.'],
+        ['Route every pipeline through the general executor.', 'Pipes longer than two stages; the executor already exists.'],
+        ['A parser and process-behavior test suite.', 'The edge cases become executable checks.']
       ]
     },
     {
@@ -1565,11 +1652,11 @@
         ['Extraction in the browser.', 'One less service to deploy for a prototype.'],
         ['Server-side key.', 'Every model call goes through the proxy.']
       ],
-      limits: [
-        ['Keyword matching misses synonyms and paraphrases.', 'Hybrid keyword plus embedding retrieval.'],
-        ['Source labels are not proof of accuracy for high-stakes decisions.', 'Page-level citations with the quoted passage.'],
-        ['Poorly extracted or scanned PDFs lose text.', 'OCR fallback and an extraction-quality warning.'],
-        ['No document versioning.', 'Track version and effective date per source.']
+      next: [
+        ['Hybrid keyword plus embedding retrieval.', 'Catches synonyms and paraphrases.'],
+        ['Page-level citations with the quoted passage.', 'High-stakes answers can be checked against the source.'],
+        ['OCR fallback and an extraction-quality warning.', 'For scanned or poorly extracted PDFs.'],
+        ['Track version and effective date per source.', 'Answers say which version of a policy they used.']
       ]
     },
     {
@@ -1587,11 +1674,7 @@
         ['Human in the loop.', 'Generated copy is a draft; publishing stays a deliberate step.'],
         ['Standardize the workflow first.', 'The schema encodes how the pages were already being written by hand.']
       ],
-      limits: [
-        ['The auditor passes a URL to the model without fetching the page, so its scores are AI assessments, not measurements.', 'Fetch the HTML, check tags, links, and schema in code, and use AI only for commentary.'],
-        ['Rendering depends on the model returning valid JSON.', 'Schema validation with an automatic retry.'],
-        ['Generated local claims can be wrong.', 'Flag factual statements for review before copy-out.']
-      ]
+      next: [] // client work: the roadmap stays with the client
     }
   ];
 
@@ -1665,16 +1748,19 @@
     const dList = el('ul');
     project.decisions.forEach(([b, t]) => dList.append(el('li', 'decision', '<b>' + b + '</b> ' + t)));
     dCol.append(dList);
-    const lCol = el('div', 'hood-col');
-    lCol.append(el('span', 'hood-col-label', "Known limitations · what I'd fix next"));
-    const lList = el('ul');
-    project.limits.forEach(([issue, fix]) => {
-      const li = el('li', 'limit');
-      li.append(el('span', 'limit-issue', issue), el('span', 'limit-fix', fix));
-      lList.append(li);
-    });
-    lCol.append(lList);
-    cols.append(dCol, lCol);
+    cols.append(dCol);
+    if (project.next.length) {
+      const nCol = el('div', 'hood-col');
+      nCol.append(el('span', 'hood-col-label', "v2 roadmap · what I'd build next"));
+      const nList = el('ul');
+      project.next.forEach(([plan, why]) => {
+        const li = el('li', 'limit');
+        li.append(el('span', 'limit-plan', plan), el('span', 'limit-why', why));
+        nList.append(li);
+      });
+      nCol.append(nList);
+      cols.append(nCol);
+    }
 
     hoodPanel.append(head, trace, cols);
     paint();
@@ -1732,6 +1818,110 @@
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') hideJargon(); });
   addEventListener('scroll', () => { if (jargonOpen && document.activeElement !== jargonOpen) hideJargon(); }, { passive: true });
+
+  // ── TECHNICAL: v2 roadmap board, built from the same trace and roadmap data ──
+  // client projects have no public roadmap, so they stay off the board
+  const statusRows = document.getElementById('statusRows');
+  const roadmapProjects = HOOD.filter(p => p.next.length);
+  roadmapProjects.forEach(p => {
+    const row = el('details', 'status-row');
+    const sum = el('summary');
+    sum.append(el('span', 'status-name', p.name));
+    const blocks = el('span', 'status-blocks');
+    blocks.setAttribute('aria-hidden', 'true');
+    p.steps.forEach(() => blocks.append(el('span', 'sq ok')));
+    p.next.forEach(() => blocks.append(el('span', 'sq next')));
+    sum.append(blocks);
+    sum.append(el('span', 'status-state', '<b>shipped</b> · <i>v2 planned</i>'));
+    row.append(sum);
+    const list = el('ul', 'status-issues');
+    p.next.forEach(([plan, why]) => {
+      const li = el('li');
+      li.append(el('span', 'sq next'), el('span', null, plan), el('span', 'fix', why));
+      list.append(li);
+    });
+    row.append(list);
+    statusRows.append(row);
+  });
+  document.getElementById('statusSum').textContent = 'v1 shipped · v2 in progress';
+
+  // ── TECHNICAL: ⌘K command palette ──
+  const cmdk = document.getElementById('cmdk');
+  const cmdkInput = document.getElementById('cmdkInput');
+  const cmdkList = document.getElementById('cmdkList');
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  if (!isMac) document.getElementById('cmdkKey').textContent = 'Ctrl K';
+  const go = id => () => document.getElementById(id).scrollIntoView({ behavior: reduceMotionPref() ? 'auto' : 'smooth', block: 'start' });
+  const caseIds = [['001', 'case-001', 'client storefront'], ['002', 'case-seo', 'SEO City Suite'], ['003', 'case-policydecode', 'PolicyDecode'], ['004', 'case-saheli', 'Saheli'], ['005', 'case-loglens', 'LogLens++'], ['006', 'case-tinyshell', 'TinyShell']];
+  const COMMANDS = [
+    ...HOOD.map(p => ({ label: 'trace ' + p.name.toLowerCase(), hint: 'step through the data flow', run: () => { renderHood(p); go('hood')(); } })),
+    ...caseIds.map(([n, id, name]) => ({ label: 'open case ' + n, hint: name, run: go(id) })),
+    { label: 'show roadmap', hint: 'what ships in v2', run: () => { go('roadmap')(); document.querySelectorAll('.status-row').forEach(d => { d.open = true; }); } },
+    { label: 'cd experience', hint: 'the 60-second version', run: go('experience') },
+    { label: 'cd how-i-work', hint: 'the loop', run: go('how') },
+    { label: 'cd writing', hint: 'essays', run: go('writing') },
+    { label: 'declassify --all', hint: 'reveal redacted lines', run: () => { go('projects')(); if (declassifyBtn.getAttribute('aria-pressed') !== 'true') declassifyBtn.click(); } },
+    { label: 'email', hint: 'shruthi.senth@gmail.com', run: () => { location.href = 'mailto:shruthi.senth@gmail.com'; } },
+    { label: 'copy email', hint: 'to clipboard', run: () => { try { navigator.clipboard.writeText('shruthi.senth@gmail.com'); } catch (e) {} } },
+    { label: 'open github', hint: 'new tab', run: () => window.open('https://github.com/shruthisenthilarasu', '_blank') },
+    { label: 'mode whimsical', hint: 'for the girls who want whimsy', run: () => setMode('whimsical', true) }
+  ];
+  let cmdkMatches = [], cmdkIndex = 0, cmdkReturn = null;
+  function paintCmdk() {
+    const q = cmdkInput.value.trim().toLowerCase();
+    const words = q.split(/\s+/).filter(Boolean);
+    cmdkMatches = COMMANDS.filter(c => words.every(w => (c.label + ' ' + c.hint).toLowerCase().includes(w)));
+    cmdkIndex = Math.min(cmdkIndex, Math.max(0, cmdkMatches.length - 1));
+    cmdkList.innerHTML = '';
+    if (!cmdkMatches.length) { cmdkList.append(el('li', 'cmdk-empty', 'command not found: ' + q.replace(/[<>&]/g, ''))); cmdkInput.removeAttribute('aria-activedescendant'); return; }
+    cmdkMatches.forEach((c, i) => {
+      const li = el('li');
+      li.id = 'cmdk-opt-' + i;
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', String(i === cmdkIndex));
+      li.append(el('span', null, c.label), el('small', null, c.hint));
+      li.addEventListener('mousemove', () => { if (cmdkIndex !== i) { cmdkIndex = i; paintCmdk(); } });
+      li.addEventListener('click', () => runCmdk(i));
+      cmdkList.append(li);
+    });
+    cmdkInput.setAttribute('aria-activedescendant', 'cmdk-opt-' + cmdkIndex);
+    const sel = cmdkList.children[cmdkIndex];
+    if (sel) sel.scrollIntoView({ block: 'nearest' });
+  }
+  function openCmdk() {
+    cmdkReturn = document.activeElement;
+    cmdk.hidden = false;
+    cmdkInput.value = '';
+    cmdkIndex = 0;
+    paintCmdk();
+    cmdkInput.focus();
+  }
+  function closeCmdk() {
+    cmdk.hidden = true;
+    if (cmdkReturn && cmdkReturn.focus) cmdkReturn.focus();
+  }
+  function runCmdk(i) {
+    const c = cmdkMatches[i];
+    if (!c) return;
+    cmdkReturn = null;
+    closeCmdk();
+    c.run();
+  }
+  document.getElementById('cmdkOpen').addEventListener('click', openCmdk);
+  cmdkInput.addEventListener('input', () => { cmdkIndex = 0; paintCmdk(); });
+  cmdkInput.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); cmdkIndex = (cmdkIndex + 1) % Math.max(1, cmdkMatches.length); paintCmdk(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); cmdkIndex = (cmdkIndex - 1 + cmdkMatches.length) % Math.max(1, cmdkMatches.length); paintCmdk(); }
+    else if (e.key === 'Enter') { e.preventDefault(); runCmdk(cmdkIndex); }
+    else if (e.key === 'Escape') { e.preventDefault(); closeCmdk(); }
+    else if (e.key === 'Tab') { e.preventDefault(); } // keep focus inside the palette
+  });
+  cmdk.addEventListener('click', e => { if (e.target === cmdk) closeCmdk(); });
+  document.addEventListener('keydown', e => {
+    if (document.documentElement.dataset.mode !== 'technical' || !cmdk.hidden) return;
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable;
+    if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) { e.preventDefault(); openCmdk(); }
+  });
 
   // case files: declassify every redacted line at once
   const declassifyBtn = document.getElementById('declassifyAll');
