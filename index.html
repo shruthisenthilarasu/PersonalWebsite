@@ -488,8 +488,14 @@
   .pencil-after-label { margin: -2.3rem 0 2rem 0.2rem; }
   .pencil-hero { margin: -1rem 0 1.6rem; opacity: 0; animation: up 0.7s ease forwards 0.95s; }
   .pencil-avail { margin: 0.9rem 0 0 0.4rem; }
-  .pencil-now { margin: -0.4rem 0 1.2rem; text-decoration: none; color: var(--teal); }
-  .pencil-now:hover { color: var(--blue); }
+  /* sparkles next to my name: a secret door to the Now page */
+  .nav-brand { display: inline-flex; align-items: flex-start; gap: 0.15rem; }
+  .nav-now { position: relative; display: inline-block; flex: none; width: 26px; height: 22px; margin-top: -0.35rem; color: var(--teal); }
+  .nav-now svg { position: absolute; fill: currentColor; animation: twinkle 3.2s ease-in-out infinite; }
+  .nav-now svg:first-child { left: 0; top: 4px; width: 15px; height: 15px; }
+  .nav-now svg:last-child { right: 0; top: 0; width: 9px; height: 9px; color: var(--blue); animation-delay: 1.1s; }
+  .nav-now:hover svg, .nav-now:focus-visible svg { animation-duration: 0.8s; }
+  .nav-now:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
   /* essay gists */
   .essay-gist { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.86rem; color: var(--teal); line-height: 1.5; margin-top: 0.45rem; }
@@ -501,6 +507,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .doodle { animation: none; opacity: 0.7; }
+    .nav-now svg { animation: none; }
     [data-mode="whimsical"] .project-card::after, [data-mode="whimsical"] .contact-card::after { transition: none; }
   }
 
@@ -553,7 +560,7 @@
 <body>
 
 <nav>
-  <a href="#hero" class="nav-logo">Shruthi Senthilarasu</a>
+  <span class="nav-brand"><a href="#hero" class="nav-logo">Shruthi Senthilarasu</a><a class="nav-now w-only" href="now.html" title="come into my living room" aria-label="Come into my living room: what I'm listening to and reading right now"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg></a></span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -848,7 +855,6 @@
       <div>
         <div class="about-photo-wrap">
           <span class="about-greeting">hello, hello :)<small>hi, I'm Shruthi</small></span>
-          <a class="pencil pencil-now w-only" href="now.html">come into my living room: what I'm listening to &amp; reading right now <svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M4 8c10-2 20 2 24 12"/><path d="M22 19l6 3 1-7"/></svg></a>
           <img src="IMG_3449.JPG" alt="Shruthi Senthilarasu" class="about-photo" />
         </div>
         <h2 class="about-h">I don't start with technologies.<br>I start with <em>friction.</em></h2>

@@ -5,11 +5,17 @@
     "author": "bell hooks",
     "progress": 40,
     "note": "",
-    "cover": "",
-    "color": "#2a7a72"
+    "cover": "/covers/all-about-love.jpg",
+    "color": "#f2c94c"
   },
-  "writing": {},
-  "building": {},
+  "writing": {
+    "title": "Monkey See, Monkey Do",
+    "status": ""
+  },
+  "building": {
+    "title": "AI UGC content for a client",
+    "status": ""
+  },
   "coolest": {},
   "video": {
     "title": "Leonardo DaVinci was once a loser - here's why that matters.",
@@ -59,11 +65,16 @@
       "caption": "Cafe Coffee Day, back home"
     }
   ],
-  "place": {},
+  "place": {
+    "city": "San Antonio, Texas",
+    "lat": 29.4241,
+    "lon": -98.4936,
+    "note": ""
+  },
   "quotes": [],
   "picks": [],
-  "thinking": "",
-  "watching": "",
+  "thinking": "The time I was analyzing Sam Altman and Dario Amodei refusing to hold hands at Modi's AI summit. 😭",
+  "watching": "Dorothy, a Karthik Subbaraj film",
   "albums": [
     {
       "title": "Did you know that there's a tunnel under Ocean Blvd",
