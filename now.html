@@ -365,32 +365,28 @@
   .btn:disabled:hover{background:transparent; color:var(--blue)}
   .brew{max-width:280px; margin:14px auto 0}
   .brew svg{display:block; width:100%; height:auto; overflow:visible}
-  .brew .tumbler{transform-box:view-box; transform-origin:0 0; transform:translate(172px,130px)}
-  .brew .stream{transform-box:view-box; transform-origin:150px 70px; transform:scaleY(0); opacity:0}
-  .brew .dcoffee,.brew .dfoam,.brew .tfoam{opacity:0; transition:opacity .6s}
+  .brew .moka{transform-box:view-box; transform-origin:0 0; transform:translate(104px,130px)}
+  .brew .stream{transform-box:view-box; transform-origin:172px 105px; transform:scaleY(0); opacity:0}
+  .brew .mcoffee,.brew .crema{opacity:0; transition:opacity .8s}
   .brew .steam path{fill:none; stroke:rgba(255,236,210,.5); stroke-width:3; stroke-linecap:round; stroke-dasharray:8 60; opacity:0}
-  .brew.pouring .tumbler{animation:pour 5s cubic-bezier(.45,0,.3,1) forwards}
+  .brew.pouring .moka{animation:pour 5s cubic-bezier(.45,0,.3,1) forwards}
   .brew.pouring .stream{animation:stream 5s linear forwards}
-  .brew.pouring .dcoffee{opacity:1; transition-delay:1.1s}
-  .brew.pouring .dfoam{opacity:1; transition-delay:2.2s}
-  .brew.done .dcoffee,.brew.done .dfoam,.brew.done .tfoam{opacity:1}
+  .brew.pouring .mcoffee{opacity:1; transition-delay:1.6s}
+  .brew.done .mcoffee,.brew.done .crema{opacity:1}
   .brew.done .steam path{opacity:1; animation:steam 2.8s linear infinite}
   .brew.done .steam path:nth-child(2){animation-delay:.9s} .brew.done .steam path:nth-child(3){animation-delay:1.8s}
   @keyframes pour{
-    0%{transform:translate(172px,130px) rotate(0deg)}
-    16%,24%{transform:translate(150px,70px) rotate(70deg)}
-    45%{transform:translate(150px,26px) rotate(70deg)}
-    64%,70%{transform:translate(150px,70px) rotate(70deg)}
-    86%,100%{transform:translate(172px,130px) rotate(0deg)}
+    0%{transform:translate(104px,130px) rotate(0deg)}
+    18%,68%{transform:translate(172px,105px) rotate(55deg)}
+    86%,100%{transform:translate(104px,130px) rotate(0deg)}
   }
   @keyframes stream{
-    0%,17%{opacity:0; transform:scaleY(0)}
-    18%{opacity:1; transform:scaleY(0)}
-    25%{opacity:1; transform:translateY(0) scaleY(1)}
-    45%{opacity:1; transform:translateY(-44px) scaleY(1.34375)}
+    0%,19%{opacity:0; transform:scaleY(0)}
+    20%{opacity:1; transform:scaleY(0)}
+    26%{opacity:1; transform:translateY(0) scaleY(1)}
     64%{opacity:1; transform:translateY(0) scaleY(1)}
-    71%{opacity:1; transform:translateY(128px) scaleY(0)}
-    72%,100%{opacity:0; transform:translateY(128px) scaleY(0)}
+    70%{opacity:1; transform:translateY(56px) scaleY(0)}
+    71%,100%{opacity:0; transform:translateY(56px) scaleY(0)}
   }
   @keyframes steam{from{stroke-dashoffset:68} to{stroke-dashoffset:0}}
   .brewmsg{margin:10px 0 0; min-height:1.3em; font-size:24px; color:var(--teal); text-align:center; line-height:1.15}
@@ -571,39 +567,31 @@
     <p class="big">do you want me to brew you some <span class="hl">coffee?</span></p>
     <div class="brewbtns"><button class="btn" id="brewYes" type="button">yes please ☕</button><button class="btn" id="brewNo" type="button">I'm good, thanks</button></div>
     <div class="brew" id="brew">
-      <svg viewBox="0 0 260 240" role="img" aria-label="Brass South Indian filter coffee set: a filter, a tumbler and a davara">
+      <svg viewBox="0 36 260 204" role="img" aria-label="A moka pot pouring coffee into a mug">
         <defs>
-          <linearGradient id="brass" x1="0" x2="1"><stop offset="0" stop-color="#7a5a17"/><stop offset=".32" stop-color="#f6dc85"/><stop offset=".6" stop-color="#c9a13f"/><stop offset="1" stop-color="#6e5014"/></linearGradient>
-          <linearGradient id="brassRim" x1="0" x2="1"><stop offset="0" stop-color="#b8902f"/><stop offset=".45" stop-color="#fbe9a6"/><stop offset="1" stop-color="#a7822a"/></linearGradient>
+          <linearGradient id="alu" x1="0" x2="1"><stop offset="0" stop-color="#5f656c"/><stop offset=".34" stop-color="#dfe3e7"/><stop offset=".62" stop-color="#a2a8ae"/><stop offset="1" stop-color="#555b62"/></linearGradient>
+          <linearGradient id="mugG" x1="0" x2="1"><stop offset="0" stop-color="#cdbfa6"/><stop offset=".4" stop-color="#f6eedf"/><stop offset="1" stop-color="#bfb196"/></linearGradient>
         </defs>
-        <g class="steam"><path d="M140 122c-7-9 7-15 0-24s7-15 0-24"/><path d="M151 118c-7-9 7-15 0-24s7-15 0-24"/><path d="M162 122c-7-9 7-15 0-24s7-15 0-24"/></g>
-        <!-- the filter, standing by -->
-        <g class="filter">
-          <ellipse cx="44" cy="226" rx="26" ry="4" fill="rgba(0,0,0,.4)"/>
-          <path d="M22 172H66V220Q44 226 22 220Z" fill="url(#brass)"/>
-          <path d="M24 122H64V172H24Z" fill="url(#brass)"/>
-          <ellipse cx="44" cy="172" rx="22" ry="3" fill="#8f6c1f"/>
-          <path d="M24 122Q24 108 44 106Q64 108 64 122Z" fill="url(#brassRim)"/>
-          <ellipse cx="44" cy="122" rx="20" ry="2.5" fill="#9b7a28"/>
-          <rect x="42.5" y="96" width="3" height="11" fill="#b8902f"/>
-          <circle cx="44" cy="95" r="5" fill="url(#brassRim)"/>
-        </g>
-        <!-- the davara -->
-        <ellipse cx="150" cy="227" rx="58" ry="6" fill="rgba(0,0,0,.4)"/>
-        <path d="M90 190Q92 222 150 225Q208 222 210 190Z" fill="url(#brass)"/>
-        <path d="M98 203 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0 q4 -4 8 0" fill="none" stroke="#6e5014" stroke-width="1.3" opacity=".75"/>
-        <g fill="#6e5014" opacity=".7"><circle cx="106" cy="211" r="1"/><circle cx="113" cy="211" r="1"/><circle cx="120" cy="211" r="1"/><circle cx="127" cy="211" r="1"/><circle cx="134" cy="211" r="1"/><circle cx="141" cy="211" r="1"/><circle cx="148" cy="211" r="1"/><circle cx="155" cy="211" r="1"/><circle cx="162" cy="211" r="1"/><circle cx="169" cy="211" r="1"/><circle cx="176" cy="211" r="1"/><circle cx="183" cy="211" r="1"/><circle cx="190" cy="211" r="1"/><circle cx="197" cy="211" r="1"/></g>
-        <ellipse cx="150" cy="190" rx="64" ry="8.5" fill="url(#brassRim)" stroke="#9b7a28"/>
-        <ellipse class="dcoffee" cx="150" cy="192" rx="56" ry="5.5" fill="#7a4a26"/>
-        <g class="dfoam" fill="#ead3ac"><circle cx="118" cy="191" r="3"/><circle cx="128" cy="193" r="2.2"/><circle cx="174" cy="192" r="2.6"/><circle cx="184" cy="190" r="2"/><circle cx="162" cy="194" r="1.8"/></g>
-        <rect class="stream" x="148" y="70" width="4" height="128" rx="2" fill="#8a5630"/>
-        <!-- the tumbler -->
-        <g class="tumbler">
-          <path d="M-44 0L0 0L-4 70L-40 70Z" fill="url(#brass)"/>
-          <path d="M-43 12H-1" stroke="#8f6c1f" stroke-width="1.2" opacity=".7"/>
-          <ellipse cx="-22" cy="70" rx="18" ry="3" fill="#8f6c1f"/>
-          <ellipse cx="-22" cy="0" rx="22" ry="4" fill="url(#brassRim)" stroke="#9b7a28"/>
-          <ellipse class="tfoam" cx="-22" cy=".5" rx="19" ry="3" fill="#ead3ac"/>
+        <g class="steam"><path d="M160 150c-7-9 7-15 0-24s7-15 0-24"/><path d="M171 146c-7-9 7-15 0-24s7-15 0-24"/><path d="M182 150c-7-9 7-15 0-24s7-15 0-24"/></g>
+        <!-- the mug -->
+        <ellipse cx="172" cy="226" rx="40" ry="5" fill="rgba(0,0,0,.4)"/>
+        <path d="M202 172c24 0 24 34 0 34" fill="none" stroke="#d8ccb4" stroke-width="8" stroke-linecap="round"/>
+        <path d="M142 160H202V210Q202 224 188 224H156Q142 224 142 210Z" fill="url(#mugG)"/>
+        <path d="M142 178H202V186H142Z" fill="#d9a866" opacity=".85"/>
+        <ellipse cx="172" cy="160" rx="30" ry="6" fill="#efe4cf" stroke="#bfb196"/>
+        <ellipse cx="172" cy="160.5" rx="26.5" ry="4.3" fill="#3a2a1e"/>
+        <ellipse class="mcoffee" cx="172" cy="160.5" rx="26.5" ry="4.3" fill="#6b3f20"/>
+        <ellipse class="crema" cx="172" cy="160.5" rx="22" ry="3.2" fill="#c08a52"/>
+        <rect class="stream" x="170" y="105" width="4" height="56" rx="2" fill="#6b3f20"/>
+        <!-- the moka pot: spout tip at the origin so it pours from the spout -->
+        <g class="moka">
+          <path d="M-60 26c-22 0-24 34-6 38" fill="none" stroke="#5a524c" stroke-width="7" stroke-linecap="round"/>
+          <path d="M-60 48H-4L2 92H-66Z" fill="url(#alu)"/>
+          <path d="M-58 4H-6L-14 44H-50Z" fill="url(#alu)"/>
+          <path d="M-52 44H-12V50H-52Z" fill="#4a5057"/>
+          <path d="M-10 4L1 -1L-4 12Z" fill="#b9bfc5"/>
+          <path d="M-60 5Q-32 -9 -4 5Z" fill="#c9ced3"/>
+          <rect x="-36" y="-11" width="8" height="6" rx="2" fill="#5a524c"/>
         </g>
       </svg>
     </div>
@@ -1119,12 +1107,12 @@
       yes.disabled = no.disabled = true;
       const done = () => {
         brew.classList.remove('pouring'); brew.classList.add('done');
-        msg.textContent = "filter coffee: strong decoction, hot milk, the long pour for froth. careful, it's hot ☕";
+        msg.textContent = "fresh off the stove, a little crema on top. careful, it's hot ☕";
         yes.textContent = 'another one?'; yes.disabled = no.disabled = false;
       };
       if (REDUCE){ done(); return; }
       brew.classList.add('pouring');
-      msg.textContent = 'one filter coffee, coming right up…';
+      msg.textContent = 'one moka pot, coming right up…';
       t = setTimeout(done, 5000);
     });
     no.addEventListener('click', () => { msg.textContent = "more for me, then. the kettle's on if you change your mind."; });
