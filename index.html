@@ -496,6 +496,12 @@
   .nav-now svg:last-child { right: 0; top: 0; width: 9px; height: 9px; color: var(--blue); animation-delay: 1.1s; }
   .nav-now:hover svg, .nav-now:focus-visible svg { animation-duration: 0.8s; }
   .nav-now:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+  /* Technical view gets a quieter door: a small circled i after my name */
+  .nav-i { align-self: flex-end; flex: none; margin: 0 0 0.3rem 0.25rem; width: 14px; height: 14px; border: 1px solid currentColor; border-radius: 50%;
+    display: grid; place-items: center; color: var(--blue); text-decoration: none;
+    font-family: 'Newsreader', serif; font-style: italic; font-weight: 600; font-size: 10px; line-height: 1; transition: background 0.2s, color 0.2s; }
+  .nav-i:hover { background: var(--blue); color: #fff; }
+  .nav-i:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* essay gists */
   .essay-gist { font-family: 'Newsreader', serif; font-style: italic; font-size: 0.86rem; color: var(--teal); line-height: 1.5; margin-top: 0.45rem; }
@@ -560,7 +566,7 @@
 <body>
 
 <nav>
-  <span class="nav-brand"><a href="#hero" class="nav-logo">Shruthi Senthilarasu</a><a class="nav-now w-only" href="now.html" title="come into my living room" aria-label="Come into my living room: what I'm listening to and reading right now"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg></a></span>
+  <span class="nav-brand"><a href="#hero" class="nav-logo">Shruthi Senthilarasu</a><a class="nav-now w-only" href="now.html" title="come into my living room" aria-label="Come into my living room: what I'm listening to and reading right now"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/></svg></a><a class="nav-i r-only" href="now.html" title="now: what I'm listening to and reading" aria-label="Now page: what I'm listening to and reading right now">i</a></span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>

@@ -389,11 +389,13 @@
     71%,100%{opacity:0; transform:translateY(56px) scaleY(0)}
   }
   @keyframes steam{from{stroke-dashoffset:68} to{stroke-dashoffset:0}}
+  #photoCard.popin{animation:popin .6s cubic-bezier(.3,1.4,.5,1)}
+  @keyframes popin{from{opacity:0; transform:translateY(28px) scale(.94) rotate(-1deg)}}
   .brewmsg{margin:10px 0 0; min-height:1.3em; font-size:24px; color:var(--teal); text-align:center; line-height:1.15}
 
   @media (prefers-reduced-motion: reduce){
     .lightsoff{display:none} .bulb{animation:none; opacity:1}
-    .paper,.flap{transition:none} .tube{animation:none!important}
+    .paper,.flap{transition:none} .tube{animation:none!important} #photoCard.popin{animation:none}
   }
 </style>
 </head>
@@ -958,6 +960,8 @@
     $('backLive').addEventListener('click', backToLive);
   }
 
+  let showDiary = null;
+
   function renderPhotos(list){
     const items = (Array.isArray(list) ? list : []).filter(p => p && /^[\w\-./]+$/.test(p.src || ''));
     if (!items.length) return;
@@ -1014,9 +1018,17 @@
       if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
     }, {passive:true});
 
-    $('photoCard').hidden = false;
     playBtn.textContent = playing ? 'Pause' : 'Play';
-    shuffle(); show(); restart();
+    shuffle(); show();
+    // The diary stays tucked away until someone says yes to coffee.
+    showDiary = () => {
+      const card = $('photoCard');
+      if (!card.hidden) return;
+      card.hidden = false;
+      card.classList.add('popin');
+      restart();
+      setTimeout(() => card.scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block: 'center'}), REDUCE ? 0 : 350);
+    };
   }
 
   async function loadNow(){
@@ -1059,8 +1071,8 @@
     }
   }
 
-  // Fairy lights: stars and crescent moons hung from a drooping wire, sized to the element.
-  function garland(el){
+  // Fairy lights hung from a drooping wire, sized to the element: stars and crescent moons, or plain round bulbs.
+  function garland(el, round = false){
     if (!el) return;
     let first = true;
     const build = () => {
@@ -1070,13 +1082,15 @@
       const pt = t => { const k = t < .5 ? t * 2 : (t - .5) * 2; return [t * w, 6 + dip * 4 * k * (1 - k) * (t < .5 ? 1 : .8)]; };
       let d = '';
       for (let i = 0; i <= 60; i++){ const [x, y] = pt(i / 60); d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }
-      const cols = ['#ffd98a', '#ffc27a', '#fff0c8', '#ffb36b'];
+      const cols = round ? ['#ffd45e', '#ffe48a', '#ffc94a', '#fff0b3'] : ['#ffd98a', '#ffc27a', '#fff0c8', '#ffb36b'];
       let stems = '', bulbs = '';
       for (let i = 0; i < n; i++){
         const [x, y] = pt((i + .5) / n), by = y + 9 + (i % 3) * 4;
         const style = `--c:${cols[i % 4]};--on:${first ? (1.05 + i * .06).toFixed(2) : 0}s;--tw:${(2.4 + (i * 37 % 17) / 10).toFixed(1)}s`;
         stems += `<line class="stem" x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(by - 4).toFixed(1)}"/>`;
-        bulbs += i % 3 === 1
+        bulbs += round
+          ? `<circle class="bulb" style="${style}" cx="${x.toFixed(1)}" cy="${(by + 1).toFixed(1)}" r="3.6"/>`
+          : i % 3 === 1
           ? `<path class="bulb" style="${style}" transform="translate(${(x - 8).toFixed(1)} ${(by - 3).toFixed(1)}) scale(.75)" d="M12 2a9 9 0 1 0 8.5 12A7 7 0 0 1 12 2z"/>`
           : `<path class="bulb" style="${style}" transform="translate(${(x - 7).toFixed(1)} ${(by - 3).toFixed(1)}) scale(.58)" d="M12 0c.9 6.4 5.6 11.1 12 12-6.4.9-11.1 5.6-12 12-.9-6.4-5.6-11.1-12-12C6.4 11.1 11.1 6.4 12 0z"/>`;
       }
@@ -1107,7 +1121,8 @@
       yes.disabled = no.disabled = true;
       const done = () => {
         brew.classList.remove('pouring'); brew.classList.add('done');
-        msg.textContent = "fresh off the stove, a little crema on top. careful, it's hot ☕";
+        msg.textContent = "fresh off the stove, a little crema on top. careful, it's hot ☕ here's where I've been sipping lately ↓";
+        if (showDiary) showDiary();
         yes.textContent = 'another one?'; yes.disabled = no.disabled = false;
       };
       if (REDUCE){ done(); return; }
@@ -1119,7 +1134,7 @@
   }
 
   garland($('garTop'));
-  garland($('garWall'));
+  garland($('garWall'), true);
   deliverPaper();
   setupBrew();
   loadNow();
