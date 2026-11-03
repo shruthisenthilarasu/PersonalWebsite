@@ -116,6 +116,7 @@
   .flyer::after{content:""; position:absolute; left:28%; top:28%; width:44%; height:44%; border-radius:50%; background-color:var(--teal); background-image:var(--lab,none); background-size:cover; background-position:center; box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
   .pctl{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
   .pctl .btn{margin-top:0}
+  .snipnote{flex-basis:100%; margin:2px 0 0; font-size:11px; letter-spacing:.04em; color:var(--soft)}
 
   .meta{flex:1 1 220px; min-width:0}
   .title{font-family:'Newsreader',serif; font-weight:700; font-size:clamp(24px,6vw,32px); line-height:1.12; margin:0; overflow-wrap:anywhere}
@@ -450,7 +451,7 @@
           <p class="by" id="artist"></p>
           <p class="alb" id="album"></p>
           <p class="when hand" id="when"></p>
-          <div class="pctl" id="pickCtl" hidden><button type="button" class="btn" id="shuf">Next song ↻</button><button type="button" class="btn" id="backLive">Back to live</button></div>
+          <div class="pctl" id="pickCtl" hidden><button type="button" class="btn" id="shuf">Next song ↻</button><button type="button" class="btn" id="snd" aria-pressed="true">Sound on 🔊</button><button type="button" class="btn" id="backLive">Back to live</button><p class="snipnote" id="snipNote">30-second snippets via Apple Music</p></div>
         </div>
       </div>
       <p class="albcap" id="albCap" aria-live="polite" hidden><span class="hand">tap an album to pull it off the shelf</span></p>
@@ -886,6 +887,34 @@
     let flying = false, pickTimer = null;
     const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     const coverUrl = a => a.cover && /^[\w\-./]+$/.test(a.cover) ? `url("${a.cover}")` : '';
+    // 30-second Apple Music previews: primed on the tap (so phones allow sound), played once the record lands.
+    const audio = new Audio();
+    audio.preload = 'none'; audio.volume = .75;
+    let soundOn = true, primeTok = 0;
+    const previewOf = (a, t) => { const u = (a.previews || [])[t] || ''; return /^https:\/\/[\w.-]+\.apple\.com\//.test(u) ? u : ''; };
+    const autoAdvance = () => { clearInterval(pickTimer); if (pick && pick.order.length > 1) pickTimer = setInterval(() => { if (!document.hidden) nextSong(); }, 24000); };
+    const syncSnd = () => { $('snd').textContent = soundOn ? 'Sound on 🔊' : 'Sound off'; $('snd').setAttribute('aria-pressed', String(soundOn)); };
+
+    function playCurrent(){
+      clearInterval(pickTimer);
+      const url = pick ? previewOf(pick.a, pick.order[pick.i % pick.order.length]) : '';
+      if (!soundOn || !url){ audio.pause(); autoAdvance(); return; }
+      if (audio.src !== url) audio.src = url;
+      audio.muted = false;
+      try{ audio.currentTime = 0; }catch(e){}
+      audio.play().catch(autoAdvance);
+    }
+
+    function prime(url){
+      if (!soundOn || !url) return;
+      const tok = ++primeTok;
+      audio.src = url; audio.muted = true;
+      audio.play().then(() => { if (tok === primeTok && audio.muted) audio.pause(); }).catch(() => {});
+    }
+
+    audio.addEventListener('ended', () => { if (pick && soundOn) nextSong(); });
+    audio.addEventListener('error', () => { if (pick && soundOn) autoAdvance(); });
+
     const shuffled = n => { const o = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; } return o; };
 
     function showPick(){
@@ -906,19 +935,23 @@
         $('album').textContent = '';
         $('when').textContent = 'pulled off my shelf';
       }
+      const hasSnips = (a.previews || []).some(Boolean);
       $('shuf').hidden = tracks.length < 2;
+      $('snd').hidden = $('snipNote').hidden = !hasSnips;
       $('pickCtl').hidden = false;
+      playCurrent();
     }
 
     function nextSong(){ if (!pick) return; pick.i++; showPick(); }
 
     function putOn(a, from){
       clearInterval(pickTimer);
-      const n = (a.tracks || []).length;
+      audio.pause();
+      const order = shuffled((a.tracks || []).length);
+      prime(previewOf(a, order[0]));
       const start = () => {
-        pick = {a, order: shuffled(n), i: 0};
+        pick = {a, order, i: 0};
         showPick();
-        if (n > 1) pickTimer = setInterval(() => { if (!document.hidden) nextSong(); }, 24000);
       };
       const deck = $('deck');
       if (reduce || !from.animate){ start(); return; }
@@ -948,6 +981,7 @@
 
     function backToLive(){
       clearInterval(pickTimer);
+      audio.pause();
       pick = null;
       $('pickCtl').hidden = true;
       if (open){ open.classList.remove('on'); open.setAttribute('aria-pressed', 'false'); open = null; }
@@ -956,7 +990,8 @@
       if (lastLive) setMusic(lastLive); else pollMusic();
     }
 
-    $('shuf').addEventListener('click', () => { nextSong(); clearInterval(pickTimer); pickTimer = setInterval(() => { if (!document.hidden) nextSong(); }, 24000); });
+    $('shuf').addEventListener('click', nextSong);
+    $('snd').addEventListener('click', () => { soundOn = !soundOn; syncSnd(); if (pick) playCurrent(); });
     $('backLive').addEventListener('click', backToLive);
   }
 
