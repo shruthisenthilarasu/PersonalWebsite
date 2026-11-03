@@ -87,6 +87,12 @@
   .arm::after{content:""; position:absolute; bottom:-8px; left:-4px; width:14px; height:16px; background:var(--ink); border-radius:3px}
   .deck.playing .arm{transform:rotate(14deg)}
   @keyframes spin{to{transform:rotate(360deg)}}
+  .record,.sleeve{transition:opacity .25s}
+  .deck.swapping .record,.deck.swapping .sleeve{opacity:0}
+  .flyer{position:absolute; z-index:50; pointer-events:none; border-radius:50%; background:repeating-radial-gradient(circle,#1a2030 0 2px,#252d40 2px 4px); box-shadow:0 14px 26px rgba(0,0,0,.35)}
+  .flyer::after{content:""; position:absolute; left:28%; top:28%; width:44%; height:44%; border-radius:50%; background-color:var(--teal); background-image:var(--lab,none); background-size:cover; background-position:center; box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
+  .pctl{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+  .pctl .btn{margin-top:0}
 
   .meta{flex:1 1 220px; min-width:0}
   .title{font-family:'Newsreader',serif; font-weight:700; font-size:clamp(24px,6vw,32px); line-height:1.12; margin:0; overflow-wrap:anywhere}
@@ -266,11 +272,12 @@
   <section class="card" id="roomCard" aria-labelledby="room-h">
     <span class="corner"><svg><use href="#star"/></svg></span>
     <div class="head"><h2 class="eyebrow" id="room-h">Come on in</h2><span class="pill">My living room</span></div>
-    <p class="hint hand" style="margin:0 0 14px">shoes off. tap an album on the wall, see what's spinning.</p>
+    <p class="hint hand" style="margin:0 0 14px">shoes off. tap an album on the wall to put it on the turntable.</p>
     <div class="room">
       <div class="wall" id="wall" hidden>
         <div class="shelfrow" id="shelf1"></div>
         <div class="shelfrow" id="shelf2"></div>
+        <div class="shelfrow" id="shelf3"></div>
       </div>
       <div class="stage">
         <div class="tt">
@@ -284,6 +291,7 @@
           <p class="by" id="artist"></p>
           <p class="alb" id="album"></p>
           <p class="when hand" id="when"></p>
+          <div class="pctl" id="pickCtl" hidden><button type="button" class="btn" id="shuf">Next song ↻</button><button type="button" class="btn" id="backLive">Back to live</button></div>
         </div>
       </div>
       <p class="albcap" id="albCap" aria-live="polite" hidden><span class="hand">tap an album to pull it off the shelf</span></p>
@@ -408,6 +416,8 @@
     const d = Math.floor(h/24); return d + (d === 1 ? ' day ago' : ' days ago');
   };
 
+  let pick = null, lastLive = null;
+
   function setMusic(d){
     const deck = $('deck'), pill = $('statePill');
     if (!d || !d.track){
@@ -438,16 +448,21 @@
     }
   }
 
+  // While a visitor has a record on, live updates are kept for "Back to live" instead of shown.
+  const live = d => { lastLive = d; if (!pick) setMusic(d); };
+
   async function pollMusic(){
     if (DEMO){
-      setMusic({nowPlaying:true, track:'Your Song Appears Here', artist:'Some Wonderful Artist', album:'The Album', image:'', url:''});
+      live({nowPlaying:true, track:'Your Song Appears Here', artist:'Some Wonderful Artist', album:'The Album', image:'', url:''});
       return;
     }
     try{
       const r = await fetch('/api/now-playing', {cache:'no-store'});
       if (!r.ok) throw 0;
-      setMusic(await r.json());
+      live(await r.json());
     }catch(e){
+      lastLive = null;
+      if (pick) return;
       $('statePill').className = 'pill'; $('statePill').textContent = 'Offline';
       $('track').innerHTML = '<span class="err">The turntable is unplugged.</span>';
       $('when').textContent = 'try again in a bit';
@@ -570,7 +585,7 @@
   }
 
   function renderAlbums(list){
-    const items = (Array.isArray(list) ? list : []).filter(a => a && a.title).slice(0, 6);
+    const items = (Array.isArray(list) ? list : []).filter(a => a && a.title).slice(0, 9);
     if (!items.length) return;
     const hex = c => /^#[0-9a-f]{3,8}$/i.test(c || '') ? c : null;
     const tilts = [-1.6, .8, -.7, 1.3, -1, .7];
@@ -595,18 +610,97 @@
       if (a.artist){ const sm = document.createElement('small'); sm.textContent = a.artist; t.appendChild(sm); }
       cov.appendChild(t); b.appendChild(cov);
       b.addEventListener('click', () => {
+        if (flying) return;
         const same = open === b;
+        if (same){ backToLive(); return; }
         if (open){ open.classList.remove('on'); open.setAttribute('aria-pressed', 'false'); }
         cap.textContent = '';
-        if (same){ open = null; const h = document.createElement('span'); h.className = 'hand'; h.textContent = 'tap an album to pull it off the shelf'; cap.appendChild(h); return; }
         open = b; b.classList.add('on'); b.setAttribute('aria-pressed', 'true');
         const n = document.createElement('b'); n.textContent = a.title; cap.appendChild(n);
         if (a.artist){ const r = document.createElement('span'); r.className = 'by2'; r.textContent = ' · ' + a.artist; cap.appendChild(r); }
         if (a.why){ const w = document.createElement('span'); w.className = 'hand'; w.textContent = a.why; cap.appendChild(w); }
+        putOn(a, cov);
       });
-      (k < 3 ? $('shelf1') : $('shelf2')).appendChild(b);
+      $('shelf' + (Math.floor(k / 3) + 1)).appendChild(b);
     });
     $('wall').hidden = false; $('albCap').hidden = false;
+
+    // Visitor picks: the record flies from the shelf onto the platter, then shuffles its tracklist.
+    let flying = false, pickTimer = null;
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coverUrl = a => a.cover && /^[\w\-./]+$/.test(a.cover) ? `url("${a.cover}")` : '';
+    const shuffled = n => { const o = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; } return o; };
+
+    function showPick(){
+      const {a, order, i} = pick, tracks = a.tracks || [];
+      const deck = $('deck'), pill = $('statePill');
+      deck.classList.add('playing');
+      pill.className = 'pill live';
+      pill.innerHTML = '<span class="eq"><i></i><i></i><i></i></span> Your pick';
+      $('sleeve').style.backgroundImage = coverUrl(a);
+      $('artist').textContent = a.artist ? 'by ' + a.artist : '';
+      if (tracks.length){
+        const t = order[i % order.length];
+        $('track').textContent = tracks[t];
+        $('album').textContent = 'from "' + a.title + '"';
+        $('when').textContent = `track ${t + 1} of ${tracks.length}, shuffled off my shelf`;
+      } else {
+        $('track').textContent = a.title;
+        $('album').textContent = '';
+        $('when').textContent = 'pulled off my shelf';
+      }
+      $('shuf').hidden = tracks.length < 2;
+      $('pickCtl').hidden = false;
+    }
+
+    function nextSong(){ if (!pick) return; pick.i++; showPick(); }
+
+    function putOn(a, from){
+      clearInterval(pickTimer);
+      const n = (a.tracks || []).length;
+      const start = () => {
+        pick = {a, order: shuffled(n), i: 0};
+        showPick();
+        if (n > 1) pickTimer = setInterval(() => { if (!document.hidden) nextSong(); }, 24000);
+      };
+      const deck = $('deck');
+      if (reduce || !from.animate){ start(); return; }
+      const s = from.getBoundingClientRect(), e = deck.getBoundingClientRect();
+      const f = document.createElement('div');
+      f.className = 'flyer';
+      const lab = coverUrl(a); if (lab) f.style.setProperty('--lab', lab);
+      Object.assign(f.style, {left: e.left + scrollX + 'px', top: e.top + scrollY + 'px', width: e.width + 'px', height: e.height + 'px'});
+      document.body.appendChild(f);
+      const k = s.width / e.width;
+      const dx = (s.left + s.width / 2) - (e.left + e.width / 2), dy = (s.top + s.height / 2) - (e.top + e.height / 2);
+      flying = true;
+      deck.classList.remove('playing');
+      deck.classList.add('swapping');
+      f.animate([
+        {transform: `translate(${dx}px,${dy}px) scale(${k}) rotate(0deg)`, opacity: 0},
+        {transform: `translate(${dx}px,${dy - 24}px) scale(${k}) rotate(0deg)`, opacity: 1, offset: .18},
+        {transform: `translate(${dx * .35}px,${dy * .35 - 46}px) scale(${(k + 1) / 2 * 1.1}) rotate(220deg)`, offset: .62},
+        {transform: 'translate(0,0) scale(1) rotate(360deg)', opacity: 1}
+      ], {duration: 1150, easing: 'cubic-bezier(.45,0,.2,1)'}).onfinish = () => {
+        deck.classList.remove('swapping');
+        f.remove();
+        flying = false;
+        start();
+      };
+    }
+
+    function backToLive(){
+      clearInterval(pickTimer);
+      pick = null;
+      $('pickCtl').hidden = true;
+      if (open){ open.classList.remove('on'); open.setAttribute('aria-pressed', 'false'); open = null; }
+      cap.textContent = '';
+      const h = document.createElement('span'); h.className = 'hand'; h.textContent = 'tap an album to pull it off the shelf'; cap.appendChild(h);
+      if (lastLive) setMusic(lastLive); else pollMusic();
+    }
+
+    $('shuf').addEventListener('click', () => { nextSong(); clearInterval(pickTimer); pickTimer = setInterval(() => { if (!document.hidden) nextSong(); }, 24000); });
+    $('backLive').addEventListener('click', backToLive);
   }
 
   function renderPhotos(list){

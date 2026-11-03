@@ -71,7 +71,25 @@
       "why": "",
       "c1": "#3c4a5a",
       "c2": "#9aa8b5",
-      "cover": "covers/ocean-blvd.jpg"
+      "cover": "covers/ocean-blvd.jpg",
+      "tracks": [
+        "The Grants",
+        "Did you know that there's a tunnel under Ocean Blvd",
+        "Sweet",
+        "A&W",
+        "Judah Smith Interlude",
+        "Candy Necklace (feat. Jon Batiste)",
+        "Jon Batiste Interlude",
+        "Kintsugi",
+        "Fingertips",
+        "Paris, Texas (feat. SYML)",
+        "Grandfather please stand on the shoulders of my father while he's deep-sea fishing (feat. RIOPY)",
+        "Let the Light In (feat. Father John Misty)",
+        "Margaret (feat. Bleachers)",
+        "Fishtail",
+        "Peppers (feat. Tommy Genesis)",
+        "Taco Truck x VB"
+      ]
     },
     {
       "title": "eternal sunshine",
@@ -79,7 +97,22 @@
       "why": "",
       "c1": "#5d5348",
       "c2": "#d8c8b0",
-      "cover": "covers/eternal-sunshine.jpg"
+      "cover": "covers/eternal-sunshine.jpg",
+      "tracks": [
+        "intro (end of the world)",
+        "bye",
+        "don't wanna break up again",
+        "saturn returns interlude",
+        "eternal sunshine",
+        "supernatural",
+        "true story",
+        "the boy is mine",
+        "yes, and?",
+        "we can't be friends (wait for your love)",
+        "i wish i hated you",
+        "imperfect for you",
+        "ordinary things (feat. Nonna)"
+      ]
     },
     {
       "title": "The Dream",
@@ -87,7 +120,21 @@
       "why": "",
       "c1": "#8a5a83",
       "c2": "#e0b3d2",
-      "cover": "covers/the-dream.jpg"
+      "cover": "covers/the-dream.jpg",
+      "tracks": [
+        "Restless Little Heart",
+        "The Dream",
+        "Moonshine",
+        "The Little Mess You Made",
+        "The Hudson",
+        "Ordinary People",
+        "Necessary Evils",
+        "Times Square Jesus",
+        "David's Brother",
+        "Lake George",
+        "Someday I'll Be Back in Hollywood",
+        "Home Sweet Home"
+      ]
     },
     {
       "title": "Red",
@@ -95,7 +142,25 @@
       "why": "",
       "c1": "#c93a3a",
       "c2": "#f0a35a",
-      "cover": "covers/red.jpg"
+      "cover": "covers/red.jpg",
+      "tracks": [
+        "State of Grace",
+        "Red",
+        "Treacherous",
+        "I Knew You Were Trouble.",
+        "All Too Well",
+        "22",
+        "I Almost Do",
+        "We Are Never Ever Getting Back Together",
+        "Stay Stay Stay",
+        "The Last Time (feat. Gary Lightbody)",
+        "Holy Ground",
+        "Sad Beautiful Tragic",
+        "The Lucky One",
+        "Everything Has Changed (feat. Ed Sheeran)",
+        "Starlight",
+        "Begin Again"
+      ]
     },
     {
       "title": "Dude",
@@ -103,7 +168,18 @@
       "why": "",
       "c1": "#d9a42f",
       "c2": "#f6e3a1",
-      "cover": "covers/dude.jpg"
+      "cover": "covers/dude.jpg",
+      "tracks": [
+        "Oorum Blood",
+        "Singari",
+        "Nallaru Po",
+        "Kannukulla",
+        "Yumabaibesa",
+        "Kannukulla (Reprise)",
+        "Dude Trailer Blast (Theme)",
+        "Blud Is On His Way",
+        "Oorum Blood Unplugged"
+      ]
     },
     {
       "title": "Alligator Bites Never Heal",
@@ -111,7 +187,90 @@
       "why": "",
       "c1": "#2f5a3a",
       "c2": "#a7c48a",
-      "cover": "covers/alligator-bites.jpg"
+      "cover": "covers/alligator-bites.jpg",
+      "tracks": [
+        "STANKA POOH",
+        "BULLFROG",
+        "BOILED PEANUTS",
+        "DENIAL IS A RIVER",
+        "CATFISH",
+        "SKIPP",
+        "HIDE N SEEK",
+        "BLOOM",
+        "WAIT",
+        "DEATH ROLL",
+        "PROFIT",
+        "BOOM BAP",
+        "NISSAN ALTIMA",
+        "GTFO (feat. Fetish)",
+        "HUH!",
+        "SLIDE",
+        "FIREFLIES",
+        "BEVERLY HILLS",
+        "ALLIGATOR BITES NEVER HEAL"
+      ]
+    },
+    {
+      "title": "you seem pretty sad for a girl so in love",
+      "artist": "Olivia Rodrigo",
+      "why": "",
+      "c1": "#5b8fc9",
+      "c2": "#f2b6c4",
+      "cover": "covers/pretty-sad.jpg",
+      "tracks": [
+        "drop dead",
+        "stupid song",
+        "honeybee",
+        "maggots for brains",
+        "u + me = <3",
+        "my way",
+        "purple",
+        "the cure",
+        "begged",
+        "what's wrong with me (with Robert Smith)",
+        "less",
+        "expectations",
+        "cigarette smoke"
+      ]
+    },
+    {
+      "title": "HIT ME HARD AND SOFT",
+      "artist": "Billie Eilish",
+      "why": "",
+      "c1": "#0f2a44",
+      "c2": "#3d6a8c",
+      "cover": "covers/hit-me-hard-and-soft.jpg",
+      "tracks": [
+        "SKINNY",
+        "LUNCH",
+        "CHIHIRO",
+        "BIRDS OF A FEATHER",
+        "WILDFLOWER",
+        "THE GREATEST",
+        "L'AMOUR DE MA VIE",
+        "THE DINER",
+        "BITTERSUITE",
+        "BLUE"
+      ]
+    },
+    {
+      "title": "Alaipayuthey",
+      "artist": "A. R. Rahman",
+      "why": "",
+      "c1": "#d9a42f",
+      "c2": "#c93a3a",
+      "cover": "covers/alaipayuthey.jpg",
+      "tracks": [
+        "Endrendrum Punnagai",
+        "Pachchai Nirame (Sakiye)",
+        "Kadhal Sadugudu (Nagila Nagila)",
+        "Evano Oruvan",
+        "Alaipayuthey",
+        "Snegithane Snegithane",
+        "Maangalyam",
+        "Yaro Yarodi",
+        "September Madham"
+      ]
     }
   ]
 }
