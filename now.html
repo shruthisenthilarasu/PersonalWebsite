@@ -1033,7 +1033,7 @@
 
   async function loadNow(){
     let d = {};
-    try{ d = await (await fetch('now.json', {cache:'no-store'})).json(); }catch(e){}
+    try{ d = await (await fetch('now-data.json', {cache:'no-store'})).json(); }catch(e){}
     const b = d.reading || {};
     if (b.title){
       $('bookTitle').textContent = b.title;
