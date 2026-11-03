@@ -1,0 +1,117 @@
+{
+  "updated": "2026-11-03",
+  "reading": {
+    "title": "All About Love",
+    "author": "bell hooks",
+    "progress": 40,
+    "note": "",
+    "cover": "",
+    "color": "#2a7a72"
+  },
+  "writing": {},
+  "building": {},
+  "coolest": {},
+  "video": {
+    "title": "Leonardo DaVinci was once a loser - here's why that matters.",
+    "creator": "Adam Westbrook | The Long Game",
+    "url": "https://www.youtube.com/watch?v=IV6tZEj4yY0",
+    "why": ""
+  },
+  "photos": [
+    {
+      "src": "photos/coffee-01.jpg",
+      "caption": "Instill Coffee, matching cups"
+    },
+    {
+      "src": "photos/coffee-02.jpg",
+      "caption": "a heart with cinnamon freckles"
+    },
+    {
+      "src": "photos/coffee-03.jpg",
+      "caption": "itsi: it's a vibe"
+    },
+    {
+      "src": "photos/coffee-04.jpg",
+      "caption": "a camel on my latte, plus sesame cookie"
+    },
+    {
+      "src": "photos/coffee-05.jpg",
+      "caption": "Qatra, a very big cup"
+    },
+    {
+      "src": "photos/coffee-06.jpg",
+      "caption": "day two making lattes at home!"
+    },
+    {
+      "src": "photos/coffee-07.jpg",
+      "caption": "affogato with a little cookie hat"
+    },
+    {
+      "src": "photos/coffee-08.jpg",
+      "caption": "matcha and mocha, window seat"
+    },
+    {
+      "src": "photos/coffee-09.jpg",
+      "caption": "the latte that looked like a bird"
+    },
+    {
+      "src": "photos/coffee-10.jpg",
+      "caption": "Cafe Coffee Day, back home"
+    }
+  ],
+  "place": {},
+  "quotes": [],
+  "picks": [],
+  "thinking": "",
+  "watching": "",
+  "albums": [
+    {
+      "title": "Did you know that there's a tunnel under Ocean Blvd",
+      "artist": "Lana Del Rey",
+      "why": "",
+      "c1": "#3c4a5a",
+      "c2": "#9aa8b5",
+      "cover": "covers/ocean-blvd.jpg"
+    },
+    {
+      "title": "eternal sunshine",
+      "artist": "Ariana Grande",
+      "why": "",
+      "c1": "#5d5348",
+      "c2": "#d8c8b0",
+      "cover": "covers/eternal-sunshine.jpg"
+    },
+    {
+      "title": "The Dream",
+      "artist": "The Favors",
+      "why": "",
+      "c1": "#8a5a83",
+      "c2": "#e0b3d2",
+      "cover": "covers/the-dream.jpg"
+    },
+    {
+      "title": "Red",
+      "artist": "Taylor Swift",
+      "why": "",
+      "c1": "#c93a3a",
+      "c2": "#f0a35a",
+      "cover": "covers/red.jpg"
+    },
+    {
+      "title": "Dude",
+      "artist": "Sai Abhyankkar",
+      "why": "",
+      "c1": "#d9a42f",
+      "c2": "#f6e3a1",
+      "cover": "covers/dude.jpg"
+    },
+    {
+      "title": "Alligator Bites Never Heal",
+      "artist": "Doechii",
+      "why": "",
+      "c1": "#2f5a3a",
+      "c2": "#a7c48a",
+      "cover": "covers/alligator-bites.jpg"
+    }
+  ]
+}
